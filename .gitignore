@@ -1,0 +1,9 @@
+resources/
+figures/
+*.gz
+*.aux
+*.log
+*.pdf
+*.blg
+*.toc
+*.bbl
