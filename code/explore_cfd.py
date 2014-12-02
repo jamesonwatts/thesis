@@ -1,45 +1,58 @@
 import pickle
 import math
 from pylab import polyfit
-from nltk.probability import FreqDist
 
-dist = {}
-freq = {}
-lfreq = {}
-fits = {}
+dist = []
+words = []
+fits = []
 lim = 1000
 xs = [math.log(x) for x in range(1,lim+1)]
 for year in range(1991, 2013):
-    with open('resources/btxt'+str(year)+'.pkl', 'r') as f:
-        txt = pickle.load(f)
-    dist[year] = FreqDist(word.lower() for word in txt if len(word) > 3)
-    freq[year] = dist[year].most_common(lim)
-    lfreq[year] = [math.log(y[1]) for y in freq[year]]
-    m, b = polyfit(xs,lfreq[year],1)
-    fits[year] = m
-    print "BA slope is: "+str(m)
+    for month in range(1,13):
+        if month > 9:
+            d = str(year)+'-'+str(month)
+        else:
+            d = str(year)+'-0'+str(month)
+        with open('resources/mo/fdist'+d+'.pkl', 'r') as f:
+            fdist = pickle.load(f)
+        dist.append(fdist)
+        mc = fdist.most_common(lim)
+        words.append([y[0] for y in mc])
+        lmc = [math.log(y[1]) for y in mc]
+        m, b = polyfit(xs,lmc,1)
+        fits.append(m)
+        print "BA slope is: "+str(m)
 
 
+churn = []
+for i in range(1,len(words)):
+    matches = 0
+    for word in words[i-1]:
+        if word in words[i]:
+            matches+=1
+    
+    c = float(lim-matches)/lim
+    churn.append(c)
+    print "Churn = "+str(c)
 
-from scipy.stats import spearmanr
-x = [5.05, 6.75, 3.21, 2.66]
-y = [1.65, 26.5, -5.93, 7.96]
-z = [1.65, 2.64, 2.64, 6.95]
-spearmanr(x,y)
 
+from numpy import genfromtxt
+my_data = genfromtxt('resources/volume.csv', delimiter=',')
+volume = [math.log(y) for y in my_data[37:,5]]
+
+#normalize 
+from sklearn import preprocessing as prep
+fits_n = prep.scale(fits)
+churn_n = prep.scale(churn)
+volume_n = prep.scale(volume)
+
+from numpy import corrcoef
+corrcoef(churn[:168], volume)
 
 import matplotlib.pyplot as plt
 fig, (ax) = plt.subplots(nrows=1, ncols=1)
 fig.set_facecolor("#ffffff")
-
-ax.set_title('Frequency Distributions By Year')
-ax.plot(range(1,lim),[y[1] for y in freq[1991]],'',
-        range(1,lim),[y[1] for y in freq[1995]],'',
-        range(1,lim),[y[1] for y in freq[1997]],'',
-        range(1,lim),[y[1] for y in freq[1999]],'',
-        range(1,lim),[y[1] for y in freq[2001]],'')
-ax.set_xscale('log')
-ax.set_yscale('log')
-aleg = ax.legend(('1991','1995','1997','1999','2001'), loc='upper right',shadow=False)
+ax.plot(range(168),churn_n[:168],'',
+        range(168),volume_n,'')
 plt.show()
 

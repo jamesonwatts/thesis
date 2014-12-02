@@ -1,15 +1,15 @@
 import MySQLdb as mdb
 import pickle
 from dateutil import parser
-from nltk.tokenize import wordpunct_tokenize
-from nltk.util import clean_html
+from nltk import word_tokenize
 from nltk.text import Text
+from bs4 import BeautifulSoup
 
 con = mdb.connect(host='localhost', user='root', passwd='', db='biotech', charset='utf8')
 with con:
     cur = con.cursor()
-    cur.execute("SELECT id, date_txt, text FROM Bioworld_Today")
-    #cur.execute("SELECT id, date_txt, text FROM Bioworld_Today WHERE date > '1990-12-31' and date < '1993-01-01'")
+    #cur.execute("SELECT id, date_txt, text FROM Bioworld_Today ORDER BY date ASC")
+    cur.execute("SELECT id, date_txt, text FROM Bioworld_Today WHERE date > '1990-12-31' and date < '1993-01-01' ORDER BY date ASC")
     articles = cur.fetchall()
 
     # build in order!!!
@@ -21,9 +21,9 @@ with con:
         d = parser.parse(date_txt)
         #year = str(date).split("-")[0]
         if d in documents:
-            documents[d].append(clean_html(html.decode('utf8')))
+            documents[d].append(BeautifulSoup(html.decode('utf8')).get_text())
         else:
-            documents[d] = [clean_html(html.decode('utf8'))]
+            documents[d] = [BeautifulSoup(html.decode('utf8')).get_text()]
         
     
     dates = documents.keys()
@@ -32,16 +32,16 @@ with con:
     
     ts = {}
     for date in dates:
-        year = date.strftime("%Y")
-        month = date.strftime("%M")
-        ds = year+":"+month        
-        if ds in ts:
-            ts[ds] += documents[date]
+        yr = date.strftime("%Y")
+        mo = date.strftime("%m")
+        t = yr+"-"+mo        
+        if t in ts:
+            ts[t] += documents[date]
         else:
-            ts[ds] = documents[date]    
+            ts[t] = documents[date]    
                      
     for t in ts:
-        text = Text(wordpunct_tokenize("\n\n".join(ts[t])))
+        text = Text(word_tokenize("\n\n".join(ts[t])))
         with open("resources/mo/btxt"+t+".pkl", 'w') as f:
             pickle.dump(text,f)  
         print "Done with %s" %(t)
