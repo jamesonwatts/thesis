@@ -1,5 +1,6 @@
 figures/
 code/resources/
+slides/
 *.gz
 *.aux
 *.log
