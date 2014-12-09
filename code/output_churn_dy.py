@@ -5,15 +5,12 @@ import scipy.stats as stats
 import os.path
 
 
-def movingaverage(interval, window_size):
-    window = np.ones(int(window_size))/float(window_size)
-    return np.convolve(interval, window, 'same')
-
+ma = 30
 
 dists = []
 xs = []
 #grab data
-for year in range(1998, 2005):
+for year in range(1991, 2005):
     for month in range(1,13):
         for day in range(1,31):
             d = str(year)+'-'+str(month) if month > 9 else str(year)+'-0'+str(month)
@@ -24,19 +21,17 @@ for year in range(1998, 2005):
                 with open(file_path, 'r') as f:
                     dists.append(pickle.load(f))
 
-# create 5 day distributions
+# create N day distributions
 mdists = []
-for i in range(len(dists)-4):
+for i in range(len(dists)-ma-1):
     fd = dists[i]
-    fd.update(dists[i+1])
-    fd.update(dists[i+2])
-    fd.update(dists[i+3])
-    fd.update(dists[i+4])
+    for j in range(ma-1):
+        fd.update(dists[i+j])
     mdists.append(fd)
 
 #calculate churn   
 ll = 500
-ul = 1501
+ul = 2001
 inc = 100   
 churn = {}
 rankc = {}  
@@ -53,7 +48,7 @@ for i in range(ll,ul,inc):
         r2 = [dists[j+5][y] for y in cw]     
         
         churn[i].append(float(i-len(cw))/i)
-        rankc[i].append(1-stats.spearmanr(r1, r2)[0])
+        rankc[i].append(stats.spearmanr(r1, r2)[0])
     
     print "Done with churn "+str(i)
 
