@@ -5,15 +5,15 @@ import scipy.stats as stats
 import os.path
 
 #settings
-ma = 10
-ll = 2000
+ma = 5
+ll = 500
 ul = 2001
 inc = 500   
 
 dists = []
 xs = []
 #grab data
-for year in range(1991, 2005):
+for year in range(1998, 2005):
     for month in range(1,13):
         for day in range(1,31):
             d = str(year)+'-'+str(month) if month > 9 else str(year)+'-0'+str(month)
@@ -60,5 +60,5 @@ for dist in dists:
     nvol.append(float(sum([dist[word] for word in dist])))
    
 #save data to csv
-data = zip([dt.strftime("%Y-%m-%d") for dt in xs[ma:]],nvol[(ma-1):],[len(dist) for dist in dists[ma-1:]],churn[2000],rankc[2000])
-np.savetxt("../stata/language_dy.csv",data,delimiter=",",header="sdate,words,vocab,churn,rank",fmt="%s")
+data = zip([dt.strftime("%Y-%m-%d") for dt in xs[ma:]],nvol[(ma-1):],[len(dist) for dist in dists[ma-1:]],churn[500],churn[1000],churn[1500],churn[2000],rankc[500],rankc[1000],rankc[1500],rankc[2000])
+np.savetxt("../stata/language_dy.csv",data,delimiter=",",header="sdate,words,vocab,churn500,churn1000,churn1500,churn2000,rank500,rank1000,rank1500,rank2000",fmt="%s")

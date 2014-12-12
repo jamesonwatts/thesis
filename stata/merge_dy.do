@@ -3,20 +3,20 @@ use daily, clear
 
 //daily
 tsset FID datadate
-//gen dyear = year - year[_n-1] //to make sure to skip discontinuities in data
-//gen dret = (prccd - prccd[_n-1])/prccd[_n-1] if dyear < 2
 
-drop if cshoc == .
+//drop if cshoc == .
 gen turnover = cshtrd/cshoc
 
-collapse (last) datadate (sd) prccd_sd=prccd (mean) turnover shares=cshoc volume=cshtrd, by(FID year month)
 egen select = tag(FID)
-collapse (count) firms=select (last) datadate  (mean) turnover unc=prccd_sd shares volume, by(year month)
-save monthly, replace
 
-outsheet year month firms unc shares volume using "/Users/research/GDrive/Dissertation/thesis/code/resources/volume.csv" , comma replace 
+collapse (count) firms=select (mean) turnover shares=cshoc volume=cshtrd, by(datadate)
+save sdaily, replace
 
-import delim using language.csv, clear
-merge 1:1 year month using monthly
+import delim using language_dy.csv, clear
+gen datadate = date(sdate, "YMD")
+format datadate %td
 
-save series_mo, replace
+merge 1:1 datadate using sdaily
+drop if _merge < 3
+drop _merge
+save series_dy, replace

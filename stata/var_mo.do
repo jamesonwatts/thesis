@@ -1,48 +1,64 @@
 cd /Users/research/GDrive/Dissertation/thesis/stata
 use series_mo,clear
-
-gen lvolume = ln(volume)
-gen rank = 1-rank2000
-egen slvolume = std(lvolume)
-egen srank = std(rank)
-egen schurn = std(churn)
-
 gen t = _n
-
 tsset t
-drop if t > 79
 
-tsline slvolume srank, legend(lab (1 "ln(volume)") lab(2 "rank")) ///
+//seasonal indicators
+tabulate month, gen(mfe)
+
+//logs fo volume
+gen lnyse_volume = log(nyse_volume)
+gen lvolume = log(volume)
+
+//sanitized volume measure
+reg lvolume lnyse_volume
+predict rvolume, r
+
+drop if t < 21 | t > 105 //first two years are messy and crach of 2000
+
+egen svolume = std(rvolume)
+egen sunc = std(unc)
+egen srank = std(rank)
+
+
+pwcorr rvolume unc firms rank churn words
+
+tsline sunc srank, legend(lab (1 "volume") lab(2 "rank")) ///
  name(l1, replace)
-tsline D.slvolume D.srank, legend(lab (1 "ln(volume)") lab(2 "rank")) ///
+tsline D.svolume D.srank, legend(lab (1 "volume") lab(2 "rank")) ///
  name(d1, replace) 
 
-//choose lag level (looks like lag of one based on all criteria)
-varsoc lvolume rank words
+//choose lag level  
+varsoc rvolume rank unc, m(6)
+//looks like lag of 3 based on all criteria
 
-//check cointigration (there is at most 1 cointegrating equation, thus must use vec not var)
-vecrank lvolume rank
+//check cointigration 
+vecrank rvolume rank unc, la(3)
+//there is at most 0 cointegrating equation, thus we can use var not vec)
 
 set more off
-vec lvolume rank , lags(3)
-veclmar 
+var D.rvolume D.rank D.unc, la(1/3) ex(mfe1-mfe12 firms)
+varstable
+varnorm
 
-predict ce1, ce equ(#1)
-twoway line ce1 t
- 
+
+set more off
+vec rvolume rank, lags(3) si(mfe1-mfe12) trend(c)
+
+predict ce1 if e(sample), ce equ(#1)
+tsline ce1 if e(sample)
+
+
+vecstable, graph
 vecnorm
+veclmar
 
-irf create vec1, set(vecintro, replace) step(24)
+irf create vec1, set(vecintro, replace) step(12)
 irf graph oirf, impulse(rank) response(lvolume) yline(0)
 irf graph oirf, impulse(lvolume) response(rank) yline(0)
 
 
-//now a regular var model
-gen dlvolume = D.lvolume
-gen drank = D.rank
 
-set more off
-var dlvolume drank
 //how many lags?
 varsoc dlvolume drank, m(4)
 //it suggests 2

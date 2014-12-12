@@ -1,33 +1,33 @@
 import pickle
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 from dateutil import parser
 import scipy.stats as stats
 
-def movingaverage(interval, window_size):
-    window = np.ones(int(window_size))/float(window_size)
-    return np.convolve(interval, window, 'same')
-
-ll = 100
+#settings
+ma = 3
+ll = 500
 ul = 2001
-inc = 100
+inc = 500
+
 dists = []
 xs = []
 #grab data
-for year in range(1998, 2005):
+for year in range(1991, 2005):
     for month in range(1,13):
         d = str(year)+'-'+str(month) if month > 9 else str(year)+'-0'+str(month)
         xs.append(parser.parse(d))
         with open('resources/mo/fdist'+d+'.pkl', 'r') as f:
             dists.append(pickle.load(f))
 
-# create 3month distribution
+# create N month distributions
 mdists = []
-for i in range(len(dists)-2):
+for i in range(len(dists)-ma-1):
     fd = dists[i]
-    fd.update(dists[i+1])
-    fd.update(dists[i+2])
+    for j in range(ma-1):
+        fd.update(dists[i+j])
     mdists.append(fd)
+print "Done creating MA dists"
 
 #calculate churn      
 churn = {}
@@ -38,14 +38,14 @@ for i in range(ll,ul,inc):
 
     for j in range(len(mdists)-1):
         w1 = mdists[j].most_common(i)
-        w2 = dists[j+3].most_common(i)
+        w2 = dists[j+ma].most_common(i)
         cw = set([x[0] for x in w1]).intersection(set([y[0] for y in w2]))
         
         r1 = [mdists[j][x] for x in cw]
-        r2 = [dists[j+3][y] for y in cw]     
+        r2 = [dists[j+ma][y] for y in cw]     
         
         churn[i].append(float(i-len(cw))/i)
-        rankc[i].append(1-stats.spearmanr(r1, r2)[0])
+        rankc[i].append(stats.spearmanr(r1, r2)[0])
     
     print "Done with churn "+str(i)
 
@@ -56,8 +56,8 @@ for dist in dists:
    
    
 #save data to csv
-data = zip([dt.strftime("%Y") for dt in xs[3:]],[dt.strftime("%m") for dt in xs[3:]],nvol[2:],[len(dist) for dist in dists[2:]],churn[1000],rankc[500],rankc[1000],rankc[1500],rankc[2000])
-np.savetxt("../stata/language.csv",data,delimiter=",",header="year,month,words,vocab,churn,rank500,rank1000,rank1500,rank2000",fmt="%s")
+data = zip([dt.strftime("%Y") for dt in xs[ma:]],[dt.strftime("%m") for dt in xs[ma:]],nvol[(ma-1):],[len(dist) for dist in dists[(ma-1):]],churn[1000],rankc[2000])
+np.savetxt("../stata/language_mo.csv",data,delimiter=",",header="year,month,words,vocab,churn,rank",fmt="%s")
 
 
 #grab volume data from csv 36=1991 and 84=1995
