@@ -36,10 +36,12 @@ print "Done creating MA dists"
 
 #calculate churn   
 churn = {}
-rankc = {}  
+rankc = {}
+klent = {}
 for i in range(ll,ul,inc):
     churn[i] = []
     rankc[i] = []
+    klent[i] = []
 
     for j in range(len(mdists)-1):
         w1 = mdists[j].most_common(i)
@@ -51,6 +53,10 @@ for i in range(ll,ul,inc):
         
         churn[i].append(float(i-len(cw))/i)
         rankc[i].append(stats.spearmanr(r1, r2)[0])
+        #entropy
+        s1 = float(sum([r1[word] for word in r1]))
+        s2 = float(sum([r2[word] for word in r2]))
+        klent[i].append(stats.entropy([float(r1[a]/s1) for a in r1],[float(r2[b]/s2) for b in r2]))
     
     print "Done with churn "+str(i)
 

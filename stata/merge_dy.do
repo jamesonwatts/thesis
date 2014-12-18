@@ -20,3 +20,18 @@ merge 1:1 datadate using sdaily
 drop if _merge < 3
 drop _merge
 save series_dy, replace
+
+import delim using nyse, clear
+tostring sdate, replace
+gen datadate = date(sdate,"YMD")
+format datadate %td
+
+sort datadate
+quietly by datadate:  gen dup = cond(_N==1,0,_n)
+list if dup
+drop if dup==2
+
+merge 1:1 datadate using series_dy
+drop if _merge < 3
+drop _merge
+save series_dy, replace

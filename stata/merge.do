@@ -23,4 +23,15 @@ drop _merge
 
 save series_mo, replace
 
-import delim using "./Vol9099.prn", clear
+import delim using nyse, clear
+tostring sdate, replace
+gen datadate = date(sdate,"YMD")
+format datadate %td
+gen year = year(datadate)
+gen month = month(datadate)
+
+collapse (last) datadate (sd) nyse_volatility=nyse_dv (mean) nyse_volume nyse_trades, by(year month)
+merge 1:1 year month using series_mo
+drop if _merge < 3
+drop _merge
+save series_mo, replace
