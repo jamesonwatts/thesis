@@ -18,7 +18,7 @@ for year in range(1991, 2005):
         for day in range(1,31):
             d = str(year)+'-'+str(month) if month > 9 else str(year)+'-0'+str(month)
             d = d+'-'+str(day) if day > 9 else d+'-0'+str(day)
-            file_path = 'resources/dy/fdist'+d+'.pkl'
+            file_path = '../resources/dy/fdist'+d+'.pkl'
             if os.path.exists(file_path):         
                 xs.append(parser.parse(d))
                 with open(file_path, 'r') as f:
@@ -54,10 +54,10 @@ for i in range(ll,ul,inc):
         churn[i].append(float(i-len(cw))/i)
         rankc[i].append(stats.spearmanr(r1, r2)[0])
         #entropy
-        s1 = float(sum([r1[word] for word in r1]))
-        s2 = float(sum([r2[word] for word in r2]))
-        klent[i].append(stats.entropy([float(r1[a]/s1) for a in r1],[float(r2[b]/s2) for b in r2]))
-    
+        s1 = float(sum([mdists[j][word] for word in cw]))
+        s2 = float(sum([dists[j+ma][word] for word in cw]))
+        klent[i].append(stats.entropy([float(mdists[j][a]/s1) for a in cw],[float(dists[j+ma][b]/s2) for b in cw]))
+        print "Done with mdist "+str(j)
     print "Done with churn "+str(i)
 
 #calculate word counts
@@ -66,5 +66,5 @@ for dist in dists:
     nvol.append(float(sum([dist[word] for word in dist])))
    
 #save data to csv
-data = zip([dt.strftime("%Y-%m-%d") for dt in xs[ma:]],nvol[(ma-1):],[len(dist) for dist in dists[ma-1:]],churn[2000],rankc[2000])
-np.savetxt("../stata/language_dy.csv",data,delimiter=",",header="sdate,words,vocab,churn,rank",fmt="%s")
+data = zip([dt.strftime("%Y-%m-%d") for dt in xs[ma:]],nvol[(ma-1):],[len(dist) for dist in dists[ma-1:]],klent[2000],churn[2000],rankc[2000])
+np.savetxt("../../stata/language_dy.csv",data,delimiter=",",header="sdate,words,vocab,klent,churn,rank",fmt="%s")

@@ -36,17 +36,23 @@ gen lvolume = log(volume)
 gen lnyse_volume = log(nyse_volume)
 gen lwords = log(words)
 
-reg lvolume lnyse_volume mfe1-mfe12 wd1-wd5 holidays
+
+reg lvolume lnyse_volume L(0/2).volatility firms mfe1-mfe12 wd1-wd5 holidays
 predict rvolume, r
 
-reg rank words mfe1-mfe12 wd1-wd5 holidays
+reg rank words volatility firms mfe1-mfe12 wd1-wd5 holidays t tt
 predict rrank, r
 
-pwcorr rvolume words vocab churn rrank
+reg klent words volatility firms mfe1-mfe12 wd1-wd5 holidays t tt
+predict rklent, r
+
+pwcorr rvolume words vocab churn klent rrank
+
 
 //check regular regressions
-reg lvolume L(1/3).lvolume L(1/2).rank L(1/2).lwords t tt lnyse_volume
-reg rvolume L(1/3).rvolume L(1/2).rrank
+reg lvolume L(1/10).lvolume L(0/3).rank L(0/3).lwords L(0/5).volatility firms t tt mfe1-mfe12 wd1-wd5 holidays lnyse_volume
+reg lvolume L(1/10).lvolume L(0/3).klent L(0/3).lwords L(0/5).volatility firms t tt mfe1-mfe12 wd1-wd5 holidays lnyse_volume
+reg rvolume L(1/10).rvolume L(0/3).rrank
 
 rvfplot
 
@@ -54,48 +60,53 @@ rvfplot
 //check for stationarity
 dfuller rvolume, //trend regress
 dfgls rvolume
-dfgls rvolume, notrend
 kpss rvolume
 //null of unit root is rejected in favor of trend stationarity
 dfgls rrank
-dfgls rrank, notrend
 kpss rrank
+//rklent
+dfgls rklent
+kpss rklent
+//volatility
+dfgls volatility
+kpss volatility
+//all stationarity diagnostics are cool
 
-//xcorr rrank rvolume, lags(30) table
 //check for optimal lags 
-varsoc rvolume rrank, m(60) //ex(t tt)
-//looks like 43
+varsoc rvolume rklent, m(60) 
+//looks like 21, 23 and 44
 set more off
-var D.rvolume D.rrank, la(1/43) //ex(t tt)
+var D.rvolume D.rklent, la(1/23) ex(D.price)
 varstable
-varlmar, ml(23)
 vargranger
+varlmar, ml(15)
 
 irf set vec_eg, replace
 irf create vec_eg, step(7) replace
 irf graph irf 
 
 
-//cointegrated version
-vecrank rvolume rrank, la(23) //t(rt) 
-set more off
-vec rvolume rrank, r(1) la(23) //t(rt)
-vecstable
-veclmar, ml(10)
-
-irf set vec_eg, replace
-irf create vec_eg, step(50) replace
-irf graph irf 
-
+//check if it's just changes at all
+gen adrank = abs(D.rrank)
+var D.rvolume adrank, la(1/23) ex(price)
 
 egen srank = std(rrank)
 egen svolume = std(rvolume)
-
+egen sklent = std(rklent)
 tssmooth ma smrank=srank, w(60) replace
 tssmooth ma smvolume=svolume, w(60) replace
+tssmooth ma smklent=sklent, w(60) replace
+
+
+tssmooth ma mklent=klent, w(60) replace
+tsline mklent
+
 
 tsline smvolume smrank, legend(lab(1 "volume") lab(2 "rank")) ///
  name(m1, replace)
+tsline smvolume smklent, legend(lab(1 "volume") lab(2 "klent")) ///
+ name(m2, replace)
+
 
 
  
