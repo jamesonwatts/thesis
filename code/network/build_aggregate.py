@@ -10,7 +10,7 @@ with con:
     with open('/Users/research/GDrive/Dissertation/thesis/stata/clstr.csv', 'wb') as csvfile:
         bwriter = csv.writer(csvfile, delimiter=',')
         bwriter.writerow(['year','month','avg_clstr','nodes','edges'])
-        for year in range(1991, 1992, 1):
+        for year in range(1991, 2004, 1):
             for month in range(1,13):
                 mo = str(month) if len(str(month)) > 1 else "0"+str(month)
                 date = str(year)+mo
