@@ -18,11 +18,14 @@ gen lvolume = log(volume)
 gen lwords = log(words)
 
 //sanitized volume measure
-reg lvolume lnyse_volume volatility firms yfe1-yfe13
+reg lvolume lnyse_volume volatility mfe1-mfe12 firms
 predict rvolume, r
 
-reg rank lwords firms yfe1-yfe13
+reg rank lwords volatility mfe1-mfe12 firms
 predict rrank, r
+
+reg avg_clstr nodes edges mfe1-mfe12 t
+predict rclstr, r
 
 pwcorr rvolume rrank words firms
 
@@ -38,35 +41,45 @@ dfuller rvolume
 dfgls rvolume
 kpss rvolume
 
+dfuller rrank
 dfgls rrank
 kpss rrank 
-//looks like variables on nonstationary
+
+dfgls rclstr
+kpss rclstr
+dfuller rclstr
+//looks like variables are stationary at lag < 1
 
 //choose lag level  
 varsoc rvolume rrank, m(6)
 //looks like lag of 3 based on majority of criteria
 
 //check cointigration 
-vecrank rvolume rrank, la(5) si(t tt)
-//there is at most 1 cointegrating equation, thus we can use vec not var)
+vecrank rvolume rrank, la(1) t(rt) si(t tt)
+//there is no cointegrating equation, thus we can use vec not var)
 
 
 set more off
-vec rvolume rrank, r(1) lags(3) t(rt)
-vecstable, graph
-veclmar
-vecnorm
+var D.rvolume D.rrank, lags(1/3)
+varstable //, graph
+varlmar
+varnorm
 
 
 irf create vec1, set(vecintro, replace) step(6)
 irf graph oirf, impulse(rank) response(rvolume) yline(0)
 irf graph oirf, impulse(words) response(rvolume) yline(0)
 
+//on clustering
 
+varsoc rclstr rrank, m(6)
+vecrank rclstr rrank, la(1)
 
+var D.avg_clstr D.rrank, la(1)
 
-egen svolume = std(lvolume)
-egen srank = std(rank)
+egen svolume = std(rvolume)
+egen srank = std(rrank)
+egen sclstr  = std(rclstr)
 tsline svolume srank, legend(lab (1 "volume") lab(2 "rank")) ///
  name(l1, replace)
 tsline D.svolume D.srank, legend(lab (1 "volume") lab(2 "rank")) ///
