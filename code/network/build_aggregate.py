@@ -4,12 +4,12 @@ import csv
 
 with open('/Users/research/GDrive/Dissertation/thesis/stata/dyngrph.csv', 'wb') as csvfile:
     bwriter = csv.writer(csvfile, delimiter=',')
-    bwriter.writerow(['year','pair','tied','pscore','avg_clstr','nodes','edges'])
+    bwriter.writerow(['year','pair','tied','pscore','cmn_nbrs','avg_clstr','nodes','edges'])
 
     con = mdb.connect(host='localhost', user='root', passwd='', db='biotech', charset='utf8')
     with con:
         cur = con.cursor()
-        for year in range(198804, 199104, 100):
+        for year in range(199104, 200404, 100):
             g = nx.Graph(name="bio")
                 
             #populate firms
@@ -43,13 +43,16 @@ with open('/Users/research/GDrive/Dissertation/thesis/stata/dyngrph.csv', 'wb') 
             e = len(g.edges())
             print "Graph has %d nodes and %d edges" %(n, e)
             
+            #grab initial pairs
             pairs = list(nx.preferential_attachment(g))
             pairs += list(nx.preferential_attachment(g,g.edges()))        
     
             for pair in pairs:
-                a,b,p = pair       
+                a,b,p = pair 
+#                c,d,j = list(nx.jaccard_coefficient(g,[(a,b)]))[0]
+                cn = len(list(nx.common_neighbors(g,a,b)))
                 pid = str(a)+":"+str(b) 
-                bwriter.writerow([str(year)[0:4],pid,int(g.has_edge(a,b)),p,c,n,e])            
+                bwriter.writerow([str(year)[0:4],pid,int(g.has_edge(a,b)),p,cn,c,n,e])            
                               
             print "Done with Ties for date %s" %(year)
 #    
