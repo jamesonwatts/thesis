@@ -2,9 +2,17 @@ import networkx as nx
 import MySQLdb as mdb
 import csv
 
+def closeness(g,x,y):
+    try:
+        return 1.0/float(nx.shortest_path_length(g,x,y))
+    except nx.NetworkXNoPath:
+        return 0.0
+
+    
+
 with open('/Users/research/GDrive/Dissertation/thesis/stata/dyngrph.csv', 'wb') as csvfile:
     bwriter = csv.writer(csvfile, delimiter=',')
-    bwriter.writerow(['year','pair','tied','pscore','cmn_nbrs','avg_clstr','nodes','edges'])
+    bwriter.writerow(['year','pair','tied','pscore','nbrs','closeness','cored','nodes','edges','triangles','d2','d3','d4','d5','d6','d7','d8','d9','d10'])
 
     con = mdb.connect(host='localhost', user='root', passwd='', db='biotech', charset='utf8')
     with con:
@@ -35,12 +43,16 @@ with open('/Users/research/GDrive/Dissertation/thesis/stata/dyngrph.csv', 'wb') 
                             cur.execute("SELECT form, aggform, consolform FROM Partners WHERE pid="+str(partner))
                             parts = cur.fetchall()
                             form, aggform, consolform = parts[0]
-                        g.add_edge(fid, partner, form=int(form), aggform=int(aggform), consolform=int(consolform))
+                        if fid != partner: #no self loops
+                            g.add_edge(fid, partner, nih=int(nih), form=int(form), aggform=int(aggform), consolform=int(consolform))
                                     
     
-            c = nx.average_clustering(g)
-            n = len(g.nodes())
-            e = len(g.edges())
+            n = nx.number_of_nodes(g)
+            e = nx.number_of_edges(g)
+            d = nx.degree_histogram(g)
+            t = len(nx.triangles(g))
+            cores = nx.core_number(g)
+#            nihs=nx.get_edge_attributes(g,'nih')
             print "Graph has %d nodes and %d edges" %(n, e)
             
             #grab initial pairs
@@ -48,11 +60,12 @@ with open('/Users/research/GDrive/Dissertation/thesis/stata/dyngrph.csv', 'wb') 
             pairs += list(nx.preferential_attachment(g,g.edges()))        
     
             for pair in pairs:
-                a,b,p = pair 
-#                c,d,j = list(nx.jaccard_coefficient(g,[(a,b)]))[0]
-                cn = len(list(nx.common_neighbors(g,a,b)))
-                pid = str(a)+":"+str(b) 
-                bwriter.writerow([str(year)[0:4],pid,int(g.has_edge(a,b)),p,cn,c,n,e])            
+                x,y,p = pair 
+                c = len(list(nx.common_neighbors(g,x,y)))
+                pid = str(x)+":"+str(y)
+#                nih = nihs[(x,y)] if g.has_edge(x,y) else 0
+
+                bwriter.writerow([str(year)[0:4],pid,int(g.has_edge(x,y)),p,c,closeness(g,x,y),int(cores[x] == cores[y]),n,e,t,d[2],d[3],d[4],d[5],d[6],d[7],d[8],d[9],d[10]])            
                               
             print "Done with Ties for date %s" %(year)
 #    
