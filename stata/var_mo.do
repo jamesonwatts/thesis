@@ -17,6 +17,9 @@ gen lnyse_volume = log(nyse_volume)
 gen lvolume = log(volume)
 gen lwords = log(words)
 
+tsline edges
+ 
+
 //sanitized volume measure
 reg lvolume lnyse_volume volatility mfe1-mfe12 firms
 predict rvolume, r

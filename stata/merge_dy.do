@@ -34,4 +34,14 @@ drop if dup==2
 merge 1:1 datadate using series_dy
 drop if _merge < 3
 drop _merge
+
+gen year = year(datadate)
+tabulate year, gen(yfe)
+gen month = month(datadate)
+tabulate month, gen(mfe)
+gen day = day(datadate)
+gen holidays = (month == 12 & day >= 20 & day <= 31) 
+gen dow = dow(datadate)
+tabulate dow, gen(wd)
+
 save series_dy, replace

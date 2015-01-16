@@ -35,3 +35,9 @@ merge 1:1 year month using series_mo
 drop if _merge < 3
 drop _merge
 save series_mo, replace
+
+import delim using grph_mo, clear
+merge 1:1 year month using series_mo
+drop if _merge < 3
+drop _merge
+save series_mo, replace

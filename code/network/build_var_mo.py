@@ -13,12 +13,12 @@ def closeness(g,x,y):
 
 with open('/Users/research/GDrive/Dissertation/thesis/stata/grph_mo.csv', 'wb') as csvfile:
     bwriter = csv.writer(csvfile, delimiter=',')
-    bwriter.writerow(['year','month','pscore','nbrs','closeness','igrp'])
+    bwriter.writerow(['year','month','nodes','edges','nbrs','clse','degr','eigc'])
 
     con = mdb.connect(host='localhost', user='root', passwd='', db='biotech', charset='utf8')
     with con:
         cur = con.cursor()
-        for year in range(1991, 1999, 1):
+        for year in range(1991, 2004, 1):
             for month in range(1,13):
                 mo = str(month) if len(str(month)) > 1 else "0"+str(month)
                 date = str(year)+mo
@@ -59,26 +59,30 @@ with open('/Users/research/GDrive/Dissertation/thesis/stata/grph_mo.csv', 'wb') 
     #            nihs=nx.get_edge_attributes(g,'nih')
                 print "Graph has %d nodes and %d edges" %(n, e)
                 
-                #grab initial pairs
-#                pairs = list(nx.preferential_attachment(g))
-#                pairs += list(nx.preferential_attachment(g,g.edges()))        
-        
+                dc=nx.degree_centrality(g)
+                nx.set_node_attributes(g,'dc',dc)
+            
+                ec=nx.eigenvector_centrality(g, 10000)
+                nx.set_node_attributes(g,'ec',ec)
+            
                 igrp = 0
                 
-                neighbors = []
-                closenesses = []
-                deg_diffs = []
-                status_diffs = []
+                nbrs = []
+                clse = []
+                degr = []
+                eigc = []
                 newg = copy.deepcopy(g)
     
                 for edge in g.edges():
-                    newg.remove_edge(edge)
-                    c = len(list(nx.common_neighbors(g,x,y)))
-                    pid = str(x)+":"+str(y)
-    #                nih = nihs[(x,y)] if g.has_edge(x,y) else 0
-    
+                    x,y = edge
+                    newg.remove_edge(x,y)
+                    nbrs.append(len(list(nx.common_neighbors(newg,x,y))))
+                    clse.append(closeness(newg,x,y))
+                    degr.append(abs(g.node[x]['dc']-g.node[y]['dc']))
+                    eigc.append(abs(g.node[x]['ec']-g.node[y]['ec']))
+                    newg.add_edge(x,y)
                 
-                bwriter.writerow([year,month,p,c,closeness(g,x,y),int(cores[x] == cores[y]),n,e,t,d[2],d[3],d[4],d[5],d[6],d[7],d[8],d[9],d[10]])            
+                bwriter.writerow([year,month,n,e,sum(nbrs)/float(len(nbrs)),sum(clse)/float(len(clse)),sum(degr)/float(len(degr)),sum(eigc)/float(len(eigc))])            
                                   
-                print "Done with Ties for date %s" %(year)
+                print "Done with Ties for date %s" %(date)
 #    

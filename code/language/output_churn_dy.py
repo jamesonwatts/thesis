@@ -6,9 +6,7 @@ import os.path
 
 #settings
 ma = 10
-ll = 2000
-ul = 2001
-inc = 500   
+wrange = [50,100,500,1000,2000]   
 
 dists = []
 xs = []
@@ -38,7 +36,7 @@ print "Done creating MA dists"
 churn = {}
 rankc = {}
 klent = {}
-for i in range(ll,ul,inc):
+for i in wrange:
     churn[i] = []
     rankc[i] = []
     klent[i] = []
@@ -66,5 +64,5 @@ for dist in dists:
     nvol.append(float(sum([dist[word] for word in dist])))
    
 #save data to csv
-data = zip([dt.strftime("%Y-%m-%d") for dt in xs[ma:]],nvol[(ma-1):],[len(dist) for dist in dists[ma-1:]],klent[2000],churn[2000],rankc[2000])
-np.savetxt("../../stata/language_dy.csv",data,delimiter=",",header="sdate,words,vocab,klent,churn,rank",fmt="%s")
+data = zip([dt.strftime("%Y-%m-%d") for dt in xs[ma:]],nvol[(ma-1):],[len(dist) for dist in dists[ma-1:]],klent[50],klent[100],klent[500],klent[1000],klent[2000],churn[50],churn[100],churn[500],churn[1000],churn[2000],rankc[50],rankc[100],rankc[500],rankc[1000],rankc[2000])
+np.savetxt("/Users/research/GDrive/Dissertation/thesis/stata/language_dy.csv",data,delimiter=",",header="sdate,words,vocab,klent50,klent100,klent500,klent1000,klent2000,churn50,churn100,churn500,churn1000,churn2000,rank50,rank100,rank500,rank1000,rank2000",fmt="%s")
