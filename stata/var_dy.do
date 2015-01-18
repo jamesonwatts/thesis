@@ -5,42 +5,39 @@ set more off
 
 //fix end of sample issue
 //drop if datadate > date("2003/10/01","YMD")
-drop if datadate > date("1998/01/01","YMD") | datadate < date("1995/01/01","YMD")
-//drop if datadate < date("2000/01/01","YMD") | datadate > date("2003/10/01","YMD")
+drop if datadate > date("1998/12/31","YMD") | datadate < date("1997/01/01","YMD")
 
 gen t = _n
 tsset t
 
-gen lvolume = log(volume)
-gen lnyse_volume = log(nyse_volume)
+gen efret = fret-rf
+
+rolling, window(100) clear: arch efret mktrf smb hml umd, ar(1) //ma(1 4) earch(1) egarch(1)	
+
+
+	
+	//gen ht_1 = _b[_cons]+_b[L1.arch]*(L.r-_b[r:_cons])^2 
+
+
 gen lwords = log(words)
-
-reg lvolume lnyse_volume 
-predict rvolume, r
-
-reg rank3 lwords wd1-wd5 holidays t
+reg rank2000 words
 predict consensus, r
 
 //check for stationarity
-dfuller lvolume, //trend regress
-dfgls lvolume
-kpss lvolume
+dfuller turnover //trend regress
+dfgls turnover
+kpss turnover
 //null of unit root is rejected in favor of trend stationarity
 dfgls consensus
 kpss consensus
 //all stationarity diagnostics are cool
 
-//controls for causal structure
-dfgls price
-kpss price
-dfgls volatility
-kpss volatility
 
 //check for optimal lags 
-varsoc rvolume rklent price volatility, m(40) 
+varsoc turnover consensus, m(40) 
 //looks like 21, 23 and 44
 set more off
-var D.rvolume D.consensus D.price, la(1/24)
+var turnover consensus fret, la(1/23) ex(t holidays yfe1-yfe13 mfe1-mfe12 wd1-wd5)
 vargranger
 varstable
 varlmar, ml(10)

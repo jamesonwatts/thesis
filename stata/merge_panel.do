@@ -80,5 +80,11 @@ bysort FID (select): replace select = select[_N]
 keep if select
 drop rnd select
 
+//fama french stuff
+use fama_french, clear
+rename date datadate
+merge 1:m datadate using panel_dy_sample
+drop if _merge < 3
+drop _merge
 save panel_dy_sample, replace
 

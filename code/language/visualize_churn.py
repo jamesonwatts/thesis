@@ -25,16 +25,17 @@ for i in range(len(dists)-ma-1):
 print "Done creating MA dists"
 
 
-twords = mdists[0].most_common(50)
+twords = mdists[0].most_common(100)
 #ewords = mdists[len(mdists)-1].most_common(50)
 
 words = {}
-for k,v in twords:
-    words[k] = []
+
+data = np.zeros(163, dtype={'names':[k for k,v in twords], 'formats':['i4' for i in range(len(twords))]})
+
 for j in range(len(mdists)-1):
-    for word in words:
-        words[k].append(mdists[j][word])
+    for k,v in twords:
+        data[k][j] = mdists[j][k]
    
 #save data to csv
-data = zip([dt.strftime("%Y-%m-%d") for dt in xs[ma:]],words[1],words[2],words[3],words[4],words[5],words[6],words[7],words[8],words[9],words[10],words[11],words[12],words[13],words[14],words[15])
-np.savetxt("/Users/research/GDrive/Dissertation/thesis/stata/top_words.csv",data,delimiter=",",header="sdate,w1,w2,w3,w4,w5,w6,w7,w8,w9,w10,w11,w12,w13,w14,w15",fmt="%s")
+
+np.savetxt("/Users/research/GDrive/Dissertation/thesis/stata/top_words.csv",data,header=",".join(data.dtype.names),delimiter=",",fmt="%s")
