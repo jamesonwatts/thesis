@@ -1,32 +1,19 @@
 cd /Users/research/GDrive/Dissertation/thesis/stata
+
+//drop if datadate > date("1999/12/31","YMD")
+
 use panel_dy_sample, clear
-
-//drop if datadate > date("1998/12/31","YMD") | datadate < date("1998/01/01","YMD")
-drop if !public
-drop if turnover == .
-
 sort FID datadate
-by FID: generate t=_n
-tsset FID t
-
-by FID: gen fret = (price-price[_n-1])/price[_n-1]
-by FID: gen efret = efret-rf 
-
-reg efret mktrf smb hml umd if FID==30 & t < 30
-arch efret mktrf smb hml umd if FID==30 & t < 250, earch(1) egarch(1)
-
-gen pret=.
 egen id=group(FID)
-su id
-forvalues i=1(1)r(max) { /*note: replace N with the highest value of id */ 
-	l id FID if id==`i'
-	arch , ar(1) ma(1 4) earch(1) egarch(1) if id==`i' & estimation_window==1 
-	predict p if id==`i'
-	replace predicted_return = p if id==`i' & event_window==1 
-	drop p
+save tmp, replace
+
+forvalues i=1(1)50 {
+	use tmp, clear
+	rolling, window(250) clear: arch efret mktrf smb hml umd if id==`i', ar(1) //arch(1) egarch(1)
+	rename end t
+	save four_factor_`i', replace
 }  
 
-arch D.ln_wpi, ar(1) ma(1 4) earch(1) egarch(1)
 
 
 gen act_div = 1-(((d_r/d)^2)+((d_f/d)^2)+((d_l/d)^2)+((d_c/d)^2)+((d_o/d)^2))

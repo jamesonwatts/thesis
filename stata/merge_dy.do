@@ -6,10 +6,9 @@ tsset FID datadate
 
 //drop if cshoc == .
 gen turnover = cshtrd/cshoc
-
 egen select = tag(FID)
 
-collapse (count) firms=select (mean) turnover shares=cshoc volume=cshtrd, by(datadate)
+collapse (count) firms=select (mean) price=prccd turnover shares=cshoc volume=cshtrd, by(datadate)
 save sdaily, replace
 
 import delim using language_dy.csv, clear

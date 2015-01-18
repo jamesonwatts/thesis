@@ -4,19 +4,29 @@ set matsize 800
 set more off
 
 //fix end of sample issue
-//drop if datadate > date("2003/10/01","YMD")
-drop if datadate > date("1998/12/31","YMD") | datadate < date("1997/01/01","YMD")
-
+//drop if datadate > date("1998/12/31","YMD")
+sort datadate
 gen t = _n
 tsset t
 
 gen efret = fret-rf
 
-rolling, window(100) clear: arch efret mktrf smb hml umd, ar(1) //ma(1 4) earch(1) egarch(1)	
+arch efret mktrf smb hml umd, ar(1) // earch(1) egarch(1)
 
+rolling, window(250) clear: arch efret mktrf smb hml umd, ar(1) //arch(1) egarch(1)
+rename end t
+save four_factor, replace
 
-	
-	//gen ht_1 = _b[_cons]+_b[L1.arch]*(L.r-_b[r:_cons])^2 
+use series_dy, clear
+sort datadate
+gen t = _n
+tsset t
+merge 1:1 t using four_factor
+drop if _merge < 3
+drop _merge
+
+gen efret = fret-rf
+gen irisk = L.SIGMA2_b_cons+L._stat_6*(L.efret-(L.efret_b_cons+L.efret_b_umd*L.umd+L.efret_b_hml*L.hml+L.efret_b_smb*L.smb+L.efret_b_mktrf*L.mktrf))^2 
 
 
 gen lwords = log(words)

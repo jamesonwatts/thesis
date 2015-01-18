@@ -61,6 +61,30 @@ rename cshtrd volume
 rename cshoc shares
 gen turnover = volume/shares
 
+drop if !public
+drop if turnover == .
+
+save panel_dy, replace
+
+use fama_french, clear
+rename date datadate
+merge 1:m datadate using panel_dy
+drop if _merge < 3
+drop _merge
+
+sort FID datadate
+by FID: generate t=_n
+xtset FID t
+
+gen fret = (price-L.price)/L.price
+gen efret = fret-rf 
+
+save panel_dy, replace
+
+collapse (mean) t fret turnover volume mktrf smb hml rf umd nyse_volume words vocab rank50 rank100 rank500 rank1000 rank2000 yfe1-yfe13 mfe1-mfe12 wd1-wd5 holidays, by(datadate)
+save series_dy, replace
+
+use panel_dy, clear
 tokenize "`c(current_date)'" ,parse(" ")
 local seed_1 "`1'"
 tokenize "`c(current_time)'" ,parse(":")
@@ -80,11 +104,5 @@ bysort FID (select): replace select = select[_N]
 keep if select
 drop rnd select
 
-//fama french stuff
-use fama_french, clear
-rename date datadate
-merge 1:m datadate using panel_dy_sample
-drop if _merge < 3
-drop _merge
 save panel_dy_sample, replace
 
