@@ -59,7 +59,7 @@ irf graph irf, impulse(vent) response(wirisk) yline(0)
 use panel_mo_basic, clear
 sort FID year month
 su dc
-gen hcent = dc > r(mean)+r(sd)
+gen hcent = dc > r(mean) + r(sd)
 keep if hcent
 drop if irisk == .
 by FID: gen t = _n
@@ -75,13 +75,14 @@ su id
 global last = r(max)
 
 set more off
-//matrix b = ("tic","f_irisk","p_irisk","f_lvolume","p_lvolume","f_aret","p_aret")
 forvalues i=1(1)$last {
- 	var D.vent irisk D.lvolume aret if id==`i', lags(1/9) small
+	display `i'
+ 	qui var D.vent irisk D.lvolume aret if id==`i', lags(1/9) small
 	matrix b = e(b)
 	qui vargranger
 	matrix f = r(gstats)
-	matrix s = (`i',f[5,1],(b[1,38]+b[1,39]+b[1,40]),f[9,1],(b[1,75]+b[1,76]+b[1,77]),f[13,1],(b[1,112]))
+	//matrix s = (`i',f[5,1],(b[1,38]+b[1,39]+b[1,40]),f[9,1],(b[1,75]+b[1,76]+b[1,77]),f[13,1],(b[1,112]+b[1,113]+b[1,114]))
+	matrix s = (`i',f[5,1],(b[1,38]+b[1,39]+b[1,40]+b[1,41]+b[1,42]+b[1,43]+b[1,44]+b[1,45]+b[1,46]),f[9,1],(b[1,75]+b[1,76]+b[1,77]+b[1,78]+b[1,79]+b[1,80]+b[1,81]+b[1,82]+b[1,83]),f[13,1],(b[1,112]+b[1,113]+b[1,114]+b[1,115]+b[1,116]+b[1,117]+b[1,118]+b[1,119]+b[1,120]))
     if `i'==1 matrix stats=s
     else matrix stats=(stats \ s)
 }
