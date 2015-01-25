@@ -1,0 +1,58 @@
+\chapter{Sample Second Chapter\label{chap2}}
+
+\section{Remembering to use non-breaking spaces}
+
+The tilde character can be used to mark a non-breaking space.  \LaTeX\
+does a great job of lining words up, putting in line breaks where
+appropriate, and making the text flow properly.  However, there are
+some cases where you really don't want \LaTeX\ to toss in a carriage
+return.  The places that spring to mind are between numbers and
+their units, and between Figure and Table references and their
+values.  So for example, you don't want something like this in your
+document:
+
+\begin{quote}
+	Blah blah blah blah blah blah blah blah blah is 10\\
+	m from foo to bar.
+\end{quote}
+
+So always use the tilde when you use numbers with units, like
+9.8~m~s$^{-2}$, and with Figure and Table references, like
+Figure~\ref{samplefig} and Table~\ref{sampletable}.  This way \LaTeX\
+will never put a line break between those elements.
+
+
+\section{Tables\label{tables}}
+
+On the next page is a sample table, placed on the page by itself.
+Again, this table is pretty small, so it could probably just be
+placed on a page with text.  Messing with tables can be quite
+grueling, so find yourself a good book.  Sometimes tables can be
+wider than they are tall, and you may need to rotate the table by
+$90^{\circ}$ to make it fit better on a page by itself.  To do that
+you can use the lscape package.  To use it, you need to do two
+things, uncomment the usepackage statement in the main dissertation
+file, and wrap the table commands in a begin and end landscape
+command (like I have commented out in this file), and that table
+will be properly rotated.  Go ahead, try it out.
+
+% \begin{landscape}
+\begin{table}[p!]
+\begin{center}
+\caption[Short table caption for LOT]{Sample table caption (to appear with the actual table). \label{sampletable}}
+\vspace{0.3in}
+\begin{tabular}{ccc}
+\hline 
+\hline
+Col A & Col B & Col C \\
+\hline
+1 & 2 & 3 \\
+4 & 5 & 6\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+% \end{landscape}
+
+Note that the \verb=\caption= command can have a short and a long version
+inside a table environment, just like inside a figure environment (see \ref{graphics}).

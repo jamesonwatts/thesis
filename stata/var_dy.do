@@ -1,53 +1,42 @@
 cd /Users/research/GDrive/Dissertation/thesis/stata
-use series_dy, clear
+use panel_dy_basic, clear
+xtset FID t
+//drop if date < date("2000/12/31","YMD")
 set matsize 800
-set more off
-
-//fix end of sample issue
-//drop if datadate > date("1998/12/31","YMD")
-sort datadate
-gen t = _n
+gen fvalue = cshoc*prccd
+egen sfvalue = total(fvalue), by(t)
+egen fcount = count(FID), by(t)
+gen vweight = fvalue/sfvalue
+gen waret = aret*vweight 
+collapse (mean) waret aret turnover volume=cshtrd nyse_volume words vocab klent50 klent100 klent500 klent1000 klent2000, by(t) 
 tsset t
 
-gen efret = fret-rf
-
-arch efret mktrf smb hml umd, ar(1) // earch(1) egarch(1)
-
-rolling, window(250) clear: arch efret mktrf smb hml umd, ar(1) //arch(1) egarch(1)
-rename end t
-save four_factor, replace
-
-use series_dy, clear
-sort datadate
-gen t = _n
-tsset t
-merge 1:1 t using four_factor
-drop if _merge < 3
-drop _merge
-
-gen efret = fret-rf
-gen irisk = L.SIGMA2_b_cons+L._stat_6*(L.efret-(L.efret_b_cons+L.efret_b_umd*L.umd+L.efret_b_hml*L.hml+L.efret_b_smb*L.smb+L.efret_b_mktrf*L.mktrf))^2 
-
-
+gen lvolume = log(volume)
+gen lnyse_volume = log(nyse_volume)
+gen lturnover = log(turnover)
 gen lwords = log(words)
-reg rank2000 words
-predict consensus, r
+reg klent100 lwords t //holidays yfe1-yfe13 mfe1-mfe12 wd1-wd5
+predict entropy, r
+reg lvolume lnyse_volume
+predict rvolume, r
 
 //check for stationarity
-dfuller turnover //trend regress
-dfgls turnover
+//dfgls turnover
+dfuller turnover
 kpss turnover
-//null of unit root is rejected in favor of trend stationarity
-dfgls consensus
-kpss consensus
+dfuller entropy
+kpss entropy
+dfuller aret
+dfgls waret
+kpss aret if 
 //all stationarity diagnostics are cool
 
 
 //check for optimal lags 
-varsoc turnover consensus, m(40) 
-//looks like 21, 23 and 44
+varsoc entropy aret turnover, m(30) 
+//looks like 3, 11, and 23
 set more off
-var turnover consensus fret, la(1/23) ex(t holidays yfe1-yfe13 mfe1-mfe12 wd1-wd5)
+var entropy rvolume, la(1/23) //ex(t lnyse_volume holidays yfe1-yfe13 mfe1-mfe12 wd1-wd5)
 vargranger
 varstable
 varlmar, ml(10)

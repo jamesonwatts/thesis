@@ -1,96 +1,91 @@
 cd /Users/research/GDrive/Dissertation/thesis/stata
-use series_mo,clear
+import delim using language_mo.csv, clear
+merge 1:m year month using panel_mo_basic
+drop _merge
+sort FID year month
+by FID: gen t= _n
+by FID: egen obs=max(t)
+//keep if obs > 60 //5 years of trading data
+//drop if date < date("2000/12/31","YMD")
+set matsize 800
+
+collapse (mean) aret irisk turnover volume nyse_volume vent vrnk vchn words klent1000 rank1000 churn1000, by(year month) 
+
 gen t = _n
-gen tt = t*t
 tsset t
 
-//seasonal indicators
-tabulate month, gen(mfe)
 tabulate year, gen(yfe)
+tabulate month, gen(mfe)
 
-drop if datadate > date("2003/10/01","YMD")
-//drop if datadate > date("1998/01/01","YMD") | datadate < date("1992/01/01","YMD")
-//drop if datadate < date("2000/01/01","YMD") | datadate > date("2003/10/01","YMD")
-
-//logs fo volume
-gen lnyse_volume = log(nyse_volume)
 gen lvolume = log(volume)
-gen lwords = log(words)
+gen lnyse_volume  = log(nyse_volume)
 
-tsline edges
- 
-
-//sanitized volume measure
-reg lvolume lnyse_volume volatility mfe1-mfe12 firms
-predict rvolume, r
-
-reg rank lwords volatility mfe1-mfe12 firms
-predict rrank, r
-
-reg avg_clstr nodes edges mfe1-mfe12 t
-predict rclstr, r
-
-pwcorr rvolume rrank words firms
-
-//regular regressions
-reg lvolume L.lvolume L(0/1).rank lwords lnyse_volume volatility firms mfe1-mfe12 yfe1-yfe13
-rvfplot
-reg rvolume L.rvolume rrank
-rvfplot
-reg rrank L.rrank rvolume
-
-//check stationarity
-dfuller rvolume
-dfgls rvolume
-kpss rvolume
-
-dfuller rrank
-dfgls rrank
-kpss rrank 
-
-dfgls rclstr
-kpss rclstr
-dfuller rclstr
-//looks like variables are stationary at lag < 1
+forvalues p = 1/12 {
+ qui reg L(0/`p').D.vent L.vent
+ di "Lags =" `p'
+ estat bgodfrey, lags(1 2 3)
+} 
+dfuller D.vent, l(9)
+dfuller aret, l(0)
+dfuller D.lvolume, l(0)
+dfuller D.turnover, l(0)
+dfuller irisk, l(0)
 
 //choose lag level  
-varsoc rvolume rrank, m(6)
+varsoc D.vent irisk D.lvolume aret, m(13) //ex(D.lnyse_volume yfe1-yfe13 mfe1-mfe12)
 //looks like lag of 3 based on majority of criteria
 
-//check cointigration 
-vecrank rvolume rrank, la(1) t(rt) si(t tt)
-//there is no cointegrating equation, thus we can use vec not var)
-
-
+//1998-2004
 set more off
-var D.rvolume D.rrank, lags(1/3)
+var D.vent irisk D.turnover aret, lags(1/9) 
+vargranger
 varstable //, graph
-varlmar
+varlmar, ml(12)
+varnorm
+//1998-2004
+set more off
+var D.vent irisk D.lvolume aret, lags(1/9) 
+vargranger
+varstable //, graph
+varlmar, ml(12)
 varnorm
 
-
-irf create vec1, set(vecintro, replace) step(6)
-irf graph oirf, impulse(rank) response(rvolume) yline(0)
-irf graph oirf, impulse(words) response(rvolume) yline(0)
-
-//on clustering
-
-varsoc rclstr rrank, m(6)
-vecrank rclstr rrank, la(1)
-
-var D.avg_clstr D.rrank, la(1)
-
-egen svolume = std(rvolume)
-egen srank = std(rrank)
-egen sclstr  = std(rclstr)
-tsline svolume srank, legend(lab (1 "volume") lab(2 "rank")) ///
- name(l1, replace)
-tsline D.svolume D.srank, legend(lab (1 "volume") lab(2 "rank")) ///
- name(d1, replace)
-egen srvolume = std(rvolume)
-egen srrank = std(rrank)
-tsline srvolume srrank, legend(lab (1 "volume") lab(2 "rank")) ///
- name(l1, replace)
+irf create var1, set(varintro, replace) step(7)
+irf graph irf, impulse(vent) response(turnover) yline(0)
+irf graph irf, impulse(vent) response(wirisk) yline(0)
 
 
+//portfolio graphs
+use panel_mo_basic, clear
+sort FID year month
+su dc
+gen hcent = dc > r(mean)+r(sd)
+keep if hcent
+drop if irisk == .
+by FID: gen t = _n
+xtset FID t
 
+by FID: egen obs = count(t)
+drop if obs < 60
+
+gen lvolume = log(volume)
+
+egen id=group(FID)
+su id
+global last = r(max)
+
+set more off
+//matrix b = ("tic","f_irisk","p_irisk","f_lvolume","p_lvolume","f_aret","p_aret")
+forvalues i=1(1)$last {
+ 	var D.vent irisk D.lvolume aret if id==`i', lags(1/9) small
+	matrix b = e(b)
+	qui vargranger
+	matrix f = r(gstats)
+	matrix s = (`i',f[5,1],(b[1,38]+b[1,39]+b[1,40]),f[9,1],(b[1,75]+b[1,76]+b[1,77]),f[13,1],(b[1,112]))
+    if `i'==1 matrix stats=s
+    else matrix stats=(stats \ s)
+}
+matrix colnames stats = id f_irisk b_irisk f_lvolume b_lvolume f_aret b_aret
+matrix list stats
+clear
+svmat stats, names(col)
