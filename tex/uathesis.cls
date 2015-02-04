@@ -136,7 +136,8 @@
 
 %% Double spaced 
 %% (in order to conserve paper, we'll actually make this less than 2)
-\renewcommand{\baselinestretch}{1.4}
+%\renewcommand{\baselinestretch}{1.4}
+\renewcommand{\baselinestretch}{2}
 
 
 %% Set margins for the bulk of the dissertation (referred to as Body of Paper).
