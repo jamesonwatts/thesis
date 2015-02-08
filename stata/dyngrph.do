@@ -1,10 +1,10 @@
 cd /Users/research/GDrive/Dissertation/thesis/stata
 
 
-import delim using language_mo.csv, clear
-//gen datadate = date(sdate, "YMD")
-//format datadate %td
-//gen year = year(datadate)
+import delim using language_dy.csv, clear
+gen datadate = date(sdate, "YMD")
+format datadate %td
+gen year = year(datadate)
 collapse (sd) vent=klent500 (mean) words klent500, by(year)
 
 gen lwords = log(words)
@@ -15,14 +15,17 @@ drop _merge
 
 gen tt = year-1990
 gen crash = year > 1999
-
+replace vent = 100*vent
+gen shared_degree = firm_degree*partner_degree
 
 xtset pid year
 rename partner_exp partner_experience
 set more off
-logit tied L.tied c.vent##c.L.firm_degree c.vent##c.L.partner_degree L.firm_experience L.new_partner L.partner_experience age_difference size_difference governance_similarity firm_cohesion partner_cohesion shared_cohesion age size governance edges triangles d2-d20, or nocon //cl(pid)
+logit tied L.tied L.vent L.firm_degree L.partner_degree L.firm_experience L.new_partner L.partner_experience age_difference size_difference governance_similarity age size governance edges triangles tt d2-d20, or nocon //cl(pid)
+
+
 set more off
-logit tied L.tied L.c.klent##L.c.shared_cohesion L.firm_degree L.partner_degree L.firm_experience L.new_partner L.partner_experience age_difference size_difference governance_similarity firm_cohesion partner_cohesion age size governance edges triangles tt d2-d20, or nocon cl(pid)
+logit tied L.tied c.vent##c.L.firm_experience c.vent##c.L.partner_experience L.new_partner age_difference size_difference governance_similarity age size governance edges triangles tt d2-d5, or nocon cl(pid)
 
 
 
