@@ -3,8 +3,8 @@ import delim using language_mo.csv, clear
 merge 1:m year month using panel_mo_basic
 drop _merge
 
-collapse (mean) aret irisk turnover volume nyse_volume words vocab vent entropy=klent1000, by(year month) 
-drop if year < 1993
+collapse (mean) aret srisk=irisk turnover volume nyse_volume words vocab vent entropy=klent1000, by(year month) 
+keep if year > 1992
 
 gen date = ym(year, month)
 format date %tm
@@ -14,18 +14,25 @@ gen lnyse_volume = log(nyse_volume)
 gen lturnover = log(turnover)
 gen lwords = log(words)
 
-gen consensus  = 1 - entropy
+gen lcon  = 1 - entropy
 
 tabulate year, gen(yfe)
 tabulate month, gen(mfe)
 gen tt = year - 1990
-egen snvol = std(lnyse_volume)
+
+//deseasonalized variables
+reg lcon mfe1-mfe12
+predict rlcon, r
+reg lvolume lnyse_volume
+predict rlvolume, r
+
 egen svol = std(lvolume)
-egen scon = std(consensus)
+egen scon = std(rlcon)
 
 tsline svol scon, legend(lab(1 "volume") lab(2 "consensus")) ///
  name(m1, replace)
 
+//also show moving average and then argue for cointegration.
 
 //check for stationarity
 forvalues p = 1/12 {
@@ -39,90 +46,80 @@ kpss lvolume //check for stationary in level seems ok
 dfuller D.lvolume // looks like stationary in difference
 
 forvalues p = 1/12 {
- qui reg L(0/`p').D.consensus L.consensus
+ qui reg L(0/`p').D.lcon L.lcon
  di "Lags =" `p'
  estat bgodfrey, lags(1 2 3)
 } 
-//looks like 4
-dfuller consensus, lags(4)
+//looks like 2
+dfuller lcon, lags(2)
 //It's close at 1% level. Probably want to do var in differences.
-dfuller D.consensus, lags(4) //ok
+dfuller D.lcon, lags(2) //ok
 
 
 //check for optimal lags 
-varsoc consensus lvolume, m(13)
-//looks like 1 (SBIC HQIC), 3 (FPE AIC)
-vecrank lvolume consensus, lags(4)
+varsoc rlcon lvolume, m(7)
+//looks like 1 (SBIC HQIC FPE AID), but 4 for (LR)
+vecrank lvolume rlcon, lags(1)
 
 set more off
-vec consensus lvolume, r(1) lags(4) 
+vec lvolume rlcon, r(1) lags(4) 
 vecstable
 veclmar, ml(9)
 
 predict ce1 if e(sample), ce equ(#1)
 tsline ce1 if e(sample)
 
+//obvious from cointegration graph that problematic unless drop pre-1993
+//also remember to talk about deseasonalization of lcon
 
 irf set vec_eg, replace
-irf create vec_eg, step(7) replace
-irf graph irf, impulse(consensus) response(lvolume) yline(0) name(irf1, replace)
-irf graph irf, impulse(lvolume) response(consensus) yline(0) name(irf2, replace)
+irf create vec_eg, step(12) replace
+irf graph irf, impulse(rlcon) response(lvolume) yline(0) name(irf1, replace)
+irf graph irf, impulse(lvolume) response(rlcon) yline(0) name(irf2, replace)
 
 
 //robustness
-reg lvolume lnyse_volume
-predict rvolume, r
 dfuller rvolume
 kpss rvolume
-
-varsoc consensus rvolume, m(13)
-vecrank rvolume consensus, lags(4)
-set more off
-var D.consensus rvolume, la(1/3)
-vargranger
-varstable
-varlmar, ml(9)
-
-
-//risk
-//check for stationarity
 forvalues p = 1/12 {
- qui reg L(0/`p').D.irisk L.irisk
+ qui reg L(0/`p').D.srisk L.srisk
  di "Lags =" `p'
  estat bgodfrey, lags(1 2 3)
 } 
+dfuller srisk
+kpss srisk
 
-dfuller irisk
-kpss irisk
-varsoc consensus irisk, m(13)
-vecrank consensus irisk
-set more off
-var consensus irisk, la(1/4)
-vargranger
-varstable
-varlmar, ml(9)
-
-//abnormal returns
-//check for stationarity
 forvalues p = 1/12 {
  qui reg L(0/`p').D.aret L.aret
  di "Lags =" `p'
  estat bgodfrey, lags(1 2 3)
-} 
-//lag 2
-dfuller aret, lags(2)
-varsoc consensus aret, m(13)
-vecrank consensus aret, lags(3)
-set more off
-var consensus aret, la(1/4)
-vargranger
-varstable
-varlmar, ml(9)
+ } 
+dfuller aret, lags(2) //lag 2
+varsoc D.consensus aret srisk rvolume, m(13)
+vecrank consensus aret srisk rvolume, lags(2) //no cointegration
 
 
 //structurated
 set more off
-var consensus aret irisk rvolume, la(1/4)
+var D.consensus aret srisk lvolume, la(1/3) ex(tt D.words mfe1-mfe12) //small
 vargranger
 varstable
 varlmar, ml(9)
+varnorm
+
+//with turnover
+forvalues p = 1/12 {
+ qui reg L(0/`p').D.turnover L.turnover
+ di "Lags =" `p'
+ estat bgodfrey, lags(1 2 3)
+ } 
+dfuller turnover //no lag but need diff
+
+varsoc D.consensus aret srisk D.turnover, m(7) //two lags
+set more off
+var D.consensus aret srisk D.turnover, la(1/2) ex(tt D.words) //small
+vargranger
+varstable
+varlmar, ml(9)
+varnorm
+

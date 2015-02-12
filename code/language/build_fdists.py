@@ -33,21 +33,19 @@ with con:
         
         aid, date_txt, html = article
         d = parser.parse(date_txt)
-        #year = str(date).split("-")[0]
-        if d in documents:
-            documents[d].append(BeautifulSoup(html.decode('utf8')).get_text())
-        else:
-            documents[d] = [BeautifulSoup(html.decode('utf8')).get_text()]
+        soup = BeautifulSoup(html.encode('utf8'))
+        [s.extract() for s in soup('script')] #remove script and its contents
         
-    
-    dates = documents.keys()
-    dates.sort()
-    
+        if d in documents:
+            documents[d].append(soup.get_text())
+        else:
+            documents[d] = [soup.get_text()]
+            
     
     ts_m = {}
     ts_d = {}
     ts_y = {}
-    for date in dates:
+    for date in sorted(documents.keys()):
         #yearly
 #        ty = date.strftime("%Y")        
 #        if ty in ts_y:
@@ -71,7 +69,7 @@ with con:
 #    for ty in ts_y:
 #        txt = Text(word_tokenize("\n\n".join(ts_y[ty])))
 #        fdist = FreqDist(sanitext(txt))
-#        with open("resources/yr/fdist"+ty+".pkl", 'w') as f:
+#        with open("../resources/yr/fdist"+ty+".pkl", 'w') as f:
 #            pickle.dump(fdist,f)  
 #        print "Done with %s" %(ty)
 
@@ -79,7 +77,7 @@ with con:
     for tm in ts_m:
         txt = Text(word_tokenize("\n\n".join(ts_m[tm])))
         fdist = FreqDist(sanitext(txt))
-        with open("resources/mo/fdist"+tm+".pkl", 'w') as f:
+        with open("../resources/mo/fdist"+tm+".pkl", 'w') as f:
             pickle.dump(fdist,f)  
         print "Done with %s" %(tm)
 

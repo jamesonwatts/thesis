@@ -24,6 +24,8 @@ for i in range(len(dists)-ma-1):
     mdists.append(fd)
 print "Done creating MA dists"
 
+#1993-06, 1997-02, 1999-01, 2001-08, 2003-08
+
 
 twords = mdists[0].most_common(100)
 #ewords = mdists[len(mdists)-1].most_common(50)
