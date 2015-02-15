@@ -29,7 +29,7 @@ predict rlvolume, r
 egen svol = std(lvolume)
 egen scon = std(rlcon)
 
-tsline svol scon, legend(lab(1 "volume") lab(2 "consensus")) ///
+tsline svol scon, legend(lab(1 "volume") lab(2 "rlcon")) ///
  name(m1, replace)
 
 //also show moving average and then argue for cointegration.
@@ -59,7 +59,7 @@ dfuller D.lcon, lags(2) //ok
 //check for optimal lags 
 varsoc rlcon lvolume, m(7)
 //looks like 1 (SBIC HQIC FPE AID), but 4 for (LR)
-vecrank lvolume rlcon, lags(1)
+vecrank lvolume srisk rlcon, lags(4)
 
 set more off
 vec lvolume rlcon, r(1) lags(4) 
@@ -72,10 +72,19 @@ tsline ce1 if e(sample)
 //obvious from cointegration graph that problematic unless drop pre-1993
 //also remember to talk about deseasonalization of lcon
 
+
 irf set vec_eg, replace
 irf create vec_eg, step(12) replace
 irf graph irf, impulse(rlcon) response(lvolume) yline(0) name(irf1, replace)
 irf graph irf, impulse(lvolume) response(rlcon) yline(0) name(irf2, replace)
+
+//robustness in vec
+vecrank lvolume srisk aret rlcon, lags(4)
+set more off
+vec lvolume srisk rlcon, r(1) lags(4) 
+vecstable
+veclmar, ml(9)
+
 
 
 //robustness
@@ -95,13 +104,13 @@ forvalues p = 1/12 {
  estat bgodfrey, lags(1 2 3)
  } 
 dfuller aret, lags(2) //lag 2
-varsoc D.consensus aret srisk rvolume, m(13)
-vecrank consensus aret srisk rvolume, lags(2) //no cointegration
+varsoc D.rlcon aret srisk rvolume, m(13)
+vecrank rlcon aret srisk rlvolume, lags(2) //no cointegration
 
 
 //structurated
 set more off
-var D.consensus aret srisk lvolume, la(1/3) ex(tt D.words mfe1-mfe12) //small
+var rlcon aret srisk rlvolume, la(1/2) ex(words) small
 vargranger
 varstable
 varlmar, ml(9)
@@ -115,9 +124,9 @@ forvalues p = 1/12 {
  } 
 dfuller turnover //no lag but need diff
 
-varsoc D.consensus aret srisk D.turnover, m(7) //two lags
+varsoc D.rlcon aret srisk D.turnover, m(7) //two lags
 set more off
-var D.consensus aret srisk D.turnover, la(1/2) ex(tt D.words) //small
+var D.rlcon aret srisk D.turnover, la(1/2) small
 vargranger
 varstable
 varlmar, ml(9)

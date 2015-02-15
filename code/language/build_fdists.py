@@ -35,11 +35,16 @@ with con:
         d = parser.parse(date_txt)
         soup = BeautifulSoup(html.encode('utf8'))
         [s.extract() for s in soup('script')] #remove script and its contents
-        
+        #remove journal title
+        t = soup.get_text()
+        t.replace("Bioworld","")
+        t.replace("bioworld","")
+        t.replace("Today","")
+        t.replace("today","")
         if d in documents:
-            documents[d].append(soup.get_text())
+            documents[d].append(t)
         else:
-            documents[d] = [soup.get_text()]
+            documents[d] = [t]
             
     
     ts_m = {}
