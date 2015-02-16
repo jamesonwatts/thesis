@@ -3,8 +3,14 @@ import delim using language_mo.csv, clear
 merge 1:m year month using panel_mo_basic
 drop _merge
 
-collapse (mean) aret srisk=irisk turnover volume nyse_volume words vocab vent entropy=klent1000, by(year month) 
-keep if year > 1992
+gen firms = 0
+forvalues i=1993(1)2005 {
+	count if year == `i' & month == 1
+	replace firms = r(N) if year == `i'
+}
+
+collapse (mean) firms aret srisk=irisk turnover volume nyse_volume words vocab vent entropy=klent1000, by(year month) 
+keep if year > 1992 & year < 2004
 
 gen date = ym(year, month)
 format date %tm
@@ -25,12 +31,14 @@ reg lcon mfe1-mfe12
 predict rlcon, r
 reg lvolume lnyse_volume
 predict rlvolume, r
+reg turnover lnyse_volume
+predict rturnover, r
 
 egen svol = std(lvolume)
 egen scon = std(rlcon)
 
-tsline svol scon, legend(lab(1 "volume") lab(2 "rlcon")) ///
- name(m1, replace)
+tsline svol scon, graphregion(color(white)) xtitle("") legend(lab(1 "log(VOLUME)") lab(2 "LCON")) name(m1, replace)
+graph export "../figures/vol1.png", replace
 
 //also show moving average and then argue for cointegration.
 
@@ -59,7 +67,7 @@ dfuller D.lcon, lags(2) //ok
 //check for optimal lags 
 varsoc rlcon lvolume, m(7)
 //looks like 1 (SBIC HQIC FPE AID), but 4 for (LR)
-vecrank lvolume rlcon, lags(4)
+vecrank lvolume lcon, lags(4)
 
 set more off
 vec lvolume lcon, r(1) lags(4) 
@@ -84,6 +92,14 @@ vec lvolume srisk rlcon, r(1) lags(4)
 vecstable
 veclmar, ml(9)
 
+//robustness turnover
+vecrank rturnover lcon, lags(4)
+vec rturnover lcon, r(1) lags(4)
+set more off
+var D.turnover D.lcon, la(1/4) ex(tt mfe1-mfe12)
+vargranger
+varstable
+varlmar
 
 
 //robustness

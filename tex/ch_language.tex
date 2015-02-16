@@ -310,7 +310,7 @@ One notable exception are the years 1999 through 2001 during which the consisten
 \begin{landscape}
 \begin{figure}
 \begin{center}
-\includegraphics[scale=.65]{../figures/lcon3.png}
+\includegraphics[scale=.65]{../figures/lcon3-edit.png}
 \caption[Highlighted Deviations in Monthly Language Consistency]{Highlighted Deviations in Monthly Language Consistency\label{lcon3}}
 \end{center}
 \end{figure}
@@ -325,6 +325,36 @@ The deviation in July of 2001 is again primarily driven by sharp declines in pro
 
  
 \section{Consensus and the Stock Market}
+
+In Chapter \ref{law} I talked about the relationship between shared understanding (representational homology) and exchange.  I proposed that increases in shared understanding would drive exchange in markets characterized by a high degree of knowledge heterogeneity. I also proposed that new information (i.e. decreases in shared understanding) could drive exchange in markets that had reached a state of relative equilibrium. In this section I test these propositions by looking at how my measure of language consistency is related to the trading volume of common shares issued by publicly-traded biotech firms.
+
+The set of firms used is taken from the dataset collected by Powell and his colleagues (see Powell et al. 2005; Powell, Koput and Smith-Doerr 1996), extended through 2004 and stock market data collected from the Wharton Research Data Service (CRSP/Compustat merged). Additional information on this dataset is presented in Chapter \ref{signal}; however a few points are worth mentioning here. The database focuses on dedicated human biotech firms, omitting companies involved in veterinary and agricultural biotech (which draw on different scientific capabilities and operate in a much different regulatory climate). The resulting sample covers 401 firms, of which 153 were in existence in 1993 and 245 in 2004. In this time-frame, some firms were created and entered the database, and others exited, due to failure, departure from the industry, or acquisition. 
+
+To reduce volatility in my aggregate measure of trading volume and for econometric reasons clarified in Chapter \ref{signal}, I also dropped firms with less than three years of trading data from the sample. The final sample numbers between 111 and 192 firms over the years 1993 to 2004. Trading volume is operationalized as the log of the sum of the trading volume for all active firms in a given month. As such it captures general interest and activity in the biotech sector in proportion to firm size. This is in contrast to a measure like turnover, which captures valuation-independent trading activity. The two measures are related; however, in this context one can think of the volume measure like that associated with a sector mutual fund or portfolio, which are often size-weighted to begin with (Kim and Verrecchia 1991). Further analysis at the firm level can be found in Chapter \ref{signal}.
+
+Figure \ref{vol1} shows standardized versions of trading volume and language consistency time series on the same axis. Despite significant volatility, both measures seem to adhere to the same long-term average. This is a striking feature of the data and suggests the two time-series may be cointegrated--that is, each may have a causal relation to the other as both conform to a longer-term trend. If trading volume deviates from the trend, it is ``pulled" back by language consistency just as consistency is ``pulled" back itself by higher trading volume. This adherence to the longer-term average and the interplay of the two variables can be more easily seen in Figure \ref{vol2}, which shows the 3-month moving average of the same variables. 
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=.4]{../figures/vol1.png}
+\caption[Standardized Trading Volume and Language Consistency]{Standardized Trading Volume and Language Consistency\label{vol1}}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=.4]{../figures/vol2.png}
+\caption[Standardized Trading Volume and Language Consistency (3-month MA)]{Standardized Trading Volume and Language Consistency (3-month MA)\label{vol2}}
+\end{center}
+\end{figure}
+
+When analyzing two time-series variables that appear nonstationary, it is common practice to look at their relationship in first differences, which are assumed to be covariance stationary (Phillips 1986). However, if the variables cointegrate (as I suspect given the plots), then even a simple regression using first differences can be misspecified yielding spurious results (Granger and Newbold 1974). In these cases it is important to test wether some linear combination of the series is stationary even though each series is not stationary by itself (Granger and Engle 1987). Following the work of Trusov, Bucklin and Pauwels (2007), Xiong and Bharadwaj (2013) and others I first use Aikake Information Criterion to identify the lag order of the combined series, which is three in this case. I then test for cointegration using the methods described in Johanson (1988, 1995) with three lags. The trace statistic of $0.3018$ is well below the $5\%$ critical value of $3.76$ used for a regression with 13 parameters, thus confirming cointegration.
+
+In the presence of cointegration, the familiar vector autoregression concept (see e.g. Trusov, Buckling and Pauwels 2007) can be extended to a vector error-correction model, or VECM. The model is fit to the first differences of the nonstationary variables, but a lagged error-correction term is added to account for the long-term relationship. In the case of two variables, the added term is the lagged residual from the cointegrating regression of one of the series on the other in levels. Thus, it expresses the prior disequilibrium from the long-run relationship, in which that residual would be zero.
+
+
+
 \begin{enumerate}
   \item Show patterns with trading volume
   \item Show statistical analysis of relation to trading volume
