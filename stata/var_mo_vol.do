@@ -59,10 +59,10 @@ dfuller D.lcon, lags(2) //ok
 //check for optimal lags 
 varsoc rlcon lvolume, m(7)
 //looks like 1 (SBIC HQIC FPE AID), but 4 for (LR)
-vecrank lvolume srisk rlcon, lags(4)
+vecrank lvolume rlcon, lags(4)
 
 set more off
-vec lvolume rlcon, r(1) lags(4) 
+vec lvolume lcon, r(1) lags(4) 
 vecstable
 veclmar, ml(9)
 
@@ -72,11 +72,10 @@ tsline ce1 if e(sample)
 //obvious from cointegration graph that problematic unless drop pre-1993
 //also remember to talk about deseasonalization of lcon
 
-
 irf set vec_eg, replace
 irf create vec_eg, step(12) replace
-irf graph irf, impulse(rlcon) response(lvolume) yline(0) name(irf1, replace)
-irf graph irf, impulse(lvolume) response(rlcon) yline(0) name(irf2, replace)
+irf graph irf, impulse(lcon) response(lvolume) yline(0) name(irf1, replace)
+irf graph irf, impulse(lvolume) response(lcon) yline(0) name(irf2, replace)
 
 //robustness in vec
 vecrank lvolume srisk aret rlcon, lags(4)

@@ -27,7 +27,7 @@ tsline D.lcon, graphregion(color(white)) ytitle("D.LCON") xtitle("") name(d_lcon
 gr combine lcon d_lcon, col(1) iscale(1) graphregion(color(white))
 graph export "../figures/lcon2.png", replace
 
-tsline lcon, graphregion(color(white)) ytitle("LCON") xtitle("") xline(`=ym(1994,11)', lw(2) lc(gs15)) xline(`=ym(1997,1)', lw(2) lc(gs15)) xline(`=ym(2001,7)', lw(2) lc(gs15)) name(lcon,replace)
+tsline lcon, graphregion(color(white)) ytitle("LCON") xtitle("") xline(`=ym(1994,05)', lw(2) lc(gs15)) xline(`=ym(1997,1)', lw(2) lc(gs15)) xline(`=ym(2001,7)', lw(2) lc(gs15)) name(lcon_h,replace)
 graph export "../figures/lcon3.png", replace
 
 gen diff = lcon-L.lcon
