@@ -1,0 +1,29 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{1}{cc}}
+\hline\hline
+          &\multicolumn{2}{c}{(1)}     \\
+          &\multicolumn{2}{c}{}        \\
+\hline
+D\_LVOL    &                  &         \\
+L.\_ce1    &  -0.0840\sym{***}&  (-3.44)\\
+LD.LVOL   &  -0.0670         &  (-0.80)\\
+L2D.LVOL  &   -0.135         &  (-1.62)\\
+LD.LCON   &   -8.175\sym{**} &  (-3.17)\\
+L2D.LCON  &   -3.628         &  (-1.59)\\
+\_cons    &0.0000534         &   (0.00)\\
+\hline
+D\_LCON    &                  &         \\
+L.\_ce1    &  0.00378\sym{***}&   (3.92)\\
+LD.LVOL   & -0.00349         &  (-1.06)\\
+L2D.LVOL  & -0.00840\sym{*}  &  (-2.55)\\
+LD.LCON   &   -0.109         &  (-1.07)\\
+L2D.LCON  &   -0.231\sym{*}  &  (-2.57)\\
+\_cons    &  0.00119         &   (1.84)\\
+\hline
+\(N\)     &      129         &         \\
+\hline\hline
+\multicolumn{3}{l}{\footnotesize \textit{z} statistics in parentheses}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}

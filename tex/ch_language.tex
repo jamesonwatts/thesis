@@ -5,13 +5,13 @@
 ``Grammars in both cooking and engineering exist not just as rules but as a set of unspoken practices taken for granted" (Arthur 2009 p. 77)
 \end{quote}
 \end{small}
-Chapter \ref{law} introduced a concept called `market entropy' as a way to describe the degree to which actors are similar or different in their representations of the market. This is a broad concept which incorporates insights from several established literatures published under the neo-institutionalist moniker (e.g. Denzau and North 1994; DiMaggio and Powell 1983; Loasby 1999). In this chapter, I narrow the scope of investigation slightly to focus on one of these literatures; namely, research on legitimacy and the legitimation process. 
+Chapter \ref{law} introduced a concept called `market entropy' as a way to describe the degree to which actors are similar or different in their representations of the market. This is a broad concept which incorporates insights from several established literatures published under the neo-institutionalist moniker (e.g. Denzau and North 1994; DiMaggio and Powell 1983; Loasby 1999). In this chapter, I narrow the scope of investigation slightly to focus on one of these literatures; namely, research on legitimacy and the legitimation process. This focus allows me to pay greater attention to the mechanisms that influence the distribution of knowledge during transitions of technology, taste and attention (e.g. Colyvas and Powell 2008).
 
-Legitimacy can be defined as ``consensus among agents (audiences) that the features and activities of [market actors] are appropriate and desirable within a widespread, taken-for-granted system of norms or social codes" (Cattani et al. 2008, p. 147). Legitimacy is distinct from the more general `market entropy' construct in that it imposes a moral dimension on shared understanding--that is, behavior is not just `taken-for-granted' but also `appropriate.' Yet, the substantial body of research on the legitimation \emph{process} can help us understand how shared understandings actually come about in practice (Colyvas and Powell 2008; Goldberg 2013).
+Legitimacy can be defined as ``consensus among agents (audiences) that the features and activities of [market actors] are appropriate and desirable within a widespread, taken-for-granted system of norms or social codes" (Cattani et al. 2008, p. 147). Legitimacy is distinct from the more general `market entropy' construct in that it imposes a moral dimension on shared understanding--that is, behavior is not just `taken-for-granted' but also `appropriate.' Nonetheless, a substantial body of research on the legitimation \emph{process} can help us understand how shared understandings actually come about in practice (Goldberg 2013).
 
-Typically, legitimation occurs over a long period of time and involves many actors (Rosa et al. 1999). The process eventually leads to the establishment of field-wide knowledge and shared understanding of the boundaries and definition of relevant technological dimensions (Bijker, Hughes, and Pinch, 1987; Santos and Eisenhardt, 2009), the meaning of new product categories (Kennedy, Lo, and Lounsbury, 2010; Rosa et al., 1999), and the validity of new practices (Lounsbury and Crumley, 2007; Tripsas, 2009). 
+Typically, legitimation occurs over a long period of time and involves many actors (Goldberg 2013; Rosa et al. 1999). The process eventually leads to the establishment of field-wide knowledge and shared understanding of the boundaries and definition of relevant technological dimensions (Bijker, Hughes, and Pinch, 1987; Santos and Eisenhardt, 2009), the meaning of new product categories (Kennedy, Lo, and Lounsbury, 2010; Rosa et al., 1999), and the validity of new practices (Lounsbury and Crumley, 2007; Tripsas, 2009). 
 
-Nonetheless, as a legitimation process unfolds, there are often periods of high disagreement (e.g. Colyvas and Powell 2008). During these periods, actor's representations of the market are either in conflict or not sufficiently diffuse. Through a process of negotiation and diffusion, dominant understandings (designs, practices, etc.) emerge as the `taken-for-granted' within a field (Cattani et al. 2008). This is the framework within which subsequent developments are then judged.
+However, as a legitimation process unfolds, there are often periods of high disagreement (e.g. Colyvas and Powell 2008). During these periods, actor's representations of the market are either in conflict or not sufficiently diffuse. Through a process of negotiation and diffusion, dominant understandings (designs, practices, products, etc.) emerge as the `taken-for-granted' within a field (Cattani et al. 2008). This is the framework within which subsequent developments are then judged.
 
 This formulation of shared understanding--derived from consideration of the legitimation process--comports nicely with my focus on field-level transitions in technology, taste and attention. However, a brief review of the empirical literature on legitimacy raises an additional concern: the behavior deemed legitimate is typically defined ex post--that is, operationalizations are based on the present incarnation of a legitimized category and then traced to some earlier period. For example, Petkova et al., (2014) examine the legitimacy of investing in the clean energy sector by counting historical references to the terms ``clean energy," ``green energy" and ``alternative energy" in media articles. In practice, categories emerge organically (Goldberg 2013) and may cycle through several incarnations of appropriate behavior before they settle on the perspicuously demarcated boundaries that appear to the present observer. More importantly, this formulation excludes the struggle between competing paradigms that characterizes the typical legitimation process (Colyvas and Powell 2008).
 
@@ -209,7 +209,7 @@ While it is impossible to draw strong conclusions from a brief scan of the word 
 
 Despite the above observations, there are many high-frequency terms that are either not very descriptive or their importance is not discernible without substantial knowledge of the context. Moreover, terms that exist well below the 25-word cutoff may be more informative or terms may shift in frequency together in patterns that are difficult to discern ex ante. However, we can potentially overcome these limitations with naive examination of changes in the frequency of language use as I argued earlier in this chapter. Building on the recent work of Klingenstein et al. (2014), I develop and test a measure that tracks the amount of change that occurs from one frequency distribution to the next. The details of this measure are presented in the following sections.
 
-\section{Kullback-Leibler Divergence}
+\section{Kullback-Leibler Divergence\label{kld}}
 
 In computational linguistics, a process called topic modeling is gaining in popularity as way to extract meaning from large, unstructured textual databases (Blei 2012). In its most basic form, the process involves the naive classification of lexical `features' into buckets based on criteria such as cooccurrence within the text. For instance, the terms `player' and `court' might co-occur in many articles about basketball and thus contribute highly to that topic (Blei and Lafferty 2009).\footnote{Note that many topic models can be viewed as a form of principal component analysis given a matrix of articles by terms Blei (2012)} Such techniques have been successfully implemented across the social sciences to understand research agendas as varied as the classification of scientific knowledge (Blei and Lafferty 2007) and brand positions in a competitive market (Tirunillai and Tellis 2014).
 
@@ -227,14 +227,14 @@ The features I consider for my model are word-stems. They are mapped to a probab
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=.4]{../figures/zipf1.png}
+\includegraphics[scale=.5]{../figures/zipf1.png}
 \caption[Frequency Distribution 1991]{Frequency Distribution for year 1991 top 50 word stems. \label{zipf1}}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=.4]{../figures/zipf2.png}
+\includegraphics[scale=.5]{../figures/zipf2.png}
 \caption[Frequency Distribution 2001]{Frequency Distribution for year 2001 top 50 word stems. \label{zipf2}}
 \end{center}
 \end{figure}
@@ -328,11 +328,11 @@ The deviation in July of 2001 is again primarily driven by sharp declines in pro
 
 In Chapter \ref{law} I talked about the relationship between shared understanding (representational homology) and exchange.  I proposed that increases in shared understanding would drive exchange in markets characterized by a high degree of knowledge heterogeneity. I also proposed that new information (i.e. decreases in shared understanding) could drive exchange in markets that had reached a state of relative equilibrium. In this section I test these propositions by looking at how my measure of language consistency is related to the trading volume of common shares issued by publicly-traded biotech firms.
 
-The set of firms used is taken from the dataset collected by Powell and his colleagues (see Powell et al. 2005; Powell, Koput and Smith-Doerr 1996), extended through 2004 and stock market data collected from the Wharton Research Data Service (CRSP/Compustat merged). Additional information on this dataset is presented in Chapter \ref{signal}; however a few points are worth mentioning here. The database focuses on dedicated human biotech firms, omitting companies involved in veterinary and agricultural biotech (which draw on different scientific capabilities and operate in a much different regulatory climate). The resulting sample covers 401 firms, of which 153 were in existence in 1993 and 245 in 2004. In this time-frame, some firms were created and entered the database, and others exited, due to failure, departure from the industry, or acquisition. 
+The set of firms used is taken from the dataset collected by Powell and his colleagues (see Powell et al. 2005; Powell, Koput and Smith-Doerr 1996), extended through 2004. Stock market data is collected from the Wharton Research Data Service (CRSP/Compustat merged). Additional information on this dataset is presented in Chapter \ref{signal}; however a few points are worth mentioning here. The database focuses on dedicated human biotech firms, omitting companies involved in veterinary and agricultural biotech (which draw on different scientific capabilities and operate in a much different regulatory climate). The resulting sample covers 401 firms, of which 153 were in existence in 1993 and 245 in 2004. In this time-frame, some firms were created and entered the database, and others exited, due to failure, departure from the industry, or acquisition. 
 
-To reduce volatility in my aggregate measure of trading volume and for econometric reasons clarified in Chapter \ref{signal}, I also dropped firms with less than three years of trading data from the sample. The final sample numbers between 111 and 192 firms over the years 1993 to 2004. Trading volume is operationalized as the log of the sum of the trading volume for all active firms in a given month. As such it captures general interest and activity in the biotech sector in proportion to firm size. This is in contrast to a measure like turnover, which captures valuation-independent trading activity. The two measures are related; however, in this context one can think of the volume measure like that associated with a sector mutual fund or portfolio, which are often size-weighted to begin with (Kim and Verrecchia 1991). Further analysis at the firm level can be found in Chapter \ref{signal}.
+To reduce volatility in my aggregate measure of trading volume and for econometric reasons clarified in Chapter \ref{signal}, I dropped firms with less than three years of trading data from the sample. The final sample numbers between 111 and 192 firms over the years 1993 to 2004. Trading volume is operationalized as the log of the sum of the trading volume for all active firms in a given month (denoted $LVOL_t$). As such it captures general interest and activity in the biotech sector in proportion to firm size. This is in contrast to a measure like turnover, which captures valuation-independent trading activity. The two measures are related; however, in this context one can think of my volume measure like that which is associated with a sector mutual fund or a portfolio, which are often size-weighted to begin with (Kim and Verrecchia 1991). Further analysis at the firm level can be found in Chapter \ref{signal}.
 
-Figure \ref{vol1} shows standardized versions of trading volume and language consistency time series on the same axis. Despite significant volatility, both measures seem to adhere to the same long-term average. This is a striking feature of the data and suggests the two time-series may be cointegrated--that is, each may have a causal relation to the other as both conform to a longer-term trend. If trading volume deviates from the trend, it is ``pulled" back by language consistency just as consistency is ``pulled" back itself by higher trading volume. This adherence to the longer-term average and the interplay of the two variables can be more easily seen in Figure \ref{vol2}, which shows the 3-month moving average of the same variables. 
+Figure \ref{vol1} shows standardized measures of trading volume and language consistency on the same axis. Despite significant volatility, both time series seem to adhere to the same long-term average. This is a striking feature of the data and suggests the two series may be cointegrated--that is, each may have a causal effect on the other as both conform to a longer-term trend. If trading volume deviates from the trend, it is ``pulled" back by language consistency just as consistency is ``pulled" back itself by higher trading volume. This adherence to the longer-term average and the interplay of the two variables can be more easily seen in Figure \ref{vol2}, which shows the 3-month moving average of the same variables. 
 
 
 \begin{figure}
@@ -349,15 +349,87 @@ Figure \ref{vol1} shows standardized versions of trading volume and language con
 \end{center}
 \end{figure}
 
-When analyzing two time-series variables that appear nonstationary, it is common practice to look at their relationship in first differences, which are assumed to be covariance stationary (Phillips 1986). However, if the variables cointegrate (as I suspect given the plots), then even a simple regression using first differences can be misspecified yielding spurious results (Granger and Newbold 1974). In these cases it is important to test wether some linear combination of the series is stationary even though each series is not stationary by itself (Granger and Engle 1987). Following the work of Trusov, Bucklin and Pauwels (2007), Xiong and Bharadwaj (2013) and others I first use Aikake Information Criterion to identify the lag order of the combined series, which is three in this case. I then test for cointegration using the methods described in Johanson (1988, 1995) with three lags. The trace statistic of $0.3018$ is well below the $5\%$ critical value of $3.76$ used for a regression with 13 parameters, thus confirming cointegration.
+When analyzing two time-series variables that appear nonstationary, it is common practice to look at their relationship in first differences, which are assumed to be covariance stationary (Phillips 1986). However, if the variables cointegrate (as I suspect given the plots), then even a simple regression using first differences can be misspecified yielding spurious results (Granger and Newbold 1974). In these cases it is important to test wether some linear combination of the series is stationary even though each series is not stationary by itself (Granger and Engle 1987). Following the work of Trusov, Bucklin and Pauwels (2007), Xiong and Bharadwaj (2013) and others I first use Aikake Information Criterion (AIC) to identify the lag order of the combined series, which is three in this case. I then test for cointegration using the methods described in Johanson (1988, 1995) with three lags. The trace statistic of $0.3018$ is well below the $5\%$ critical value of $3.76$ used for a regression with 13 parameters, which allows me to reject the null hypothesis of no cointegration.
 
-In the presence of cointegration, the familiar vector autoregression concept (see e.g. Trusov, Buckling and Pauwels 2007) can be extended to a vector error-correction model, or VECM. The model is fit to the first differences of the nonstationary variables, but a lagged error-correction term is added to account for the long-term relationship. In the case of two variables, the added term is the lagged residual from the cointegrating regression of one of the series on the other in levels. Thus, it expresses the prior disequilibrium from the long-run relationship, in which that residual would be zero.
+In the presence of cointegration, the familiar vector autoregression concept (see e.g. Trusov, Buckling and Pauwels 2007) can be extended to a vector error-correction model, or VECM. The model is fit to the first differences of the nonstationary variables, but a lagged error-correction term is added to account for the long-term relationship. In the case of two variables, the added term is the lagged residual from the cointegrating regression of one of the series on the other in levels. Thus, it expresses the prior disequilibrium from the long-run relationship, in which that residual would be zero. Allowing for a constant and a linear trend, the error correction model for a two variable case can be expressed as follows:
 
+\begin{equation}
+	\Delta LVOL_t = \psi_1\mu_{1t-1}+\sum_{i=1}^mA_i\Delta LVOL_{t-i} + \sum_{j=1}^mB_j\Delta LCON_{t-j}+v_1+\delta_1 t+\epsilon_{1t}
+\end{equation}
+\begin{equation}
+	\Delta LCON_t = \psi_2\mu_{2t-1}+\sum_{i=1}^mC_i\Delta LVOL_{t-i} + \sum_{j=1}^mD_j\Delta LCON_{t-j}+v_2+\delta_2 t+\epsilon_{2t},
+\end{equation}
 
+\noindent where $LVOL$ and $LCON$ are the trading volume and language consistency measures respectively. The error correction terms $\mu_{t-1}$, are the residuals from the cointegrating regression (as mentioned above). Note that these terms represent the extent of disequilibrium in levels from the prior period. Thus, the VECM specification states that changes in $LVOL$ and $LCON$ not only depend on each other and their own past differences, but also on the extent to which the two variables have deviated from their long-term average. Note also that the constant term $v$ implies a linear time trend in the levels, and the time trend $\delta t$ implies a quadratic time trend in levels. This allows for added flexibility in the shape of the long-term trend. $m$ is the number of lags as determined by the AIC (as above).
+
+Estimation of the two variable VECM was accomplished using the maximum likelihood methods developed by Johansen (1995) and implemented in Stata 13 using the \emph{vec} command. Coefficients and their z-values from this estimation are shown in Table \ref{vec}. Both the $LVOL$ and the $LCON$ equations are well specified with $P>\chi^2$ well below the $5\%$ cutoff and R-squared values of $0.13$ and $0.34$ respectively.\footnote{I also verified the absence of autocorrelation in the residuals using the typical methods (see e.g. Trusov, Bucklin and Pauwels 2007)} The cointegrating equation is also highly significant $(\chi^2 = 57, df=1)$ as are each of the error correction coefficients shown as $L.\_ce1$ in Table \ref{vec}. The fact that these coefficients have opposing signs is a requirement for a well-specified VECM model: that is, if $(LVOL-LCON)$ is above the long term average, either $LVOL$ must fall or $LCON$ must rise. 
+
+\begin{table}
+\begin{center}
+\caption[VECM Results]{Results of Vector Error Correction Model \label{vec}}
+\vspace{0.3in}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{1}{cc}}
+\hline\hline
+&       Coef.           & z         \\
+\hline
+D\_LVOL    &                  &       \\
+L.\_ce1    &  -0.0840\sym{***}&  (-3.44)\\
+& & \\
+LD.LVOL   &  -0.0670         &  (-0.80)\\
+L2D.LVOL  &   -0.135         &  (-1.62)\\
+& & \\
+LD.LCON   &   -8.175\sym{**} &  (-3.17)\\
+L2D.LCON  &   -3.628         &  (-1.59)\\
+& & \\
+\_cons    &0.0000534         &   (0.00)\\
+\hline
+D\_LCON    &                  &         \\
+L.\_ce1    &  0.00378\sym{***}&   (3.92)\\
+& & \\
+LD.LVOL   & -0.00349         &  (-1.06)\\
+L2D.LVOL  & -0.00840\sym{*}  &  (-2.55)\\
+& & \\
+LD.LCON   &   -0.109         &  (-1.07)\\
+L2D.LCON  &   -0.231\sym{*}  &  (-2.57)\\
+& & \\
+\_cons    &  0.00119         &   (1.84)\\
+\hline
+\(N\)     &      129         &         \\
+\hline\hline
+\multicolumn{3}{l}{\footnotesize \textit{z} statistics in parentheses}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+There is a strong connection between cointegration and causality in that at least one granger-causal relationship must exist in a cointegrated system (Granger and Engle 1987). In this case the long-term causality appears to flow both directions as each variable ``pulls" the other back towards equilibrium. This can be seen visually by looking at the orthogonalized impulse response functions (OIRF), which show one variable's response to a one-unit increase in the other.\footnote{The interpretation of OIRFs rely on the stability of the model. The companion matrix of a VECM with $K$ endogenous variables and r cointegrating equations has $K - r$ unit eigenvalues. If the process is stable, the moduli of the remaining r eigenvalues are strictly less than one, which I verified using the \emph{vecstable} command in Stata 13} Figure \ref{irf1} shows the effect of $LCON$ on $LVOL$ and Figure \ref{irf2} shows the effect of $LVOL$ on $LCON$. 
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=.5]{../figures/irf1.png}
+\caption[Orthoganalized Impulse Response (LCON on LVOL)]{Orthoganalized Impulse Response (LCON on LVOL)\label{irf1}}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=.5]{../figures/irf2.png}
+\caption[Orthoganalized Impulse Response (LVOL on LCON)]{Orthoganalized Impulse Response (LVOL on LCON)\label{irf2}}
+\end{center}
+\end{figure}
+
+Unlike a vector autoregresive model, the variables in a cointegrating VECM are not mean reverting, so the effects of some shocks will not die out over time. This can be clearly seen in the OIRFS from Figures \ref{irf1} and \ref{irf2}. An increase in language consistency has a long-term permanent effect on trading volume, and similarly, an increase in trading volume appears to have a permanent effect on language consistency after a transitory drop in month two. Both variables are ``pulling" each other higher in accordance with their long-term average.
+
+The remaining coefficients in Table \ref{vec} also provide evidence of short-term causal effects. The coefficients prefixed with $LD$ and $L2D$ are the effects of first and second lagged variable differences on themselves and on each other. $LCON$ has a negative short-term effect on $LVOL$ in the first lag and $LVOL$ has a negative short-term effect on $LCON$ in its second lag. The short-term destabilizing effect of an increase in trading volume on language consistency is also apparent in the levels equation as was previously illustrated in Figure \ref{irf2}; however, the short-term negative effect of $LCON$ on $LVOL$ in differences in particularly intriguing. Recall from my discussion in section \ref{kld} that the KLD captures the new information represented by the current set of word frequencies (as compared to the last three months). Language consistency was defined as $1-KLD$, or essentially, the \emph{lack} of information in the current set of word-stems. The negative short-term effect of $LCON$ on $LVOL$ in the VECM is thus the equivalent of saying that new information (a drop in $LCON$) granger causes a transitory spike in trading volume.
+
+These two distinct effects--the short-term and the long-term--describe a nuanced system of relationships between language consistency and trading volume. While both variables tend to elevate each other in an increasing long-term trend, \emph{drops} in consistency (i.e. new information) can also increase trading volume, if only briefly. In a general sense, this is consistent with the propositions developed in Chapter \ref{law}. As knowledge in the  biotechnology industry becomes ``common" knowledge over time, the liquidity of a firm's shares should also increase. This occurs because more investors understand the nature of the investment. However, in the shorter-term, new information can jolt trading volume from it's long term equilibrium in a transitory spike of increased activity.
+
+\section{Discussion}
 
 \begin{enumerate}
-  \item Show patterns with trading volume
-  \item Show statistical analysis of relation to trading volume
   \item However, confounded with macro economic changes
   \item However, confounded with relationship to systematic risk
   \item Show short term reactions and interdependencies.

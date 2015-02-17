@@ -40,6 +40,13 @@ egen scon = std(rlcon)
 tsline svol scon, graphregion(color(white)) xtitle("") legend(lab(1 "log(VOLUME)") lab(2 "LCON")) name(m1, replace)
 graph export "../figures/vol1.png", replace
 
+tssmooth ma msvol = svol, w(3)
+tssmooth ma mscon = scon, w(4)
+
+tsline msvol mscon, graphregion(color(white)) xtitle("") legend(lab(1 "Smoothed log(VOLUME)") lab(2 "Smoothed LCON")) name(m2, replace)
+graph export "../figures/vol2.png", replace
+
+
 //also show moving average and then argue for cointegration.
 
 //check for stationarity
@@ -65,14 +72,24 @@ dfuller D.lcon, lags(2) //ok
 
 
 //check for optimal lags 
-varsoc rlcon lvolume, m(7)
-//looks like 1 (SBIC HQIC FPE AID), but 4 for (LR)
-vecrank lvolume lcon, lags(4)
+varsoc lcon lvolume, m(7)
+//looks like 1 (SBIC HQIC), but 3 for others
+vecrank lvolume lcon, lags(3)
 
 set more off
-vec lvolume lcon, r(1) lags(4) 
+rename lvolume LVOL
+rename lcon LCON
+replace LCON = 100*LCON
+vec LVOL LCON, r(1) lags(3) 
+//est sto v1
+esttab using "../tex/vec.tex", z nogaps wide compress replace
 vecstable
 veclmar, ml(9)
+
+//test for short-run granger causality
+test ([D_LVOL]: L2D.LVOL L2D.LCON) ([D_LCON]: L2D.LCON L2D.LVOL)
+test ([D_LVOL]: LD.LCON L2D.LCON)
+test ([D_LCON]: LD.LVOL L2D.LVOL) 
 
 predict ce1 if e(sample), ce equ(#1)
 tsline ce1 if e(sample)
@@ -82,8 +99,18 @@ tsline ce1 if e(sample)
 
 irf set vec_eg, replace
 irf create vec_eg, step(12) replace
-irf graph irf, impulse(lcon) response(lvolume) yline(0) name(irf1, replace)
-irf graph irf, impulse(lvolume) response(lcon) yline(0) name(irf2, replace)
+irf graph oirf, impulse(LCON) response(LVOL) yline(0) name(irf1, replace) graphregion(color(white))
+irf graph oirf, impulse(LVOL) response(LCON) yline(0) name(irf2, replace) graphregion(color(white))
+
+
+irf graph oirf //
+
+//robustness to nyse
+vecrank lvolume lnyse_volume lcon, lags(3)
+set more off
+vec lvolume lnyse_volume lcon, r(1) lags(3) 
+testparm D.lnyse_volume
+
 
 //robustness in vec
 vecrank lvolume srisk aret rlcon, lags(4)
