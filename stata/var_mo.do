@@ -1,93 +1,69 @@
 cd /Users/research/GDrive/Dissertation/thesis/stata
-//import delim using language_mo.csv, clear
-//merge 1:m year month using panel_mo_basic
-//drop _merge
-use panel_mo_basic, clear
-sort FID year month
-by FID: gen t= _n
-by FID: egen obs=max(t)
-//keep if obs > 60 //5 years of trading data
-//drop if date < date("1993/01/01","YMD")
-drop if year < 1993
-set matsize 800
-collapse (mean) caret aret irisk turnover volume nyse_volume vent, by(year month) 
-//collapse (mean) aret irisk turnover volume nyse_volume vent words klent1000 rank1000 churn1000, by(year month) 
+import delim using language_mo.csv, clear
+merge 1:m year month using panel_mo_basic
+drop _merge
 
-gen t = _n
-tsset t
+//keep if year > 1998 //& year < 2002
+//keep if year > 1992 //& year < 1999
+keep if year > 1992 & year < 2004
 
-tabulate year, gen(yfe)
-tabulate month, gen(mfe)
+gen date = ym(year, month)
+format date %tm
+xtset FID date
 
+
+by FID: gen tt = _n
+tab year, gen(y)
+tab month, gen(m)
 gen lvolume = log(volume)
-gen lnyse_volume  = log(nyse_volume)
+gen kld = klent1000
+gen lcon  = (1 - kld) //*100
+gen size = log(emps)
 
-forvalues p = 1/12 {
- qui reg L(0/`p').D.vent L.vent
- di "Lags =" `p'
- estat bgodfrey, lags(1 2 3)
-} 
-dfuller D.vent, l(3)
-dfuller aret, l(0)
-dfuller D.lvolume, l(0)
-dfuller D.turnover, l(0)
-dfuller irisk, l(0)
+gen explore = (d_r)/d
 
-//choose lag level  
-varsoc D.vent irisk D.lvolume aret, m(11) ex(D.lnyse_volume mfe1-mfe12)
-//looks like lag of 3 based on majority of criteria
-vecrank D.vent irisk D.lvolume caret, lags(3)
-//no cointegration
+reg lcon i.month
+predict rlcon, r
+//xtregar aret irisk c.lcon##c.explore size tt i.year i.month, fe
+//xtregar aret irisk c.lcon##c.act_div size tt i.year i.month, fe
+//xtregar aret irisk c.lcon##c.frm_div size tt i.year i.month, fe
+//xtregar aret irisk c.lcon##c.ec size tt i.year i.month, fe
 
-//1998-2004
+//margins, dydx(explore) at(l.lcon=(.93(.005).97))
+//marginsplot
+
+//robustness abond
+keep if year > 1999
+gen lcon_exp = lcon*explore
+gen lcon_act = lcon*act_div
+gen lcon_frm = lcon*frm_div
+gen lcon_ec = lcon*ec
+
+
+
 set more off
-var D.vent irisk D.turnover caret, lags(1/3) 
-vargranger
-varstable //, graph
-varlmar, ml(12)
-varnorm
-//1993-2004
-set more off
-var D.vent irisk D.lvolume caret, lags(1/12) ex(D.lnyse_volume mfe1-mfe12)
-vargranger
-varstable //, graph
-varlmar, ml(12)
-varnorm
-
-irf create var1, set(varintro, replace) step(7)
-irf graph irf, impulse(vent) response(turnover) yline(0)
-irf graph irf, impulse(vent) response(wirisk) yline(0)
+xtabond aret tt m1-m12, endogenous(lcon lcon_exp explore irisk turnover, lag(2,.)) two vce(robust) 
+//estat sargan
+estat abond
 
 
-//portfolio graphs
-use panel_mo_basic, clear
-sort FID year month
-by FID: gen t = _n
-xtset FID t
+xtdpdsys aret, endogenous(lcon lcon_exp explore irisk, lag(2,.)) vce(robust)
+estat abond //mo betta
 
-replace emps = . if emps == -9
-by FID: egen size = mean(emps)
-gen lsize = log(size)
-su lsize
-gen big = lsize > r(mean) + r(sd)
-gen small  = lsize < r(mean) - r(sd)
-keep if small
-drop if irisk == .
 
-by FID: egen obs = count(t)
-drop if obs < 48
-
-gen lvolume = log(volume)
-
+//robustness VAR
 egen id=group(FID)
 su id
 global last = r(max)
 
 set more off
-//var D.vent irisk D.lvolume aret if id==1, lags(1/3) small
+var D.lcon D.lcon_ec D.ec irisk aret if id==4, lags(1/2) small
+vargranger
+varlmar
+
 forvalues i=1(1)$last {
 	display `i'
- 	qui var D.vent irisk D.lvolume aret if id==`i', lags(1/3) small
+ 	qui var D.lcon D.irisk D.lvolume aret if id==`i', lags(1/3) small
 	matrix b = e(b)
 	qui vargranger
 	matrix f = r(gstats)
@@ -106,3 +82,24 @@ svmat stats, names(col)
 qui twoway scatter f_aret id, yline(1.5, lstyle(foreground)) name(f_aret, replace)
 qui twoway scatter b_aret id, yline(0, lstyle(foreground)) name(b_aret, replace)
  gr combine f_aret b_aret, col(1) iscale(1)
+
+ 
+ 
+ //pwcorr aret irisk turnover L.lcon tt
+collapse (mean) aret act_div frm_div explore irisk size (sd) vent=lcon, by(FID year)
+tab year, gen(y)
+gen tt = year-1992
+xtset FID year
+
+xtreg aret vent explore act_div frm_div irisk, fe
+xtreg aret c.vent##c.frm_div irisk, fe
+
+gen vent_explore = vent*explore
+gen vent_act_div = vent*act_div
+gen vent_frm_div = vent*frm_div
+
+xtdpdsys aret l.lcon tt m1-m12, endogenous(act_div lcon_act_div irisk size) vce(robust)
+estat abond //yuck
+//estat sargan
+
+ 

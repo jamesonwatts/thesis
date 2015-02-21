@@ -596,12 +596,12 @@ and recommend that it be accepted as fulfilling the
 \cline{1-1}
 #5	& 			\\
 	& 			\\
-	& 			\\
-	& Date: #1	\\
-\cline{1-1}
-#6	& 			\\
-	&			\\
-	&			\\
+%	& 			\\
+%	& Date: #1	\\
+%\cline{1-1}
+%#6	& 			\\
+%	&			\\
+%	&			\\
 %	& Date: #1	\\
 %\cline{1-1}
 %#7	& 			\\

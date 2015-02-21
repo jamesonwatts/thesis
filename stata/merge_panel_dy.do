@@ -76,6 +76,7 @@ save panel_dy_basic, replace
 import delim using "./bio.csv", clear
 label variable d "total # of alliances"
 label variable dc "normalized degree centrality of all alliances"
+label variable ec "eigenvector centrality"
 label variable bc "betweenness centrality"
 label variable cc "closeness centrality"
 label variable d_r "# of research ties"
@@ -97,7 +98,7 @@ save panel_dy_basic, replace
 
 //for var month
 use panel_dy_basic, clear
-collapse (sd) irisk=aret vent=klent500 (sum) caret=aret (mean) klent500 aret turnover volume=cshtrd nyse_volume (last) emps d dc bc d_c d_f d_l d_r d_o n_oth n_pha n_fin n_gov n_npr n_bio tic shares=cshoc price=prccd, by(FID year month) 
+collapse (sd) irisk=aret vent=klent1000 (sum) caret=aret (mean) aret turnover volume=cshtrd nyse_volume (last) emps d dc ec bc d_c d_f d_l d_r d_o n_oth n_pha n_fin n_gov n_npr n_bio tic shares=cshoc price=prccd, by(FID year month) 
 gen act_div = 1-(((d_r/d)^2)+((d_f/d)^2)+((d_l/d)^2)+((d_c/d)^2)+((d_o/d)^2))
 gen frm_div = 1-(((n_bio/d)^2)+((n_npr/d)^2)+((n_gov/d)^2)+((n_fin/d)^2)+((n_pha/d)^2)+((n_oth/d)^2))
 

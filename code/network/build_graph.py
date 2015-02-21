@@ -8,9 +8,10 @@ with con:
     with open('/Users/research/GDrive/Dissertation/thesis/stata/bio.csv', 'wb') as csvfile:
         bwriter = csv.writer(csvfile, delimiter=',')
 #        bwriter.writerow(['fid','year','d','dc','ec','bc','cc','d_r','d_f','d_l','d_c','ec_r','ec_f','ec_l','ec_c','name','fyr','ipoyr','eyr','firsttie','lasttie','emps','phds','public','international','zipcode','n_bio','n_npr','n_gov','n_fin','n_pha','n_oth'])
-        bwriter.writerow(['fid','year','d','dc','bc','cc','d_r','d_f','d_l','d_c','d_o','name','fyr','ipoyr','eyr','firsttie','lasttie','emps','phds','public','international','zipcode','n_bio','n_npr','n_gov','n_fin','n_pha','n_oth'])
+        bwriter.writerow(['fid','year','d','dc','ec','bc','cc','d_r','d_f','d_l','d_c','d_o','name','fyr','ipoyr','eyr','firsttie','lasttie','emps','phds','public','international','zipcode','n_bio','n_npr','n_gov','n_fin','n_pha','n_oth'])
         for year in range(198804, 200404, 100):
-            g = nx.MultiGraph(name="bio")
+            g = nx.Graph(name="bio")
+            mg = nx.MultiGraph(name="mbio")
             g1 = nx.MultiGraph(name="research")
             g2 = nx.MultiGraph(name="finance")
             g3 = nx.MultiGraph(name="licensing")
@@ -23,7 +24,8 @@ with con:
             for firm in firms:
                 fid, firmname, fyr_mrg, ipoyr_mrg, exityear, firsttie, lasttie, emps, phds, publicco, zipcode = firm
                 international = 1 if len(str(zipcode)) <= 3 else 0
-                g.add_node(fid, label=firmname, fyr=int(fyr_mrg), ipoyr=int(ipoyr_mrg), eyr=int(exityear), firsttie=int(firsttie), lasttie=int(lasttie), emps=int(emps), phds=int(phds), public=int(publicco), international=int(international), zipcode=int(zipcode))        
+                mg.add_node(fid, label=firmname, fyr=int(fyr_mrg), ipoyr=int(ipoyr_mrg), eyr=int(exityear), firsttie=int(firsttie), lasttie=int(lasttie), emps=int(emps), phds=int(phds), public=int(publicco), international=int(international), zipcode=int(zipcode)) 
+                g.add_node(fid,label=firmname)
                 g1.add_node(fid, label=firmname)        
                 g2.add_node(fid, label=firmname)        
                 g3.add_node(fid, label=firmname)        
@@ -44,8 +46,8 @@ with con:
                             cur.execute("SELECT form, aggform, consolform FROM Partners WHERE pid="+str(partner))
                             parts = cur.fetchall()
                             form, aggform, consolform = parts[0]
-                            
                         g.add_edge(fid, partner, form=int(form), aggform=int(aggform), consolform=int(consolform))
+                        mg.add_edge(fid, partner, form=int(form), aggform=int(aggform), consolform=int(consolform))
                         if ctcode == 1:
                             g1.add_edge(fid, partner, form=int(form), aggform=int(aggform), consolform=int(consolform))
                         elif ctcode == 2:
@@ -58,16 +60,16 @@ with con:
                             g5.add_edge(fid, partner, form=int(form), aggform=int(aggform), consolform=int(consolform))  
             
         
-            d=nx.degree(g)
-            nx.set_node_attributes(g,'d',d)
-            dc=nx.degree_centrality(g)
-            nx.set_node_attributes(g,'dc',dc)
-#            ec=nx.eigenvector_centrality(g, 10000)
-#            nx.set_node_attributes(g,'ec',ec)     
-            bc=nx.betweenness_centrality(g)
-            nx.set_node_attributes(g,'bc',bc)
-            cc=nx.closeness_centrality(g)
-            nx.set_node_attributes(g,'cc',cc)
+            d=nx.degree(mg)
+            nx.set_node_attributes(mg,'d',d)
+            dc=nx.degree_centrality(mg)
+            nx.set_node_attributes(mg,'dc',dc)
+            ec=nx.eigenvector_centrality(g, 10000)
+            nx.set_node_attributes(g,'ec',ec)     
+            bc=nx.betweenness_centrality(mg)
+            nx.set_node_attributes(mg,'bc',bc)
+            cc=nx.closeness_centrality(mg)
+            nx.set_node_attributes(mg,'cc',cc)
             
             d=nx.degree(g1)
             nx.set_node_attributes(g1,'d',d)
@@ -102,7 +104,7 @@ with con:
                     n_fin = 0
                     n_pha = 0
                     n_oth = 0
-                    for edge in g.edges([n],data=True):
+                    for edge in mg.edges([n],data=True):
                         n_bio = n_bio+1 if edge[2]['consolform'] == 1 else n_bio
                         n_npr = n_npr+1 if edge[2]['consolform'] == 2 else n_npr
                         n_gov = n_gov+1 if edge[2]['consolform'] == 3 else n_gov
@@ -112,11 +114,11 @@ with con:
 
                     bwriter.writerow([
                         n,str(year)[0:4], 
-                        g.node[n]['d'], 
-                        g.node[n]['dc'],
-#                        g.node[n]['ec'],
-                        g.node[n]['bc'],
-                        g.node[n]['cc'],
+                        mg.node[n]['d'], 
+                        mg.node[n]['dc'],
+                        g.node[n]['ec'],
+                        mg.node[n]['bc'],
+                        mg.node[n]['cc'],
                         g1.node[n]['d'] if n in g1.nodes() else None,
                         g2.node[n]['d'] if n in g2.nodes() else None,
                         g3.node[n]['d'] if n in g3.nodes() else None,
@@ -126,17 +128,17 @@ with con:
 #                        g2.node[n]['ec'] if n in g2.nodes() else None,
 #                        g3.node[n]['ec'] if n in g3.nodes() else None,
 #                        g4.node[n]['ec'] if n in g4.nodes() else None, 
-                        g.node[n]['label'] if 'label' in g.node[n].keys() else None, 
-                        g.node[n]['fyr'] if 'fyr' in g.node[n].keys() else None, 
-                        g.node[n]['ipoyr'] if 'ipoyr' in g.node[n].keys() else None, 
-                        g.node[n]['eyr'] if 'eyr' in g.node[n].keys() else None, 
-                        g.node[n]['firsttie'] if 'firsttie' in g.node[n].keys() else None, 
-                        g.node[n]['lasttie'] if 'lasttie' in g.node[n].keys() else None, 
-                        g.node[n]['emps'] if 'emps' in g.node[n].keys() else None, 
-                        g.node[n]['phds'] if 'phds' in g.node[n].keys() else None, 
-                        g.node[n]['public'] if 'public' in g.node[n].keys() else None,
-                        g.node[n]['international'] if 'international' in g.node[n].keys() else None,
-                        g.node[n]['zipcode'] if 'zipcode' in g.node[n].keys() else None,
+                        mg.node[n]['label'] if 'label' in mg.node[n].keys() else None, 
+                        mg.node[n]['fyr'] if 'fyr' in mg.node[n].keys() else None, 
+                        mg.node[n]['ipoyr'] if 'ipoyr' in mg.node[n].keys() else None, 
+                        mg.node[n]['eyr'] if 'eyr' in mg.node[n].keys() else None, 
+                        mg.node[n]['firsttie'] if 'firsttie' in mg.node[n].keys() else None, 
+                        mg.node[n]['lasttie'] if 'lasttie' in mg.node[n].keys() else None, 
+                        mg.node[n]['emps'] if 'emps' in mg.node[n].keys() else None, 
+                        mg.node[n]['phds'] if 'phds' in mg.node[n].keys() else None, 
+                        mg.node[n]['public'] if 'public' in mg.node[n].keys() else None,
+                        mg.node[n]['international'] if 'international' in mg.node[n].keys() else None,
+                        mg.node[n]['zipcode'] if 'zipcode' in mg.node[n].keys() else None,
                         n_bio,
                         n_npr,
                         n_gov,

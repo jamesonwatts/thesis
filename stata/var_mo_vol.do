@@ -22,17 +22,13 @@ gen lwords = log(words)
 
 gen lcon  = 1 - entropy
 
-tabulate year, gen(yfe)
-tabulate month, gen(mfe)
-gen tt = year - 1990
+//rename and rescale variables
+rename lvolume LVOL
+rename lcon LCON
+rename aret ARET
+rename srisk SRISK
+replace LCON = 100*LCON //note this in text
 
-//deseasonalized variables
-reg lcon mfe1-mfe12
-predict rlcon, r
-reg lvolume lnyse_volume
-predict rlvolume, r
-reg turnover lnyse_volume
-predict rturnover, r
 
 egen svol = std(lvolume)
 egen scon = std(rlcon)
@@ -47,39 +43,13 @@ tsline msvol mscon, graphregion(color(white)) xtitle("") legend(lab(1 "Smoothed 
 graph export "../figures/vol2.png", replace
 
 
-//also show moving average and then argue for cointegration.
-
-//check for stationarity
-forvalues p = 1/12 {
- qui reg L(0/`p').D.lvolume L.lvolume
- di "Lags =" `p'
- estat bgodfrey, lags(1 2 3)
-} 
-//looks like no autocorrelation
-dfuller lvolume //but not stationary
-kpss lvolume //check for stationary in level seems ok
-dfuller D.lvolume // looks like stationary in difference
-
-forvalues p = 1/12 {
- qui reg L(0/`p').D.lcon L.lcon
- di "Lags =" `p'
- estat bgodfrey, lags(1 2 3)
-} 
-//looks like 2
-dfuller lcon, lags(2)
-//It's close at 1% level. Probably want to do var in differences.
-dfuller D.lcon, lags(2) //ok
-
 
 //check for optimal lags 
-varsoc lcon lvolume, m(7)
+varsoc LCON LVOL, m(7)
 //looks like 1 (SBIC HQIC), but 3 for others
-vecrank lvolume lcon, lags(3)
+vecrank LVOL LCON, lags(3)
 
 set more off
-rename lvolume LVOL
-rename lcon LCON
-replace LCON = 100*LCON
 vec LVOL LCON, r(1) lags(3) 
 //est sto v1
 esttab using "../tex/vec.tex", z nogaps wide compress replace
@@ -102,75 +72,38 @@ irf create vec_eg, step(12) replace
 irf graph oirf, impulse(LCON) response(LVOL) yline(0) name(irf1, replace) graphregion(color(white))
 irf graph oirf, impulse(LVOL) response(LCON) yline(0) name(irf2, replace) graphregion(color(white))
 
-
 irf graph oirf //
 
 //robustness to nyse
-vecrank lvolume lnyse_volume lcon, lags(3)
+vecrank LVOL lnyse_volume LCON, lags(3)
 set more off
-vec lvolume lnyse_volume lcon, r(1) lags(3) 
-testparm D.lnyse_volume
+vec LVOL lnyse_volume LCON, r(1) lags(3) 
 
-
-//robustness in vec
-vecrank lvolume srisk aret rlcon, lags(4)
+//robustness with srisk and aret
+varsoc LVOL SRISK ARET LCON, m(7)
+vecrank LVOL SRISK ARET LCON, lags(3)
 set more off
-vec lvolume srisk rlcon, r(1) lags(4) 
+vec LVOL SRISK ARET LCON, r(2) lags(3) 
 vecstable
 veclmar, ml(9)
 
+irf set vec_eg, replace
+irf create vec_eg, step(12) replace
+irf graph oirf, impulse(LCON) response(LVOL) yline(0) name(irf1, replace) graphregion(color(white))
+irf graph oirf, impulse(LCON) response(ARET) yline(0) name(irf2, replace) graphregion(color(white))
+irf graph oirf, impulse(ARET) response(LCON) yline(0) name(irf2, replace) graphregion(color(white))
+irf graph oirf, impulse(ARET) response(LVOL) yline(0) name(irf2, replace) graphregion(color(white))
+irf graph oirf, impulse(LVOL) response(ARET) yline(0) name(irf2, replace) graphregion(color(white))
+
+
 //robustness turnover
-vecrank rturnover lcon, lags(4)
-vec rturnover lcon, r(1) lags(4)
+keep if year > 1997
+varsoc turnover SRISK ARET LCON, m(7)
+vecrank turnover SRISK ARET LCON, lags(3)
 set more off
-var D.turnover D.lcon, la(1/4) ex(tt mfe1-mfe12)
+vec turnover SRISK ARET LCON, r(1) lags(3) 
 vargranger
 varstable
 varlmar
 
-
-//robustness
-dfuller rvolume
-kpss rvolume
-forvalues p = 1/12 {
- qui reg L(0/`p').D.srisk L.srisk
- di "Lags =" `p'
- estat bgodfrey, lags(1 2 3)
-} 
-dfuller srisk
-kpss srisk
-
-forvalues p = 1/12 {
- qui reg L(0/`p').D.aret L.aret
- di "Lags =" `p'
- estat bgodfrey, lags(1 2 3)
- } 
-dfuller aret, lags(2) //lag 2
-varsoc D.rlcon aret srisk rvolume, m(13)
-vecrank rlcon aret srisk rlvolume, lags(2) //no cointegration
-
-
-//structurated
-set more off
-var rlcon aret srisk rlvolume, la(1/2) ex(words) small
-vargranger
-varstable
-varlmar, ml(9)
-varnorm
-
-//with turnover
-forvalues p = 1/12 {
- qui reg L(0/`p').D.turnover L.turnover
- di "Lags =" `p'
- estat bgodfrey, lags(1 2 3)
- } 
-dfuller turnover //no lag but need diff
-
-varsoc D.rlcon aret srisk D.turnover, m(7) //two lags
-set more off
-var D.rlcon aret srisk D.turnover, la(1/2) small
-vargranger
-varstable
-varlmar, ml(9)
-varnorm
 
