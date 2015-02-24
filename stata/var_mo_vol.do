@@ -30,19 +30,17 @@ rename srisk SRISK
 replace LCON = 100*LCON //note this in text
 
 
-egen svol = std(lvolume)
-egen scon = std(rlcon)
+egen svol = std(LVOL)
+egen scon = std(LCON)
 
 tsline svol scon, graphregion(color(white)) xtitle("") legend(lab(1 "log(VOLUME)") lab(2 "LCON")) name(m1, replace)
 graph export "../figures/vol1.png", replace
 
 tssmooth ma msvol = svol, w(3)
-tssmooth ma mscon = scon, w(4)
+tssmooth ma mscon = scon, w(3)
 
 tsline msvol mscon, graphregion(color(white)) xtitle("") legend(lab(1 "Smoothed log(VOLUME)") lab(2 "Smoothed LCON")) name(m2, replace)
 graph export "../figures/vol2.png", replace
-
-
 
 //check for optimal lags 
 varsoc LCON LVOL, m(7)
@@ -80,8 +78,11 @@ set more off
 vec LVOL lnyse_volume LCON, r(1) lags(3) 
 
 //robustness with srisk and aret
+egen scon = std(rlcon)
+
+
 varsoc LVOL SRISK ARET LCON, m(7)
-vecrank LVOL SRISK ARET LCON, lags(3)
+vecrank LVOL SRISK ARET LCON, lags(2) //maybe 3
 set more off
 vec LVOL SRISK ARET LCON, r(2) lags(3) 
 vecstable
@@ -91,9 +92,9 @@ irf set vec_eg, replace
 irf create vec_eg, step(12) replace
 irf graph oirf, impulse(LCON) response(LVOL) yline(0) name(irf1, replace) graphregion(color(white))
 irf graph oirf, impulse(LCON) response(ARET) yline(0) name(irf2, replace) graphregion(color(white))
-irf graph oirf, impulse(ARET) response(LCON) yline(0) name(irf2, replace) graphregion(color(white))
-irf graph oirf, impulse(ARET) response(LVOL) yline(0) name(irf2, replace) graphregion(color(white))
-irf graph oirf, impulse(LVOL) response(ARET) yline(0) name(irf2, replace) graphregion(color(white))
+irf graph oirf, impulse(ARET) response(LCON) yline(0) name(irf3, replace) graphregion(color(white))
+irf graph oirf, impulse(ARET) response(LVOL) yline(0) name(irf4, replace) graphregion(color(white))
+irf graph oirf, impulse(LVOL) response(ARET) yline(0) name(irf5, replace) graphregion(color(white))
 
 
 //robustness turnover

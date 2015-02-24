@@ -1,55 +1,6 @@
 cd /Users/research/GDrive/Dissertation/thesis/stata
-import delim using language_mo.csv, clear
-merge 1:m year month using panel_mo_basic
-drop _merge
-
-//keep if year > 1998 //& year < 2002
-//keep if year > 1992 //& year < 1999
-keep if year > 1992 & year < 2004
-
-gen date = ym(year, month)
-format date %tm
-xtset FID date
-
-
-by FID: gen tt = _n
-tab year, gen(y)
-tab month, gen(m)
-gen lvolume = log(volume)
-gen kld = klent1000
-gen lcon  = (1 - kld) //*100
-gen size = log(emps)
-
-gen explore = (d_r)/d
-
-reg lcon i.month
-predict rlcon, r
-//xtregar aret irisk c.lcon##c.explore size tt i.year i.month, fe
-//xtregar aret irisk c.lcon##c.act_div size tt i.year i.month, fe
-//xtregar aret irisk c.lcon##c.frm_div size tt i.year i.month, fe
-//xtregar aret irisk c.lcon##c.ec size tt i.year i.month, fe
-
-//margins, dydx(explore) at(l.lcon=(.93(.005).97))
-//marginsplot
-
-//robustness abond
-keep if year > 1999
-gen lcon_exp = lcon*explore
-gen lcon_act = lcon*act_div
-gen lcon_frm = lcon*frm_div
-gen lcon_ec = lcon*ec
-
-
-
-set more off
-xtabond aret tt m1-m12, endogenous(lcon lcon_exp explore irisk turnover, lag(2,.)) two vce(robust) 
-//estat sargan
-estat abond
-
-
-xtdpdsys aret, endogenous(lcon lcon_exp explore irisk, lag(2,.)) vce(robust)
-estat abond //mo betta
-
+use panel_mo, clear
+global excon = "lexp lage size foreign"
 
 //robustness VAR
 egen id=group(FID)
@@ -57,7 +8,7 @@ su id
 global last = r(max)
 
 set more off
-var D.lcon D.lcon_ec D.ec irisk aret if id==4, lags(1/2) small
+var D.lcon irisk aret if id==2, lags(1/3) small ex($excon)
 vargranger
 varlmar
 
