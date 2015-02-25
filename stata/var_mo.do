@@ -1,6 +1,28 @@
 cd /Users/research/GDrive/Dissertation/thesis/stata
 use panel_mo, clear
-global excon = "lexp lage size foreign"
+global excon = "mlexp mlage mlemps"
+drop if aret == .
+gen lcomm = log(co)
+su lcomm
+gen mlcomm = lcomm-r(mean)
+
+//xtregar caret c.lcon##c.ec_pro irisk lvolume $excon, fe
+keep if year > 1999 //& year < 2004
+//xtregar caret c.lcon##c.mec_pro irisk lvolume $excon, fe
+
+gen mlcon_mec = mlcon*mec_pro
+set more off
+xtabond caret l(0/2).(lcon mlcon_mec), end(mlcon mec_pro irisk turnover, lags(2,12)) two vce(robust)
+estat abond
+vif, uncentered
+
+gen mlcon_mlcomm = mlcon*mlcomm
+set more off
+xtabond caret l(0/2).(mlcon_mlcomm), end(mlcon mlcomm irisk, lags(2,12)) two vce(robust)
+estat abond
+vif, uncentered
+
+
 
 //robustness VAR
 egen id=group(FID)
@@ -8,9 +30,11 @@ su id
 global last = r(max)
 
 set more off
-var D.lcon irisk aret if id==2, lags(1/3) small ex($excon)
+varsoc lcon irisk aret if id==1
+vecrank lcon irisk aret lvolume if id==1, lags(4)
+vec lcon irisk lvolume aret if id==1, lags(4) 
 vargranger
-varlmar
+varlmar, ml(6)
 
 forvalues i=1(1)$last {
 	display `i'
