@@ -1,42 +1,72 @@
 cd /Users/research/GDrive/Dissertation/thesis/stata
 use panel_yr, clear
 
+sort year
+by year: egen srisk = mean(irisk)
+
 xtset FID year
 //keep if year > 1888 & year < 1999
-keep if year > 1992
-global exog = "act_div mlexp mlage foreign I.year"
-gen r_ties = d_r
-gen o_ties = d-d_r
+keep if year > 1992 //& year < 2000
 
-//employees: centrality
-xtreg emps L.emps mecp $exog, fe
-xtreg emps L.emps LC.mvcon##C.mecp $exog, fe
-xtabond2 emps L.emps mecp $exog, gmm(L.emps L.mecp) iv($exog) two orthogonal robust noleveleq
-xtabond2 emps L.emps LC.mvcon##C.mecp $exog, gmm(L.emps L2C.mvcon##LC.mecp) iv($exog) two orthogonal robust noleveleq
+replace patents = patents + pto1976 if year == 1993
+replace patents2 = patents2 + pto1976 if year == 1993
+bysort FID: gen tpat1 = sum(patents)
+bysort FID: gen tpat2 = sum(patents2)
+gen expr2 = expr*expr
 
-//non operating income: centrality, patents accumulated
-xtreg nopi L.nopi mecp $exog, fe
-xtreg nopi L.nopi LC.mvcon##C.mecp $exog, fe
-xtabond2 nopi L.nopi mecp $exog, gmm(L.nopi L.mecp) iv($exog) two orthogonal robust noleveleq
-xtabond2 nopi L.nopi LC.mvcon##C.mecp $exog, gmm(L.nopi L2C.mvcon##LC.mecp) iv($exog) two orthogonal robust noleveleq
-
-//sales: centrality
-gen lsale = log(sale)
-xtreg lsale L.lsale mecp $exog, fe
-xtreg lsale L.lsale LC.mvcon##C.mecp $exog, fe
-xtabond2 lsale L.lsale mecp $exog, gmm(L.lsale L.mecp) iv($exog) two orthogonal robust noleveleq
-xtabond2 lsale L.lsale LC.mvcon##C.mecp $exog, gmm(L.lsale L2C.mvcon##LC.mecp) iv($exog) two orthogonal robust noleveleq
-
-//minority equity: centrality
+//employees: hansen test fails if emps rather than lemps
+xtreg emps L.emps L.nopi I.year, fe
+xtivreg emps L.emps (ecp = L.nopi) I.year, fe
+xtabond2 emps L.emps mecp L.nopi I.year, gmm(L.emps L.mecp L2.nopi) iv(I.year) two orthogonal robust noleveleq
+//add lags
+xtabond2 emps L(1/2).emps mecp L.nopi I.year, gmm(L(1/2).emps L.mecp L2.nopi) iv(I.year) two orthogonal robust noleveleq
+//hansen test still fails, move to system gmm
+xtabond2 emps L.emps mecp L.nopi I.year, gmm(L.emps L.mecp L2.nopi) iv(I.year) two orthogonal robust
+//so accounting for endogeneity of nopi and centrality, the effect of nopi on emps largely holds and there's a hint of an independent centrality effect.
+//let's look at whether centrality is an `instrument' for nopi's effect
+xtabond2 emps L.emps mecp I.year, gmm(L.emps L.mecp L2.nopi) iv(I.year) two orthogonal robust
+//possibly... 
 
 
-//patents: centrality, accumulated patents, minority equity
-xtabond2 patents L.patents mecp $exog, gmm(L.patents L.mecp) iv($exog) two orthogonal robust noleveleq
-xtabond2 patents L.patents Lmvcon mecp $exog, gmm(L.patents L2.mvcon L.mecp) iv($exog) two orthogonal robust noleveleq
-xtabond2 patents L.patents LC.mvcon##C.mecp $exog, gmm(L.patents L2C.mvcon##LC.mecp) iv($exog) two orthogonal robust noleveleq
+//sales: I also find that # of employess is a predictor unlike 1999
+xtreg sale L.sale mecp L.nopi I.year, fe
+xtivreg sale L.sale (mecp = L.nopi) I.year, fe
+//let's check 
+//ok what about direct effect w/ nopi as instrument
+xtabond2 sale L.sale mecp I.year, gmm(L.sale L.mecp L.nopi) iv(I.year) two orthogonal robust noleveleq
+//hansen test is bunk and extra lag doesn't work so go to system gmm
+xtabond2 sale L.sale mecp I.year, gmm(L.sale L.mecp L.nopi) iv(I.year) two orthogonal robust 
+//that seems ok, a ecp is marginally significant. So effect of 
+
+
+//now let's look at centrality's effect on non operating income. Again we start with with Powell et al. 1999 model
+xtreg nopi L.nopi L.mvcon mecp L.tpat2 I.year, fe
+//here the main effect of centrality is absent.
+xtreg nopi L.nopi LC.mvcon##C.mecp L.tpat2 I.year, fe
+xtabond2 nopi L(1/2).nopi mecp L.tpat2 I.year, gmm(L(1/2).nopi L.mecp L2.tpat2) iv(I.year) two orthogonal robust //noleveleq
+xtabond2 nopi L(1/2).nopi LC.mvcon##C.mecp L.tpat2 I.year, gmm(L(1/2).nopi L2C.mvcon##LC.mecp L2.tpat2) iv(I.year) two orthogonal robust noleveleq
+xtabond2 nopi L.nopi LC.mvcon##C.mecp L.tpat2 I.year, gmm(L.nopi L2C.mvcon##LC.mecp L2.tpat2) iv(I.year) two orthogonal robust //noleveleq
+
+
+
+//patents: r&d to diversity and experience through centrality
+xtreg tpat2 L.tpat2 mecp act_div d_r L.expr L.expr2 I.year, fe
+//this holds, however # of employees is also significant which might signal an ability to produce patents included and main effect disappears
+xtreg tpat2 L.tpat2 mecp act_div d_r L.expr L.expr2 L.emps I.year, fe
+//however, two-stage effect is still there... centrality is an instrument for expr and diversity
+xtivreg tpat2 L.tpat2 (mecp = act_div L.expr L.expr2) L.emps I.year, fe
+//if non signaling effect then patent interaction should occur as well
+xtreg tpat2 L.tpat2 LC.mvcon##C.mecp act_div L.expr L.expr2 L.emps I.year, fe
+xtabond2 tpat2 L.tpat2 LC.mvcon##C.mecp act_div d_r L.expr L.expr2 L.emps public I.year, gmm(L.tpat2 L2C.mvcon##LC.mecp L.act_div L.d_r L2.expr L2.expr2 L2.emps) iv(public I.year) two orthogonal robust //noleveleq
+
 
 //abnormal returns
-xtabond2 aret L.aret mecp $exog I.year, gmm(L.aret L.mecp) iv($exog I.year) two orthogonal robust noleveleq
-xtabond2 aret L.aret L.mvcon mecp irisk $exog, gmm(L.aret L2.mvcon L.mecp L.irisk) iv($exog) two orthogonal robust noleveleq
-xtabond2 aret L.aret LC.mvcon##C.mecp irisk $exog, gmm(L.aret L2C.mvcon##LC.mecp L.irisk) iv($exog) two orthogonal robust noleveleq
+xtregc aret L.caret mecp irisk lvolume act_div L.age L.expr L.expr2 d_r L.tpat2 L.emps I.year, fe
+xtreg caret L.caret mecp irisk lvolume act_div L.age L.expr I.year, fe
+xtreg caret L.caret LC.mvcon##C.mecp irisk lvolume act_div L.age L.expr I.year, fe
+xtabond2 caret L.caret LC.mvcon##C.mecp irisk lvolume act_div L.age L.expr I.year, gmm(L.aret L2C.mvcon##LC.mecp irisk lvolume L.act_div L2.age L2.expr) iv(I.year) two orthogonal robust noleveleq
 
+//steps
+//difference gmm with forward orthogonal transformation
+//if ar(2) test or hansen test fails first add additional lags of dependent variable
+//second, try system gmm which adds additional instruments

@@ -4,7 +4,7 @@ use daily, clear
 
 gen turnover = cshtrd/cshoc
 
-collapse (mean) volume=cshtrd turnover (last) price=prccd shares=cshoc datadate, by(FID year month)
+collapse (mean) volume=cshtrd turnover (last) permno price=prccd shares=cshoc datadate, by(FID year month)
 
 save panel_yr, replace
 
@@ -54,7 +54,7 @@ gen aret = efret - L2._b_cons+L2._b_mktrf*mktrf+L2._b_smb*smb+L2._b_hml*hml+L2._
 drop _merge
 save panel_yr, replace
 
-collapse (sd) irisk=aret (sum) caret=aret (mean) aret turnover, by(FID year)
+collapse (sd) irisk=aret (sum) caret=aret (mean) aret turnover volume (last) permno, by(FID year)
 
 save panel_yr, replace
 
@@ -94,6 +94,10 @@ su ecp
 gen mecp = ecp-r(mean)
 su ec
 gen mec = ec-r(mean)
+su dc
+gen mdc = dc-r(mean)
+su co
+gen mco = co-r(mean)
 
 su irisk
 gen mirisk = irisk-r(mean)
@@ -109,7 +113,7 @@ import delim using language_mo, clear
 gen kld = klent1000
 gen lcon = 1-kld
 
-collapse (sd) vcon=lcon (mean) words vocab kld lcon, by(FID year)
+collapse (sd) vcon=lcon (mean) words vocab kld lcon, by(year)
 su lcon
 gen mlcon = lcon-r(mean)
 su vcon
@@ -122,3 +126,30 @@ merge 1:m year using panel_yr
 drop _merge
 save panel_yr, replace
 
+import delim using patents, clear
+rename dbf_id FID
+rename pto197600 pto1976
+sort FID
+drop if FID == .
+reshape long v, i(FID) j(year)
+replace year = 1972+year
+rename v  patents
+replace patents = 0 if patents == .
+merge 1:1 FID year using panel_yr
+drop _merge
+save panel_yr, replace
+
+use minority, clear
+rename fyear year
+keep mib mii tic year
+merge 1:m tic year using panel_yr
+drop if _merge == 1
+drop _merge
+save panel_yr, replace
+
+import delim using patents3, clear
+rename freq patents2
+merge 1:m permno year using panel_yr
+drop if _merge == 1
+drop _merge
+save panel_yr, replace

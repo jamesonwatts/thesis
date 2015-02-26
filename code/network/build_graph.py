@@ -2,13 +2,13 @@ import networkx as nx
 from networkx.algorithms import bipartite
 import MySQLdb as mdb
 import csv
+#import structural_holes as sh
 
 con = mdb.connect(host='localhost', user='root', passwd='', db='biotech', charset='utf8')
 with con:
     cur = con.cursor()    
     with open('/Users/research/GDrive/Dissertation/thesis/stata/bio.csv', 'wb') as csvfile:
         bwriter = csv.writer(csvfile, delimiter=',')
-#        bwriter.writerow(['fid','year','d','dc','ec','bc','cc','d_r','d_f','d_l','d_c','ec_r','ec_f','ec_l','ec_c','name','fyr','ipoyr','eyr','firsttie','lasttie','emps','phds','public','international','zipcode','n_bio','n_npr','n_gov','n_fin','n_pha','n_oth'])
         bwriter.writerow(['fid','year','d','dc','ec','ec_pro','bc','cc','cl','co','d_r','d_f','d_l','d_c','d_o','name','fyr','ipoyr','eyr','firsttie','lasttie','emps','phds','public','international','zipcode','n_bio','n_npr','n_gov','n_fin','n_pha','n_oth'])
         for year in range(198804, 200404, 100):
             g = nx.Graph(name="bio")
@@ -75,7 +75,7 @@ with con:
             nx.set_node_attributes(g,'cl',cl)
             co=nx.communicability_centrality(g)
             nx.set_node_attributes(g,'co',co)
-            
+                       
             d=nx.degree(g1)
             nx.set_node_attributes(g1,'d',d)
             d=nx.degree(g2)
@@ -88,10 +88,11 @@ with con:
             nx.set_node_attributes(g5,'d',d)
             
             #projected eigenvector centrality
-            bio_nodes = set(n for n in g.nodes() if n < 1000)
+            bio_nodes = set(n for n in g.nodes() if n < 1000 and n > 0)
             eg = bipartite.projected_graph(g, bio_nodes)
             ec_pro=nx.eigenvector_centrality(eg, 1000)
             nx.set_node_attributes(eg,'ec',ec_pro) 
+#            ho=sh.structural_holes(g)
             
             for n in g.nodes():
                 if(n < 1000 and n != -9):
@@ -122,6 +123,7 @@ with con:
                         mg.node[n]['cc'],
                         g.node[n]['cl'],
                         g.node[n]['co'],
+#                        ho[n]['C-Density'] if n in ho.keys() else None,
                         g1.node[n]['d'] if n in g1.nodes() else None,
                         g2.node[n]['d'] if n in g2.nodes() else None,
                         g3.node[n]['d'] if n in g3.nodes() else None,
