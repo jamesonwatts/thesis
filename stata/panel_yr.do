@@ -45,28 +45,34 @@ xtreg nopi L.nopi L.mvcon mecp L.tpat2 I.year, fe
 xtreg nopi L.nopi LC.mvcon##C.mecp L.tpat2 I.year, fe
 xtabond2 nopi L(1/2).nopi mecp L.tpat2 I.year, gmm(L(1/2).nopi L.mecp L2.tpat2) iv(I.year) two orthogonal robust //noleveleq
 xtabond2 nopi L(1/2).nopi LC.mvcon##C.mecp L.tpat2 I.year, gmm(L(1/2).nopi L2C.mvcon##LC.mecp L2.tpat2) iv(I.year) two orthogonal robust noleveleq
-xtabond2 nopi L.nopi LC.mvcon##C.mecp L.tpat2 I.year, gmm(L.nopi L2C.mvcon##LC.mecp L2.tpat2) iv(I.year) two orthogonal robust //noleveleq
+xtabond2 nopi L.nopi LC.mvcon##C.mecp L.patents2 I.year, gmm(L.nopi L2C.mvcon##LC.mecp L2.patents2, c) iv(I.year) two orthogonal robust noleveleq
 
 
 
 //patents: r&d to diversity and experience through centrality
-xtreg tpat2 L.tpat2 mecp act_div d_r L.expr L.expr2 I.year, fe
+xtreg patents2 L.patents2 L.tpat2 mecp act_div d_r L.expr L.expr2 I.year, fe
 //this holds, however # of employees is also significant which might signal an ability to produce patents included and main effect disappears
-xtreg tpat2 L.tpat2 mecp act_div d_r L.expr L.expr2 L.emps I.year, fe
-//however, two-stage effect is still there... centrality is an instrument for expr and diversity
-xtivreg tpat2 L.tpat2 (mecp = act_div L.expr L.expr2) L.emps I.year, fe
-//if non signaling effect then patent interaction should occur as well
-xtreg tpat2 L.tpat2 LC.mvcon##C.mecp act_div L.expr L.expr2 L.emps I.year, fe
-xtabond2 tpat2 L.tpat2 LC.mvcon##C.mecp act_div d_r L.expr L.expr2 L.emps public I.year, gmm(L.tpat2 L2C.mvcon##LC.mecp L.act_div L.d_r L2.expr L2.expr2 L2.emps) iv(public I.year) two orthogonal robust //noleveleq
-
+xtreg patents2 L.patents2 L.tpat2 mecp act_div d_r L.expr L.expr2 L.emps I.year, fe
+//however, two-stage effect is still there... centrality is an instrument for R&D, expr and diversity
+xtivreg patents2 L.patents2 L.tpat2 (mecp = act_div d_r L.expr L.expr2) L.emps I.year, fe
+//controlling for learning component of network there might still be a signaling effect
+xtreg patents2 L.patents2 L.tpat2 LC.mvcon##C.mecp act_div d_r L.expr L.expr2 L.emps I.year, fe
+xtreg patents2 L.patents2 L.tpat2 LC.mvcon##C.mecp L.emps I.year, fe
+xtabond2 patents2 L.patents2 L.tpat2 LC.mvcon##C.mecp act_div d_r L.expr L.expr2 L.emps I.year, gmm(L.patents2 L.tpat2 L2C.mvcon##LC.mecp L.act_div L.d_r L2.expr L2.expr2 L2.emps, c) iv(I.year) two orthogonal robust noleveleq
+//this could be due to more likely to be approved etc.
+//however, the portion of centrality that's due to learning should not be affected (leave size as an instrument of centrality effect)
+xtabond2 patents2 L.patents2 L.tpat2 LC.mvcon##C.mecp L.emps I.year, gmm(L.patents2 L.tpat2 L2C.mvcon##LC.mecp L2.emps, c) iv(I.year) two orthogonal robust noleveleq
+//exactly... when centrality is capturing the "access" effect on patents the interaction is non-existent.
+//possibly non-negative because of opposing effects. Move to abnormal returns.
 
 //abnormal returns
 xtregc aret L.caret mecp irisk lvolume act_div L.age L.expr L.expr2 d_r L.tpat2 L.emps I.year, fe
 xtreg caret L.caret mecp irisk lvolume act_div L.age L.expr I.year, fe
 xtreg caret L.caret LC.mvcon##C.mecp irisk lvolume act_div L.age L.expr I.year, fe
-xtabond2 caret L.caret LC.mvcon##C.mecp irisk lvolume act_div L.age L.expr I.year, gmm(L.aret L2C.mvcon##LC.mecp irisk lvolume L.act_div L2.age L2.expr) iv(I.year) two orthogonal robust noleveleq
+xtabond2 caret L.caret LC.mvcon##C.mecp irisk lvolume act_div L.age L.expr I.year, gmm(L.caret L2C.mvcon##LC.mecp irisk lvolume L.act_div L2.age L2.expr, c) iv(I.year) two orthogonal robust noleveleq
 
 //steps
 //difference gmm with forward orthogonal transformation
+//when instruments > n, I collapsed them to single colume vector.
 //if ar(2) test or hansen test fails first add additional lags of dependent variable
 //second, try system gmm which adds additional instruments
