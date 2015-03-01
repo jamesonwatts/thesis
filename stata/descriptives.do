@@ -1,12 +1,14 @@
 cd /Users/research/GDrive/Dissertation/thesis/stata
 import delim using language_mo.csv, clear
 
-gen lcon = 1-klent2000
+gen lcon = 1-klent1000
 collapse words vocab lcon, by(year)
 
 import delim using language_mo.csv, clear
-gen lcon = 1-klent2000
+gen lcon = 1-klent1000
 tabulate month, gen(mfe)
+
+keep if year < 2004
 
 gen date = ym(year, month)
 format date %tm

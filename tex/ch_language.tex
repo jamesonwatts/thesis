@@ -21,7 +21,7 @@ How then, do we attempt to understand transitions in technology, taste and atten
 
 A variety of recent studies have started to look at the generic characteristics of written language as a way to understand the structure of markets and the evolution of human behavior (Klingenstein, Hitchcock, and DeDeo 2014; Goldberg 2013; Tirunillai and Tellis 2014). The viability of this type of research is driven by parallel developments in the availability of digital archives and methods appropriate for the analysis of ``big data." While the standards and practices used for large-scale textual analysis are still very much under development, I have largely followed the work of prior scholars in preparing my data and constructing my measures. The following paragraphs describe this process in detail.
 
-Textual data is sourced from articles written for the Bioworld trade journal between January 1991 and December 2004. During this period, Bioworld constituted a primary source for industry-wide dissemination of information about the activities of firms and other stakeholders in the biotechnology industry. They published daily articles (excluding weekends) on topics as wide-ranging as personnel changes, fundraising activity, inter-firm contracting, the FDA approval process and the latest scientific trends. Below are excerpts from two different example articles--the first from 1994 and the second from 2004--that illustrate the level of detail typically present in the text.
+Textual data is sourced from articles written for the Bioworld trade journal between January 1991 and December 2004. During this period, Bioworld constituted a primary source for industry-wide dissemination of information about the activities of firms and other stakeholders in the biotechnology industry (Wolfe 2001). They published daily articles (excluding weekends) on topics as wide-ranging as personnel changes, fundraising activity, inter-firm contracting, the FDA approval process and the latest scientific trends. Below are excerpts from two different example articles--the first from 1994 and the second from 2004--that illustrate the level of detail typically present in the text.
 
 \begin{singlespace}
 \begin{small}
@@ -45,11 +45,11 @@ Enrollment is under way in the U.S., while more sites will be added in Eastern E
 \end{small}
 \end{singlespace}
 
-With even a quick glance at the prior two articles, one will notice several prominent features of the text. First, there are a large number of industry-specific words dealing with the science of biotechnology--words like `glufosfamide' and `virion.' These words are very specific and exist at a very low frequency in the text. Because of this, they provide little insight into the broad subject matter of the article. In contrast, words like `the,' `to,' `is,' `of,' and `was' show up everywhere. However, these words constitute the ``plumbing" of the english language and are also uninformative. Between these two extremes, are words like `HIV,' `cancer' and `cell.' These words are descriptive, but not overly specific. Moreover, they appear with sufficient periodicity to suggest they are an integral part of subject matter under consideration. If we can capture changes in the most informative set of descriptive words over time, we might be able to infer something about how the industry is changing. For instance, perhaps the importance of \emph{HIV} relative to \emph{cancer} shifted in the period between 1994 and 2004.
+With even a quick glance at the prior two articles, one will notice several prominent features. First, there are a large number of industry-specific words dealing with the science of biotechnology--words like `glufosfamide' and `virion.' These words are very specific and exist at a very low frequency in the text. Because of this, they provide little insight into the broad subject matter of the article. In contrast, words like `the,' `to,' `is,' `of,' and `was' show up everywhere. However, these words constitute the ``plumbing" of the english language and are also uninformative. Between these two extremes, are words like `HIV,' `cancer' and `cell.' These words are descriptive, but not overly specific. Moreover, they appear with sufficient periodicity to suggest they are an integral part of subject matter under consideration. If we can capture changes in the most informative set of descriptive words over time, we might be able to infer something about how the industry is changing. For instance, perhaps the importance of \emph{HIV} relative to \emph{cancer} shifted in the period between 1994 and 2004.
 
 \section{Frequency Distributions}
 
-Between 1991 (when the journal first started) and the end of 2004, Bioworld published 22,461 articles. Following the work of Klingenstein et al., (2014), Tirunillai and Tellis (2014) and others, I performed the following steps on each article in order to prepare the data for further analysis.
+Between 1991 (when the journal first started) and the end of 2003, Bioworld published 22,461 articles. Following the work of Klingenstein et al., (2014), Tirunillai and Tellis (2014) and others, I performed the following steps on each article in order to prepare the data for further analysis.
 \begin{enumerate}
   \item Break apart each article into a list of lexical elements at the word level in a process typically referred to as tokenization (Jurafsky and Martin 2000). \footnote{Note for instance that compound words are split into their constituent parts so that a word like `don't' becomes three elements: `don,' `',' and `t.'}
   \item Remove all punctuation and numbers from the list.
@@ -96,7 +96,7 @@ should & now & & & \\
 \end{center}
 \end{table}
 
-Following the preprocessing steps described above, the lists of lexical elements representing each article were pooled by month into 168 larger lists--one for each month between January 1991 and December 2004. \footnote{Various aggregation sizes were tested and the results (shown later) remain qualitatively the same.} From these lists, I then constructed 168 frequency distributions, with the lexical element in rank order on the x-axis and its count divided by the total number of lexical elements constituting the y-axis--that is, that element's probability given the total list of elements in that month. Tables \ref{topwords1} and \ref{topwords2} list the top 25 word-stems in rank order for each of the 14 years under consideration. 
+Following the preprocessing steps described above, the lists of lexical elements representing each article were pooled by month into 156 larger lists--one for each month between January 1991 and December 2003. \footnote{Various aggregation sizes were tested and the results (shown later) remain qualitatively the same.} From these lists, I then constructed 156 frequency distributions, with the lexical element in rank order on the x-axis and its count divided by the total number of lexical elements constituting the y-axis--that is, that element's probability given the total list of elements in that month. Tables \ref{topwords1} and \ref{topwords2} list the top 25 word-stems in rank order for each of the 13 years under consideration. 
 
 \begin{table}
 \footnotesize
@@ -139,37 +139,37 @@ close & patent & market & market & human & also & treatment \\
 \begin{table}
 \footnotesize
 \begin{center}
-\caption[Top Words (1998-2004)]{Top Words (1998-2004) \label{topwords2}}
+\caption[Top Words (1998-2003)]{Top Words (1998-2003) \label{topwords2}}
 \vspace{0.3in}
 \begin{tabular}{ccccccc}
 \hline 
 \hline
-1998 & 1999 & 2000 & 2001 & 2002 & 2003 & 2004 \\
-said & said & said & said & said & said & said \\
-gene & compani & compani & develop & compani & compani & compani \\
-cell & gene & million & compani & develop & million & escap \\
-compani & cell & gene & million & drug & develop & million \\
-million & million & develop & cell & patient & escap & develop \\
-drug & drug & cell & drug & trial & drug & patient \\
-develop & develop & drug & patient & million & patient & drug \\
-patient & patient & product & product & studi & bioworld & trial \\
-protein & trial & protein & trial & product & product & phase \\
-product & product & trial & gene & phase & trial & product \\
-trial & protein & patient & research & cell & studi & bioworld \\
-cancer & phase & technolog & phase & research & phase & studi \\
-year & cancer & share & studi & cancer & today & today \\
-human & research & phase & technolog & technolog & research & year \\
-research & year & research & cancer & diseas & cancer & cancer \\
-phase & studi & diseas & diseas & also & cell & research \\
-diseas & human & cancer & protein & year & percent & also \\
-studi & diseas & human & human & percent & year & percent \\
-use & percent & studi & year & today & also & share \\
-today & use & use & treatment & pharmaceut & diseas & diseas \\
-technolog & technolog & year & also & would & share & pharmaceut \\
-percent & share & stock & percent & bioworld & technolog & locat \\
-bioworld & stock & therapeut & use & gene & would & clinic \\
-market & sequenc & pharmaceut & therapeut & clinic & stock & technolog \\
-treatment & pharmaceut & clinic & pharmaceut & use & pharmaceut & cell \\
+1998 & 1999 & 2000 & 2001 & 2002 & 2003  \\
+said & said & said & said & said & said  \\
+gene & compani & compani & develop & compani & compani  \\
+cell & gene & million & compani & develop & million  \\
+compani & cell & gene & million & drug & develop  \\
+million & million & develop & cell & patient & escap  \\
+drug & drug & cell & drug & trial & drug  \\
+develop & develop & drug & patient & million & patient  \\
+patient & patient & product & product & studi & bioworld  \\
+protein & trial & protein & trial & product & product  \\
+product & product & trial & gene & phase & trial  \\
+trial & protein & patient & research & cell & studi  \\
+cancer & phase & technolog & phase & research & phase  \\
+year & cancer & share & studi & cancer & today  \\
+human & research & phase & technolog & technolog & research  \\
+research & year & research & cancer & diseas & cancer  \\
+phase & studi & diseas & diseas & also & cell  \\
+diseas & human & cancer & protein & year & percent  \\
+studi & diseas & human & human & percent & year  \\
+use & percent & studi & year & today & also  \\
+today & use & use & treatment & pharmaceut & diseas  \\
+technolog & technolog & year & also & would & share  \\
+percent & share & stock & percent & bioworld & technolog  \\
+bioworld & stock & therapeut & use & gene & would  \\
+market & sequenc & pharmaceut & therapeut & clinic & stock \\
+treatment & pharmaceut & clinic & pharmaceut & use & pharmaceut  \\
 \hline
 \end{tabular}
 \end{center}
@@ -218,7 +218,7 @@ The KLD quantifies the amount of information lost when $Q$ is used to predict $P
 
 \section{Descriptive Statistics}
 
-For the descriptive statistics and analysis that follow, my measure of language consistency is based on probability distributions derived from the intersection of the top 1,000 word-stems in the current month ($Q_t$) and the prior three ($P_k$). Several other configurations were tested as as part of my robustness checks and the results are qualitatively the same. Table \ref{freq} shows the average monthly word stems, vocabulary (i.e. unique word-stems) and consistency over the fourteen year period under investigation.
+For the descriptive statistics and analysis that follow, my measure of language consistency is based on probability distributions derived from the intersection of the top 1,000 word-stems in the current month ($Q_t$) and the prior three ($P_k$). Several other configurations were tested as as part of my robustness checks and the results are qualitatively the same (see Appendix A). Table \ref{freq} shows the average monthly word stems, vocabulary (i.e. unique word-stems) and consistency over the thirteen year period under investigation.
 
 Several trends are immediately apparent. First, the amount of writing grew substantially throughout the 1990's before leveling off around year 2000. Second, the vocabulary used to describe the industry more than doubled over the same period with the sharpest increase occurring between 1992 and 1993. Third, the consistency in the way the language was used rose gradually over the same period. If, as I argued previously, the frequency of language use is indicative of the legitimation process (e.g. Pektrova et al. 2014; Rosa et al 1999), then this rise in consistency suggests that the industry as a whole has undergone a gradual march towards the establishment of greater field-wide knowledge and shared understanding (Cattani et al., 2008). That is, the consistency observed in language may proxy for shared understanding--or consensus--at the field level.
 
@@ -244,7 +244,6 @@ YEAR & WORD-STEMS & VOCABULARY & LCON \\
 2001 &  329,704 & 14,673 & .9540956 \\
 2002 &  342,010 & 13,854 & .9625357 \\
 2003 &  374,304 & 13,286 & .9642392 \\
-2004 &  350,575 & 12,525 & .9612578 \\
 \hline
 \end{tabular}
 \end{center}
@@ -252,7 +251,7 @@ YEAR & WORD-STEMS & VOCABULARY & LCON \\
 
 
 
-Despite the gradual increase in language consistency year over year, there is significant variation at the monthly level. Figure \ref{lcon1} shows the language consistency measure plotted on a monthly basis from 1991 through 2004. Notably, there is significant volatility in the first couple of years, which may be due to institutional factors unrelated to the legitimation process. For instance, new reporters must be recruited and learn how to write about the industry. As mentioned above, the vocabulary more than doubled in these first few years. 
+Despite the gradual increase in language consistency year over year, there is significant variation at the monthly level. Figure \ref{lcon1} shows the language consistency measure plotted on a monthly basis from 1991 through 2003. Notably, there is significant volatility in the first couple of years, which may be due to institutional factors unrelated to the legitimation process. For instance, new reporters must be recruited and learn how to write about the industry. As mentioned above, the vocabulary more than doubled in these first few years. 
 
 %\begin{landscape}
 \begin{figure}
@@ -298,9 +297,9 @@ The deviation in July of 2001 is again primarily driven by sharp declines in pro
 
 In Chapter \ref{law} I talked about the relationship between shared understanding (representational homogeny) and exchange.  I proposed that increases in shared understanding would drive exchange in markets characterized by a high degree of knowledge heterogeneity. I also proposed that new information (i.e. decreases in shared understanding) could drive exchange in markets that had reached a state of relative equilibrium. In this section I test these propositions by looking at how my measure of language consistency is related to the trading volume of common shares issued by publicly-traded biotech firms.
 
-The set of firms used is taken from the dataset collected by Powell and his colleagues (see Powell et al. 2005; Powell, Koput and Smith-Doerr 1996), extended through 2004. Stock market data is collected from the Wharton Research Data Service (CRSP/Compustat merged). Additional information on this dataset is presented in Chapter \ref{signal}; however a few points are worth mentioning here. The database focuses on dedicated human biotech firms, omitting companies involved in veterinary and agricultural biotech (which draw on different scientific capabilities and operate in a much different regulatory climate). The resulting sample covers 401 firms, of which 153 were in existence in 1993 and 245 in 2004. In this time-frame, some firms were created and entered the database, and others exited, due to failure, departure from the industry, or acquisition. 
+The set of firms used is taken from the dataset collected by Powell and his colleagues (see Powell et al. 2005; Powell, Koput and Smith-Doerr 1996), extended through 2003. Stock market data is collected from the Wharton Research Data Service (CRSP/Compustat merged). Additional information on this dataset is presented in Chapter \ref{signal}; however a few points are worth mentioning here. The database focuses on dedicated human biotech firms, omitting companies involved in veterinary and agricultural biotech (which draw on different scientific capabilities and operate in a much different regulatory climate). The sub-sample used here covers only publicly traded firms, of which 153 were in existence in 1993 and 252 in 2003. In this time-frame, some firms were created and entered the database, and others exited, due to failure, departure from the industry, or acquisition. 
 
-To reduce volatility in my aggregate measure of trading volume and for econometric reasons clarified in Chapter \ref{signal}, I dropped firms with less than three years of trading data from the sample. The final sample numbers between 111 and 192 firms over the years 1993 to 2004. Trading volume is operationalized as the log of the sum of the trading volume for all active firms in a given month (denoted $LVOL_t$). As such it captures general interest and activity in the biotech sector in proportion to firm size. This is in contrast to a measure like turnover, which captures valuation-independent trading activity. The two measures are related; however, in this context one can think of my volume measure like that which is associated with a sector mutual fund or a portfolio, which are often size-weighted to begin with (Kim and Verrecchia 1991). Further analysis at the firm level can be found in Chapter \ref{signal}.
+To reduce volatility in my aggregate measure of trading volume and for econometric reasons clarified in Chapter \ref{signal}, I dropped firms with less than three years of trading data from the sample.\footnote{Leaving all firms in for this analysis made no qualitative difference in the results.} The final sample numbers between 111 and 192 firms in any given year. Trading volume is operationalized as the log of the sum of the trading volume for all active firms in a given month (denoted $LVOL_t$). As such it captures general interest and activity in the biotech sector in proportion to firm size. This is in contrast to a measure like turnover, which captures valuation-independent trading activity. The two measures are related; however, in this context one can think of my volume measure like that which is associated with a sector mutual fund or a portfolio, which are often size-weighted to begin with (Kim and Verrecchia 1991). Further analysis at the firm level can be found in Chapter \ref{signal}.
 
 Figure \ref{vol1} shows standardized measures of trading volume and language consistency on the same axis. Despite significant volatility, both time series seem to adhere to the same long-term average. This is a striking feature of the data and suggests the two series may be cointegrated--that is, each may have a causal effect on the other as both conform to a longer-term trend. If trading volume deviates from the trend, it is ``pulled" back by language consistency just as consistency is ``pulled" back itself by higher trading volume. This adherence to the longer-term average and the interplay of the two variables can be more easily seen in Figure \ref{vol2}, which shows the 3-month moving average of the same variables. 
 
@@ -397,6 +396,6 @@ The remaining coefficients in Table \ref{vec} also provide evidence of short-ter
 
 These two distinct effects--the short-term and the long-term--describe a nuanced system of relationships between language consistency and trading volume. While both variables tend to elevate each other in an increasing long-term trend, \emph{drops} in consistency (i.e. new information) can also increase trading volume, if only briefly. In a general sense, this is consistent with the propositions developed in Chapter \ref{law}. As knowledge in the  biotechnology industry becomes ``common" knowledge over time, the liquidity of (and possibly the demand for) a firm's shares should also increase. This occurs because more investors understand the nature of the investment. However, in the shorter-term, new information can jolt trading volume from it's long term equilibrium in a transitory spike of increased activity.
 
-Despite these intriguing results, many questions remain. For instance, does the effect that language consistency has on exchange affect firm performance? In Chapter \ref{signal}, I address this question by building and testing theory on the relationship between language consistency, and the advantages derived from a firm's centrality in a network of long-term exchange relationships. Language consistency is shown to moderate the effect of a firm's network position on a variety of measures of firm performance.
+Despite these intriguing results, many questions remain. For instance, does the effect that language consistency has on exchange affect firm performance? What is the relationship (if any) with systematic risk? In Chapter \ref{signal}, I address these questions by building and testing theory on the relationship between language consistency, and the advantages derived from a firm's centrality in a network of long-term exchange relationships. Language consistency is shown to moderate the effect of a firm's network position on a variety of measures of firm performance.
 
 

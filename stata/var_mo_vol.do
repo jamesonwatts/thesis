@@ -90,12 +90,20 @@ veclmar, ml(9)
 
 irf set vec_eg, replace
 irf create vec_eg, step(12) replace
-irf graph oirf, impulse(LCON) response(LVOL) yline(0) name(irf1, replace) graphregion(color(white))
+irf graph oirf, impulse(ARET) response(LCON) yline(0) name(irf1, replace) graphregion(color(white))
 irf graph oirf, impulse(LCON) response(ARET) yline(0) name(irf2, replace) graphregion(color(white))
-irf graph oirf, impulse(ARET) response(LCON) yline(0) name(irf3, replace) graphregion(color(white))
-irf graph oirf, impulse(ARET) response(LVOL) yline(0) name(irf4, replace) graphregion(color(white))
-irf graph oirf, impulse(LVOL) response(ARET) yline(0) name(irf5, replace) graphregion(color(white))
+irf graph oirf, impulse(SRISK) response(LCON) yline(0) name(irf3, replace) graphregion(color(white))
+irf graph oirf, impulse(LCON) response(SRISK) yline(0) name(irf4, replace) graphregion(color(white))
 
+//robustness of lcon with srisk
+varsoc SRISK LCON, m(7)
+vecrank ARET SRISK LCON, lags(3)
+set more off
+
+var SRISK D.LCON, lags(1/2) //ex(mfe1-mfe12 lnyse_volume)
+vargranger
+varstable
+varlmar, ml(6)
 
 //robustness turnover
 keep if year > 1997
