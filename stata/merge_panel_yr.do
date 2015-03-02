@@ -68,27 +68,18 @@ drop _merge
 gen act_div = 1-(((d_r/d)^2)+((d_f/d)^2)+((d_l/d)^2)+((d_c/d)^2)+((d_o/d)^2))
 gen frm_div = 1-(((n_bio/d)^2)+((n_npr/d)^2)+((n_gov/d)^2)+((n_fin/d)^2)+((n_pha/d)^2)+((n_oth/d)^2))
 
+replace emps = . if emps < 0
+replace fyr = . if fyr < 0
 gen fyrd = fyr / 10000
 gen age = year - floor(fyrd)
-gen lage = log(age)
-su lage
-gen mlage = lage-r(mean)
-replace firsttie = . if firsttie == -1 | firsttie == -9
+replace age = 0 if age < 0 //hack
+replace firsttie = . if firsttie < 0
 gen firsttied = firsttie / 100
 gen expr = year - floor(firsttied)
-replace expr = 0 if expr < 0
-gen lexpr = log(expr)
-su lexpr
-gen mlexpr = lexpr-r(mean)
+replace expr = 0 if expr < 0 //hack
 rename international foreign
-gen lemps = log(emps)
-su lemps
-gen mlemps = lemps-r(mean)
 
-tab year, gen(y)
 gen lvolume = log(volume)
-su lvolume
-gen mlvolume = lvolume-r(mean)
 rename ec_pro ecp
 su ecp
 gen mecp = ecp-r(mean)
@@ -98,9 +89,6 @@ su dc
 gen mdc = dc-r(mean)
 su co
 gen mco = co-r(mean)
-
-su irisk
-gen mirisk = irisk-r(mean)
 
 save panel_yr, replace
 
@@ -139,17 +127,18 @@ merge 1:1 FID year using panel_yr
 drop _merge
 save panel_yr, replace
 
-use minority, clear
-rename fyear year
-keep mib mii tic year
-merge 1:m tic year using panel_yr
-drop if _merge == 1
-drop _merge
-save panel_yr, replace
+//use minority, clear
+//rename fyear year
+//keep mib mii tic year
+//merge 1:m tic year using panel_yr
+//drop if _merge == 1
+//drop _merge
+//save panel_yr, replace
 
 import delim using patents3, clear
 rename freq patents2
 merge 1:m permno year using panel_yr
 drop if _merge == 1
 drop _merge
+replace patents2 = 0 if patents2 == .
 save panel_yr, replace

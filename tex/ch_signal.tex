@@ -39,7 +39,7 @@ One could think of a similar argument in the context of a marketing channel. A r
 
 Without precluding the existence of purely symbolic advantage, this discussion reveals an interesting fact about structural market signals. One need not prove information asymmetry in a particular relationship to make claims about their value as market signals. Instead, it may be sufficient to claim that knowledge heterogeneity exists in the broader market context. That is, benefits can accrue to actors in a favorable position even if bestowed by those with full knowledge of underlying quality, provided some information asymmetries still exist elsewhere in the field. 
 
-\section{Pipes or Prisms?}
+\section{Pipes or Prisms? \label{pp}}
 
 Despite the preponderance of research documenting structural advantage (e.g. Benjamin and Podolny, 1999; Bothner, Kim, and Lee, 2014; Kim and King 2014; Podolny, 1993), the mechanisms undergirding such advantage are often left underdeveloped (Jensen, Kim, and Kim, 2011; Podolny 2001). As noted above, this was the primary motivation for the Malter (2014) study; however, this lack of definition is particularly evident in research on networks where `structure' is conceptualized as ``...enduring patterns of relationships among actors--be they individuals, cliques, groups, or organizations" (Powell et al. 1999 p. 2). Here, the cost advantages of a favorable position can accrue on both a symbolic \emph{and} a substantive basis (see e.g. Podolny 2001), which complicates the process of theory identification.
 
@@ -53,7 +53,7 @@ Both of these mechanisms are motivated in the well known work of Powell et al., 
 
 I propose that language uncertainty can be used as a way to identify the influence of these distinct mechanisms. If the consistency of language can proxy for field-wide shared understanding as discussed in Chapter \ref{lang}, then \emph{inconsistency} in language could adversely affect the value of information garnered from extant network ties. This in turn, makes it more difficult to translate that information into productive output. However, a lack of field-level shared understanding may also increase uncertainty regarding the future standards of quality. This could actually intensify the symbolic significance of a central network position for those looking to invest new (or further) resources in an industry. 
 
-For centrally located firms, these countervailing forces lead to an unusual tension. Under high language uncertainty, the quality signaled by a firm's network can bring it additional resources--including additional network ties. However, it also becomes more difficult to translate these resources into productive output. Thus, language uncertainty is expected to positively moderate any symbolic structural advantage while negatively moderating the substantive advantage.
+For centrally located firms, these countervailing forces lead to an unusual tension. Under high language uncertainty, the quality signaled by a firm's network can bring additional resources--including additional network ties. However, it also becomes more difficult to translate these resources into productive output. Thus, language uncertainty is expected to positively moderate any symbolic structural advantage while negatively moderating the substantive advantage.
 
 Using the dataset from Powell et al., (1999) extended and updated by five years, I test the moderating role of language uncertainty on the performance advantages of network centrality. I take the work of Powell and colleagues as my point of departure for the empirical portion of this chapter and attempt to reproduce their original results before introducing the language uncertainty moderator. In the next section I briefly review my empirical context and then describe my data and measures. This is followed by a description of my methods and related assumptions. I conclude with a discussion of the results and their significance.
 
@@ -62,7 +62,8 @@ Using the dataset from Powell et al., (1999) extended and updated by five years,
 My research setting is the biotechnology industry during the period 1993-2003. This time period is important for two reasons. First, it predates widespread use of the Internet as a primary source for information on the Biotechnology industry. This increases confidence in the reliability of my language measure developed in Chapter \ref{lang} since few alternatives to the Bioworld trade journal were available (Wolfe 2001). Second, it represents a period in the industry with sparse analyst coverage and unreliable financial data--there were few individuals capable of evaluating the science, much less its commercial value (Powell et al. 2005; Wolfe 2001). These features of the industry amplified the importance of strategic alliances as an indicator of firm potential (Podolny 2001; Shane and Stuart 2002). The fact that significant investment has occurred in this context confirms the importance of network models in information and investment. Moreover, the data I describe below are based on formal contractual agreements and not informal ties, handshake deals, or social embedding, hence they afford a strict test of whether network relationships influence financial outcomes.  
 
 The science underlying the field of biotechnology had its origins in university laboratories. These promising discoveries were initially exploited by a handful of science-based start-up firms founded in the mid-to-late 1970s. The year 1980 marked a sea change, with the U.S. Supreme Court ruling in the Diamond v. Chakrabaty case that genetically engineered life forms were patentable. Congress passed the Bayh-Dole Act in the same year, which allowed universities, nonprofit research institutes, and small businesses to retain the intellectual property rights to discoveries funded by federal research grants (Mowery, Sampat, and Zedonis, 2001). And Genentech--which along with Cetus was then the most visible biotech company--had its initial public offering, drawing great interest on Wall Street, with a single day stock price run up exceeding any previous one-day jump. Over the next two decades, hundreds of small, science-based biotech firms were founded, mostly in the United States but more recently in Canada, Australia, Britain, and Europe.
-In fields such as biotech, where knowledge is advancing rapidly and the sources of knowledge are widely dispersed, organizations enter into an array of alliances to gain different competencies and knowledge (Powell, et al., 1996). In so doing, firms develop portfolios of relationships that permit access both to developments in science and skill in bringing new products to markets. Thus, the field is not only multi-disciplinary, it is multi-institutional as well. In addition to research universities and both start-up and established firms, government agencies, nonprofit research institutes, and leading hospitals have played key roles in conducting and funding research, while venture capitalists and law firms have played essential parts as talent scouts, advisors, consultants, and financiers (Gilson and Black 1998; Lerner and Merges 1998), and chemical, pharmaceutical, health-care, and conglomerate corporations have sought to bring the science to consumers.  
+
+In fields such as biotech, where knowledge is advancing rapidly and the sources of knowledge are widely dispersed, organizations enter into an array of alliances to gain different competencies and knowledge (Powell, et al., 1996). In so doing, firms develop portfolios of relationships that permit access both to developments in science and skill in bringing new products to markets. Thus, the field is not only multi-disciplinary, it is multi-institutional as well. In addition to research universities and both start-up and established firms, government agencies, nonprofit research institutes, and leading hospitals have played key roles in conducting and funding research, while venture capitalists and law firms have played essential parts as talent scouts, advisors, consultants, and financiers (Gilson and Black 1998; Lerner and Merges 1998), and chemical, pharmaceutical, health-care, and conglomerate corporations have sought to bring the science to consumers.  
 
 \section{Data Sources}
 
@@ -76,17 +77,93 @@ Financial data was obtained from the Wharton Research Data Service (CRSP/Compust
 
 Patent data was collected from two separate sources. The primary source originates with the dataset collected by Powell and colleagues for their 1999 expansion of the Powell et al., (1996) research. This data comes from CASSIS, which is a government document that was made available by the U.S. Patent and Trademark Office before data was available over the Internet. This data is supplemented with patent counts from a search done through the Commercialization Research on Innovation and Entrepreneurship (CRIE) database hosted by the University of Arizona. This database uses a matching algorithm to associate a company's unique identifier (such as `permno') with the data published online by the U.S. government. This is also limited to publicly traded companies.
 
-Most models are run with $N>250$ and approximately 1,700 firm-year observations. The most expansive model is unrestricted by whether a firm is publicly traded and covers essentially the entire database. The most restrictive panel has $N=173$ and 823 firm-year observations. However, this occurs with the additional restriction of a minimum 5 years of stock market data. The justification for this particular restriction is explained in the Measures section below. All models are shown to be robust to a variety of selection biases in Appendix B.
+Most models are run with $N>250$ and approximately 1,700 firm-year observations. The most expansive model is unrestricted by whether a firm is publicly traded and covers essentially the entire database. The most restrictive panel has $N=173$ and 823 firm-year observations. However, this occurs with the additional restriction of a minimum 5 years of stock market data per included firm. The justification for this particular restriction is explained in the Measures section below. All models are shown to be robust to a variety of selection biases in Appendix B.
 
 \section{Measures.}
 
-For any given DBF, a network profile consists of the number of ties (alliances) it has for each of four core types of business activity--research, financing, licensing and commercialization. The number of research ties is an important outcome variable as well as a component of a firm's network profile and so it is treated separately (both conceptually and empirically). The range of activities that a firm is engaged in during 
+For any given DBF, a network profile consists of the number of ties (alliances) it has for each of four core types of business activity--research, financing, licensing and commercialization. The number of research ties is an important outcome variable as well as a component of a firm's network profile and so it is treated separately (both conceptually and empirically). 
 
-Since the primary goal of this Chapter is to extend the theory and analysis of Powell et al., (1999), I adhere in a strict sense to their measure of network centrality. 
+The range of activities that a firm is engaged in during a given year reflects a firm's portfolio of collaborative activities. The diversity of these activities is computed as the Blau (1977) index of heterogeneity as follows: 
+
+\begin{equation}
+d_{it}=1-\sum_{j=1}^Jp_{it,j}^2,
+\end{equation}
+
+\noindent where $p_{it,j}$ is the proportion of firm $i$'s $j$-type ties in year $t$.
+ 
+Since the primary goal of this Chapter is to extend the theory and analysis of Powell et al., (1999), I adhere in a strict sense to their operationalization of network centrality. Further justification can be found in the original papers, however the essential intuition is that overall position in the network of DBFs can be best captured by mapping two-mode ties onto the one-mode network. Thus, two biotech firms are assumed affiliated through mutual association with a third party (e.g. Breiger 1974). For instance, two DBFs may each have a separate alliance with the same large pharmaceutical firm. The imputed network treats this scenario as one in which these two firms are themselves tied (cf. Powell et al., 1996).
+
+From the resultant network, a firm's centrality is computed using the Bonacich (1972; 1987) eigenvector measure, which takes into account both a firm's number of ties and how well connected those ties are in turn. The measure is thus representative of a firm's embeddedness in the overall biotech network, but also the degree to which it is connected to others of similar prominence (Podolny 2001). It has been used elsewhere to measure power, prestige and status (Burt 1982; Baker et al., 1998).
+
+Patents are measured as a simple count of the patents granted to each DBF in a given year. Though not a perfect measure of a firm's intellectual output, it is used frequently in academic work as a proxy (cf. Powell et. al., 1999; Traditionberg 1990). I track both the number of new patents and the cumulative total. The cumulative count can play a signaling role in attracting potential collaborators (e.g. Smith-Doerr et al., 1998) and so also serves as an important control variable (and potential confound) in certain regressions dealing with the symbolic value of centrality. 
+
+Language data is collected and prepared as described in Chapter \ref{lang}; however, firm-level data is at the yearly, not monthly, level. Since I am interested in the environmental uncertainty reflected in the industry's (lack of) language consistency, I operationalize a measure of language uncertainty as the standard deviation of the monthly consistency measure developed in the prior chapter.
+
+For financial outcomes, I used sales, non operating income and abnormal stock returns. Sales are netted revenue generated from billing customers, but reduced by discounts and return allowances. The measure also includes equity income from R\&D joint ventures if reported as operating income. By contrast, nonoperating income results from secondary business-related activities like grants, licensing or other royalties, investment income, externally-sponsored research and anything else not classified as sales.
+
+The inclusion of abnormal returns as a measure of financial outcomes is new to this research and was not included in the 1999 model. Following Srinivasan and Hanssens (2009), Xiong and Bharadwaj (2013) and others, I calculate the abnormal stock return for firm $i$ in month $j$ based on the extended Carhart four-factor financial model (Carhart 1997) as:
+
+\begin{equation}\label{ff}
+(R_{ij}-R_{rf,j}) = \alpha_i + \beta_{mi}(R_{mj}-R_{rf,j}) + s_iSMB_j + h_iHML_j + u_iUMD_j + e_{i,j},
+\end{equation}
+
+\noindent where $R_ij$ is the stock return of firm $i$ at month $j$, $R_{rf,j}$ is the risk-free rate of return at $j$, $R_{mj}$ is the market factor (market return at $j$), $SMB_j$ is the size factor (difference between the return on a value-weighted small-market capitalization stock portfolio and the return on a big-market capitalization portfolio), $HML_j$ is the value factor (the difference between the return on a value-weighted high-book-to-market stock portfolio and the return on low-book-to-market portfolio), and $UMD_j$ is the momentum factor (the difference between the average return of two high prior-return portfolios and the average return of two low prior-return portfolios).
+
+The abnormal stock return in month $j+1$, $ARET_{j+1}$ is calculated as $(R_{ij+1}-R_{rf,j+1})-\beta_{mi}^*(R_{mj+1}-R_{rf,j+1})-s_i^*SMB_{j+1}-h_i^*HML_{j+1}-u_i^*UMD_{j+1}$, where the parameters $\beta_{mi}^*$, $s_i^*$, $h_i^*$, and $u_i^*$ are firm risk covariates estimated from regression of Equation \ref{ff} in a rolling estimation window of 36 months ending two months prior to the calculation month. Altering the length of estimation window as 24 or 48 months or the parameter lag yields consistent results; however, the longer windows require that a firm be actively traded for a longer period of time. For the reported results, estimating the parameters on the 36 months prior (i.e. 3 years) requires that I use only firms with 5 years of trading data. This occurs because the abnormal returns data is aggregated to the yearly level in order to match the other firm-level data. Five years of trading data equals 3 years for parameter estimation used in the returns calculation plus 2 years for subsequent panel estimation in differences. 
+
+
+\begin{table}[htbp]\centering \caption{Summary Statistics \label{sumstat}}
+\begin{tabular}{l c c c c c}\hline\hline
+\multicolumn{1}{c}{\textbf{Variable}} & \textbf{Mean}
+ & \textbf{Std. Dev.}& \textbf{Min.} &  \textbf{Max.} & \textbf{N}\\ \hline
+R\&D Ties & 3.224 & 4.504 & 0 & 34 & 3898\\
+Diversity & 0.473 & 0.231 & 0 & 0.776 & 3656\\
+Experience & 7.91 & 4.762 & 0 & 27 & 3518\\
+Centrality & 0.037 & 0.033 & 0 & 0.155 & 3898\\
+New Patents & 14.616 & 47.095 & 1 & 874 & 882\\
+Cum. Patents & 20.622 & 95.412 & 0 & 1276 & 3898\\
+Lang Uncert. & 0.007 & 0.002 & 0.004 & 0.01 & 3898\\
+Sales & 101.847 & 433.455 & -21.796 & 8356 & 1745\\
+Nonop. Income & 5.181 & 19.454 & -95.121 & 315 & 1745\\
+Abnorm. Ret. & 0.023 & 0.258 & -4.74 & 3.697 & 1430\\
+Idiosync. Risk & 0.366 & 0.528 & 0.012 & 9.974 & 1410\\
+Employees & 162.477 & 516.825 & 1 & 8342 & 3898\\
+Age & 10.971 & 7.074 & 0 & 87 & 3894\\
+\hline\end{tabular}
+\end{table}
+
+Abnormal returns were aggregated to the yearly level as both an average of the monthly calculation and as a sum. The average is used in the regressions below; however, results are qualitatively the same using both aggregation methods. In addition, I calculated each firm's idiosyncratic risk as the standard deviation of it's monthly abnormal returns for use as a control variable in regressions where abnormal returns are the dependent variable (Thomaz and Swaminathan 2014).
+
+Firm size (measured as the number of employees) is an important outcome variable as well as a potential control in several models. Indeed it was the primacy outcome in the 1996 paper and I continue it's use here. Finally, I measure a firm's age as the number of years since it's founding. Age is a common control for ecological and life-cycle theories of organization (Powell et al., 1999) and may capture advantages due to vicarious learning or the mastery of internal routines. All models also include a dummy variable for each of the 11 years under consideration. When interactions are included the interacted variables are mean-centered to account for the imposed multicolinearity. Summary statistics and bivariate correlations are listed in Tables \ref{sumstat} and \ref{corrtable} respectively.
+
+
+\begin{landscape}
+\begin{table}[htbp]\centering \caption{Variable Correlations\label{corrtable}}
+\begin{tabular}{l  c  c  c  c  c  c  c  c  c  c  c  c  c }\hline\hline
+\multicolumn{1}{c}{Variables} &(1)&(2)&(3)&(4)&(5)&(6)&(7)&(8)&(9)&(10)&(11)&(12)&(13)\\ \hline
+R\&D Ties&1.000\\
+Diversity&0.295&1.000\\
+Experience&0.198&0.272&1.000\\
+Centrality&0.603&0.474&0.261&1.000\\
+New Patents&0.195&0.074&-0.027&0.237&1.000\\
+Cum. Patents&0.328&0.145&0.202&0.301&0.443&1.000\\
+Lang Uncert.&0.043&0.058&0.019&0.023&0.012&0.011&1.000\\
+Sales&0.161&0.092&0.180&0.113&0.110&0.294&-0.036&1.000\\
+Nonop. Income&0.262&0.145&0.189&0.254&0.208&0.449&0.060&0.568&1.000\\
+Abnorm. Ret.&0.007&0.021&0.015&0.003&-0.057&-0.008&-0.055&-0.012&-0.023&1.000\\
+Idiosync. Risk&-0.052&-0.056&-0.055&-0.086&-0.085&-0.073&0.092&-0.089&-0.053&-0.000&1.000\\
+Employees&0.346&0.184&0.303&0.332&0.197&0.558&0.001&0.608&0.645&-0.008&-0.097&1.000\\
+Age&0.061&0.158&0.638&0.096&0.026&0.179&0.026&0.099&0.089&-0.002&-0.044&0.278&1.000\\
+\hline \hline 
+ \end{tabular}
+\end{table}
+\end{landscape}
 
 
 \section{Model}
-The model of Powell et al. (1999) is one in which network centrality plays a substantial role in determining firm performance. This can be seen clearly from Figure \ref{omodel} reproduced here by permission of the original authors. However, this visual representation illustrates results from a 3-stage regression and many of the mechanisms driving these results are hidden in the one and two stage results.  For instance, It plays a symbolic role in attracting the new resources that lead to sales and growth, and a substantive role facilitating the translation of research and development collaborations into new patents. Figure \ref{model} shows the 
+The model of Powell et al. (1999) is one in which network centrality plays a substantial role in determining firm performance. This can be seen clearly from Figure \ref{omodel} reproduced here by permission of the original authors. However, this visual representation illustrates the outcome of a 3-stage regression and many of the mechanisms driving these results are hidden in the one and two stage results.  For instance, it is reasoned that network centrality plays a largely symbolic role in attracting the grants, licensing deals and externally sponsored research that show up as nonoperating income on the balance sheet. Moreover, a firm's sales and employee growth are driven by centrality's prior effect on nonoperating income. This is demonstrated by the fact that nearly all variance in the proximate effect of nonoperating income on sales and employee growth is accounted for in the two-stage model in which nonoperating income is merely `instrumental' in the effect that centrality plays on these two performance outcomes.
+
+In contrast, centrality is postulated to play a largely substantive role in translating the fruits of R\&D alliances into defensible intellectual property in the form of patents. This is demonstrated in the two- and three-stage regressions in which centrality is instrumental in the effect of R\&D ties, alliance experience and portfolio diversity on patent production. Indeed, Powell et al., (1999, p. 20) assert that centrality ``clearly enables firms to select and complete research projects that prove worthy of patent protection."
 
 \begin{figure}
 \begin{center}
@@ -95,6 +172,9 @@ The model of Powell et al. (1999) is one in which network centrality plays a sub
 \end{center}
 \end{figure}
 
+Given these findings and the arguments from Section \ref{pp}, I expect that language uncertainty will positively moderate the effect of centrality on nonoperating income and negatively moderate the effect of centrality on patents. Though not postulated in the original model, I also expect a negative moderation with abnormal stock returns. This is because under the efficient market hypothesis, the stock market reflects the consensus expectation of future growth. While the sales generated from licensing and sponsored research are positive from a cash flow standpoint, it is R\&D that really drives future performance (Wolfe 2001). Thus, anything which hinders a firm's use of their alliance network to fuel that growth should be reflected negatively in their share price. 
+
+Figure \ref{model} reproduces the elements from the Powell et al., (1999) model that I attempt to reproduce. Also included are the two instances in their model where I have proposed an interaction will occur. I visually break apart network centrality into its symbolic and substantive effects and make links where they are theoretically clear. However, several relationships may draw from both the symbolic and the substantive advantage of centrality and thus the line is drawn from the encircling shape. While I can't make a priori predictions about the moderating effect of language uncertainty on these other relationships, I do test them at the end of this section and speculate on the results.
 
 \begin{figure}
 \begin{center}
@@ -103,7 +183,69 @@ The model of Powell et al. (1999) is one in which network centrality plays a sub
 \end{center}
 \end{figure}
 
-Fore each performance measure, I first test the relationships using the same methods as those used in the original paper and then compare those results with those obtained from newer methods that control for additional sources of potential bias.
+\section{Methods}
+
+For each of the theorized causal links, I first test the relationship using the same method used in the original paper and then compare results with those obtained from a newer method that controls for additional sources of potential bias. In general there are two major econometric challenges in testing the proposed effects. First, unobservable, time-invariant firm characteristics can be correlated with the explanatory variables. Second, certain outcome variables may have an effect on the explanatory variables and on themselves. A relationship between the explanatory variable and outcome might thus be spurious and due to effects from lags of the dependent variable on itself.
+
+In the original models, unobserved firm-level heterogeneity was accounted for with firm fixed effects and bias from autocorrelation was addressed by adding lags of the dependent variable (DV) to the right hand side of the equation. However, the fixed effects transformation (i.e. first differencing) of the lagged DV creates additional autocorrelation by definition. That is $\Delta y_{it-1}$ is correlated with the error term $e_{it}$ since $e_{i,t-1}$ is a component in not only $\Delta e_{it}$ (because $\Delta e_{i,t-1} = e_{i,t-1}-e_{i,t-2}$) but also $\Delta y_{it-1}$ (because $\Delta y_{i,t-1} = y_{i,t-1}-y_{i,t-2}$ and $e_{i,t-1}$ is a component of $y_{i,t-1}$).
+
+Arellano and Bond (1991) develop a Generalized Method of Moments estimator that instruments the differenced variables that are not strictly exogenous with all their available lags in levels. As illustrated by Arellano and Honore (2001), $y_{i,t-2}$ and further lags are valid instruments for $\Delta y_{i,t-1}$ when $E[e_{i,t-1}, e_{i,t-2}] = 0$. This occurs for two reasons. First, $y_{i,t-2}$ is correlated with $\Delta y_{i,t-1}$, because $\Delta y_{i,t-1} = y_{i,t-1}-y_{i,t-2}$ and second, $y_{i,t-2}$ is not correlated with $\Delta e_{it}$ because $\Delta e_{it} = e_{it}-e_{i,t-1}$ does not contain the element of $e_{i,t-2}$. Based on the assumption $E[e_{i,t-1}, e_{i,t-2}] = 0$, the $e_{i,t-1}$ element is not correlated with $e_{i,t-2}$. 
+
+This estimator is generally appropriate for large $N$ small $t$ applications as I have in the current context (Arellano and Bover 1995). However, with several explanatory variables and all of their lagged values as instruments, the instrument count can get quite high. When the instrument count approaches $N$, which is often the case, the estimator can start to produce inconsistent results and it can be useful to collapse the instrument matrix into a single vector (Roodman 2006). In all models, the AR(2) tests (Arellano and Bond 1991) suggest that the second-order differenced error terms ($e_{it}-e_{i,t-1}$) and ($e_{it-2}-e_{i,t-3}$) are not correlated, indicating that $e_{it}$ is not serially correlated and thus the assumption $E[e_{i,t-1}, e_{i,t-2}] = 0$ holds. In addition, the Hansen tests of overidentifying restrictions fail to reject the null, indicating that the instruments are valid (the p-values of AR(2) and Hansen tests are reported in each Table). Following the same logic, I treat the other potentially endogenous variables with lagged levels as instruments. For instance, $Centrality_{i,t-1}$ and further lags are used to instrument $\Delta Centrality_{it}$. Thus, the Arellano-Bond GMM approach effectively accounts for the endogeneity of each explanatory variable.\footnote{Note that all regressions also include yearly fixed effects as in the original models and as recommended by Roodman (2006).}
 
 \section{Results}
+
+I begin with the symbolic effect of centrality as it relates to employee growth and sales through nonoperating income. As a first step I attempt to reproduce the proximate effects of nonoperating income on number of employees and sales, and the two-stage results of centrality on these performance measures through nonoperating income. Tables \ref{r1} and \ref{r2} show these results.
+
+\begin{table}[htbp]\centering \caption{Regression of Employees on Nonoperating Income\label{r1}}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arrellano-Bond}&\multicolumn{1}{c}{Cent. $\rightarrow$ Nonop. Inc.}\\
+\hline
+L.Employees         &       0.679\sym{***}&       0.509\sym{***}&       0.667\sym{***}\\
+                    &     (43.47)         &      (7.92)         &      (5.13)         \\
+L.Nonop. Income     &       2.631\sym{***}&       8.400\sym{*}  &       3.166         \\
+                    &      (8.45)         &      (2.42)         &      (0.51)         \\
+\hline
+Observations        &        1577         &        1325         &        1577         \\
+r2\_w                &       0.701         &                     &       0.700         \\
+hansenp             &                     &       0.328         &                     \\
+ar2p                &                     &       0.293         &                     \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
+
+\end{table}
+
+\begin{table}[htbp]\centering \caption{Regression of Sales on Nonoperating Income\label{r1}}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arrellano-Bond}&\multicolumn{1}{c}{Cent. $\rightarrow$ Nonop. Inc.}\\
+\hline
+L.Sales             &       1.382\sym{***}&       1.446\sym{***}&       1.534\sym{***}\\
+                    &     (79.03)         &      (5.83)         &      (5.84)         \\
+L.Nonop. Income     &       0.455\sym{*}  &       1.383         &      -2.917         \\
+                    &      (2.46)         &      (0.51)         &     (-0.50)         \\
+\hline
+Observations        &        1484         &        1242         &        1484         \\
+\(R^{2}\)           &       0.879         &                     &                     \\
+r2\_w                &       0.879         &                     &       0.846         \\
+hansenp             &                     &       0.249         &                     \\
+ar2p                &                     &       0.300         &                     \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
+\end{table}
+
+Table \ref{r1} Model 1 shows the results of a time-series regression with firm fixed-effects as was done in the original paper. Model 2 uses the more conservative Arellano-Bond estimator and Model 3 uses the same 2-stage least-squares method used in the original research. While the proximate effect of nonoperating income on employee growth holds even in the more conservative Model, the two-stage results do not reproduce. 
 \section{Discussion}
