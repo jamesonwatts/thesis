@@ -30,8 +30,8 @@ la var expr "Experience"
 la var expr2 "Experience^2"
 la var ecp "Centrality"
 la var mecp "Centrality"
-la var vcon "Lang Uncert."
-la var mvcon "Lang Uncert."
+la var vcon "Lang Unc."
+la var mvcon "Lang Unc."
 la var patents2 "New Patents"
 la var tpat2 "Cum. Patents"
 la var sale "Sales"
@@ -52,9 +52,9 @@ est sto m1
 xtabond2 emps L.emps L.nopi I.year, gmm(L.emps L2.nopi, c) iv(I.year) two orthogonal robust noleveleq
 est sto m2
 //however doesn't appear to be driven by centrality?
-xtivreg emps L.emps (L.nopi = mecp) I.year, fe
+xtivreg emps L.emps (L.nopi = L.mecp) I.year, fe
 est sto m3
-esttab m1 m2 m3 using "../tex/reg1.tex", nogaps l mtitle("Fixed Effects" "Arrellano-Bond" "Cent. $\rightarrow$ Nonop. Inc.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
+esttab m1 m2 m3 using "../tex/reg1.tex", se nogaps l mtitle("Fixed Effects" "Arrellano-Bond" "Cent. $\rightarrow$ Nonop. Inc.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
 
 //sales: 
 set more off
@@ -62,39 +62,27 @@ xtreg sale L.sale L.nopi I.year, fe
 est sto m1
 xtabond2 sale L.sale L.nopi I.year, gmm(L.sale L2.nopi, c) iv(I.year) two orthogonal robust noleveleq
 est sto m2
-xtivreg sale L.sale (L.nopi = mecp) I.year, fe
+xtivreg sale L.sale (L.nopi = L.mecp) I.year, fe
 est sto m3
-esttab m1 m2 m3 using "../tex/reg2.tex", nogaps l mtitle("Fixed Effects" "Arrellano-Bond" "Cent. $\rightarrow$ Nonop. Inc.") sca(r2_w hansenp ar2p) r2 star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
-
-//maybe driven by uncertainty in the environment
-xtivreg emps L.emps (L.nopi = LC.mvcon##C.mecp) I.year, fe
-xtabond2 emps L.emps L.nopi I.year, gmm(L.emps L2.nopi L2C.mvcon##LC.mecp, c) iv(I.year) two orthogonal robust noleveleq
-xtivreg sale L.sale (L.nopi = LC.mvcon##C.mecp L.tpat2) I.year, fe
-xtabond2 sale L(1/2).sale L.nopi I.year, gmm(L(1/2).sale L2.nopi L2C.mvcon##LC.mecp, c) iv(I.year) two orthogonal robust noleveleq
-//absolutely in the case of sales... less so in the case of employee growth.
-xtabond2 sale L(1/2).sale LC.mvcon##C.mecp L.nopi I.year, gmm(L(1/2).sale L2.nopi L2C.mvcon##LC.mecp, c) iv(I.year) two orthogonal robust noleveleq
-
+esttab m1 m2 m3 using "../tex/reg2.tex", se nogaps l mtitle("Fixed Effects" "Arrellano-Bond" "Cent. $\rightarrow$ Nonop. Inc.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
 
 //now let's look at centrality's effect on non operating income. Again we start with with Powell et al. 1999 model
+set more off
 xtreg nopi L.nopi mecp L.tpat2 I.year, fe
+est sto m1
 xtabond2 nopi L.nopi mecp L.tpat2 I.year, gmm(L.nopi L.mecp L2.tpat2, c) iv(I.year) two orthogonal robust noleveleq
-//here the main effect of centrality is absent.
-//it's possible that patents have shifted to the primary signal of quality rather than centrality
-xtreg nopi L.nopi LC.mvcon##C.mecp LC.srisk##C.mecp L.tpat2 I.year, fe
-xtabond2 nopi L.nopi LC.mvcon##C.mecp L.tpat2 I.year, gmm(L.nopi L2C.mvcon##LC.mecp L2.tpat2, c) iv(I.year) two orthogonal robust noleveleq
-//however, interestingly the effect is pronounced under language uncertainty. 
-//The value of existing patents may not tell us as much about future performance
-//post hoc... both interactions
-xtreg nopi L.nopi LC.mvcon##C.mecp LC.mvcon##LC.tpat2 I.year, fe
-xtabond2 nopi L.nopi LC.mvcon##C.mecp LC.mvcon##LC.tpat2 I.year, gmm(L.nopi L2C.mvcon##LC.mecp L2C.mvcon##LC2.tpat2, c) iv(I.year) two orthogonal robust noleveleq
+est sto m2
+xtabond2 nopi L.nopi LC.mvcon##C.mecp L.tpat2 I.year, gmm(L.nopi L2C.mvcon##LC.mecp L2.tpat2) iv(I.year) two orthogonal robust noleveleq
+est sto m3
+esttab m1 m2 m3 using "../tex/reg3.tex", se nogaps l mtitle("Fixed Effects" "Arrellano-Bond" "Lang Uncert x Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
 
-
-//now let's look at centrality's effect on R&D ties. Again we start with with Powell et al. 1999 model
-xtreg d_r L.d_r L.mecp L2.emps L2.public I.year, fe
-xtivreg d_r L.d_r (L2.public = L.mecp) I.year, fe
-xtreg d_r L.d_r L2C.mvcon##LC.mecp I.year, fe
-xtabond2 d_r L.d_r L2C.mvcon##LC.mecp I.year, gmm(L.d_r L3C.mvcon##L2C.mecp) iv(I.year) two orthogonal robust noleveleq
-//opposite.
+//maybe driven by uncertainty in the environment
+set more off
+xtivreg emps L.emps (L.nopi = L2C.mvcon##LC.mecp) I.year, fe
+est sto m1
+xtivreg sale L.sale (L.nopi = L2C.mvcon##LC.mecp) I.year, fe
+est sto m2 //voila!!
+esttab m1 m2 using "../tex/reg4.tex", se nogaps l mtitle("Emps = Cent. $\rightarrow$ Nonop. Inc." "Sales = Cent. $\rightarrow$ Nonop. Inc.") sca(r2_w) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
 
 //now on to substantive
 
@@ -118,6 +106,18 @@ xtabond2 patents2 L.patents2 L.tpat2 LC.mvcon##C.mecp L.emps I.year, gmm(L.paten
 xtreg caret L.caret mecp irisk lvolume act_div L.age L.expr I.year, fe
 xtreg caret L.caret LC.mvcon##C.mecp L(0/2).irisk act_div L.age L.expr I.year, fe
 xtabond2 aret L.aret LC.mvcon##C.mecp L(0/2).irisk act_div L.age L.expr I.year, gmm(L.aret L2C.mvcon##LC.mecp L3.irisk L.act_div L2.age L2.expr, c) iv(I.year) two orthogonal robust noleveleq
+
+
+//post-hoc
+
+
+//now let's look at centrality's effect on R&D ties. Again we start with with Powell et al. 1999 model
+xtreg d_r L.d_r L.mecp L2.emps L2.public I.year, fe
+xtivreg d_r L.d_r (L2.public = L.mecp) I.year, fe
+xtreg d_r L.d_r L2C.mvcon##LC.mecp I.year, fe
+xtabond2 d_r L.d_r L2C.mvcon##LC.mecp I.year, gmm(L.d_r L3C.mvcon##L2C.mecp) iv(I.year) two orthogonal robust noleveleq
+//opposite.
+
 
 //steps
 //difference gmm with forward orthogonal transformation

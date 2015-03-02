@@ -1,0 +1,25 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arrellano-Bond}&\multicolumn{1}{c}{Lang Uncert x Cent.}\\
+\hline
+L.Nonop. Income     &       0.452\sym{***}&      0.0772         &       0.320         \\
+                    &    (0.0275)         &     (0.110)         &     (0.199)         \\
+Centrality          &       11.26         &      -66.94         &      -3.226         \\
+                    &     (23.19)         &     (54.44)         &     (47.19)         \\
+L.Cum. Patents      &      0.0387\sym{***}&      0.0585         &      0.0337\sym{+}  \\
+                    &   (0.00876)         &    (0.0373)         &    (0.0204)         \\
+L.Lang Uncert. $\times$ Centrality&                     &                     &       201.5\sym{**} \\
+                    &                     &                     &     (74.47)         \\
+\hline
+Observations        &        1484         &        1242         &        1242         \\
+r2\_w                &       0.275         &                     &                     \\
+hansenp             &                     &       0.125         &       0.262         \\
+ar2p                &                     &       0.331         &       0.761         \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}

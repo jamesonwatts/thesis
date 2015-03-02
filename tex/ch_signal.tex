@@ -206,23 +206,23 @@ I begin with the symbolic effect of centrality as it relates to employee growth 
                     &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arrellano-Bond}&\multicolumn{1}{c}{Cent. $\rightarrow$ Nonop. Inc.}\\
 \hline
 L.Employees         &       0.679\sym{***}&       0.509\sym{***}&       0.667\sym{***}\\
-                    &     (43.47)         &      (7.92)         &      (5.13)         \\
+                    &    (0.0156)         &    (0.0642)         &     (0.130)         \\
 L.Nonop. Income     &       2.631\sym{***}&       8.400\sym{*}  &       3.166         \\
-                    &      (8.45)         &      (2.42)         &      (0.51)         \\
+                    &     (0.312)         &     (3.473)         &     (6.256)         \\
 \hline
 Observations        &        1577         &        1325         &        1577         \\
 r2\_w                &       0.701         &                     &       0.700         \\
 hansenp             &                     &       0.328         &                     \\
 ar2p                &                     &       0.293         &                     \\
 \hline\hline
-\multicolumn{4}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
 \multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }
 
 \end{table}
 
-\begin{table}[htbp]\centering \caption{Regression of Sales on Nonoperating Income\label{r1}}
+\begin{table}[htbp]\centering \caption{Regression of Sales on Nonoperating Income\label{r2}}
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \begin{tabular}{l*{3}{c}}
@@ -231,21 +231,80 @@ ar2p                &                     &       0.293         &               
                     &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arrellano-Bond}&\multicolumn{1}{c}{Cent. $\rightarrow$ Nonop. Inc.}\\
 \hline
 L.Sales             &       1.382\sym{***}&       1.446\sym{***}&       1.534\sym{***}\\
-                    &     (79.03)         &      (5.83)         &      (5.84)         \\
+                    &    (0.0175)         &     (0.248)         &     (0.263)         \\
 L.Nonop. Income     &       0.455\sym{*}  &       1.383         &      -2.917         \\
-                    &      (2.46)         &      (0.51)         &     (-0.50)         \\
+                    &     (0.185)         &     (2.710)         &     (5.820)         \\
 \hline
 Observations        &        1484         &        1242         &        1484         \\
-\(R^{2}\)           &       0.879         &                     &                     \\
 r2\_w                &       0.879         &                     &       0.846         \\
 hansenp             &                     &       0.249         &                     \\
 ar2p                &                     &       0.300         &                     \\
 \hline\hline
-\multicolumn{4}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
 \multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }
 \end{table}
 
-Table \ref{r1} Model 1 shows the results of a time-series regression with firm fixed-effects as was done in the original paper. Model 2 uses the more conservative Arellano-Bond estimator and Model 3 uses the same 2-stage least-squares method used in the original research. While the proximate effect of nonoperating income on employee growth holds even in the more conservative Model, the two-stage results do not reproduce. 
+Table \ref{r1} Model 1 shows the results of a time-series regression with firm fixed-effects as was done in the original paper. Model 2 uses the more conservative Arellano-Bond estimator and Model 3 uses the same 2-stage least-squares method used in the original research. While the proximate effect of nonoperating income on employee growth holds even in the more conservative model, the two-stage results do not reproduce. In the regression of sales on nonoperating income in Table \ref{r2}, even the proximate effect doesn't reproduce with the more conservative model.
+
+However, recall from the above discussion that the symbolic effect of centrality on acquisition of new resources can depend on the uncertainty potential exchange partners have about the focal firm's ability to translate those resources into productive output. Under high language uncertainty, we'd expect the value of centrality in securing nonoperating income to be greater. 
+
+Table \ref{r3} shows the proximate effect of centrality and its interaction with language uncertainty on nonoperating income. Models 1 and 2 fail to reproduce the main effects present in original research; however, Model 3 (with the interaction) shows the positive effect. This supports my hypothesis that language uncertainty will positively moderate the symbolic effects of centrality. Controlling for cumulative patents (as was done originally) as an alternative signaling explanation does not affect the results. Moreover, Table \ref{r4} shows updated 2SLS results with the interacted variable instrumenting for nonoperating income's effect on sales and employee growth and the effect returns. By interacting centrality with language uncertainty, I am able to reproduce the two-stage results (at p < 0.05) from the original model.
+
+\begin{table}[htbp]\centering \caption{Regression of Nonoperating Income on Centrality\label{r3}}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arrellano-Bond}&\multicolumn{1}{c}{L Unc. x Cent.}\\
+\hline
+L.Nonop. Income     &       0.452\sym{***}&      0.0772         &       0.320         \\
+                    &    (0.0275)         &     (0.110)         &     (0.199)         \\
+Centrality          &       11.26         &      -66.94         &      -3.226         \\
+                    &     (23.19)         &     (54.44)         &     (47.19)         \\
+L.Cum. Patents      &      0.0387\sym{***}&      0.0585         &      0.0337\sym{+}  \\
+                    &   (0.00876)         &    (0.0373)         &    (0.0204)         \\
+L.Lang Unc. $\times$ Cent.&                     &                     &       201.5\sym{**} \\
+                    &                     &                     &     (74.47)         \\
+\hline
+Observations        &        1484         &        1242         &        1242         \\
+r2\_w                &       0.275         &                     &                     \\
+hansenp             &                     &       0.125         &       0.262         \\
+ar2p                &                     &       0.331         &       0.761         \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[htbp]\centering \caption{2SLS Regression of Sales and Employees on Nonop. Inc. via Centrality\label{r4}}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{2}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(Employees)}&\multicolumn{1}{c}{(Sales)}\\
+                    &\multicolumn{1}{c}{L Unc. x Cent. $\rightarrow$ Nonop. Inc.}&\multicolumn{1}{c}{L Unc. x Cent. $\rightarrow$ Nonop. Inc.}\\
+\hline
+L.Nonop. Inc.     &       4.456\sym{*}  &       2.896\sym{*}  \\
+                    &     (1.789)         &     (1.172)         \\
+L.Empl.         &       0.496\sym{***}&                     \\
+                    &    (0.0495)         &                     \\
+L.Sales             &                     &       1.315\sym{***}\\
+                    &                     &    (0.0589)         \\
+\hline
+Observations        &        1378         &        1293         \\
+r2\_w                &       0.576         &       0.854         \\
+\hline\hline
+\multicolumn{3}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{3}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
+
+\end{table}
+
+
+
 \section{Discussion}
