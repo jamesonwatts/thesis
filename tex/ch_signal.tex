@@ -187,7 +187,7 @@ Figure \ref{model} reproduces the elements from the Powell et al., (1999) model 
 
 For each of the theorized causal links, I first test the relationship using the same method used in the original paper and then compare results with those obtained from a newer method that controls for additional sources of potential bias. In general there are two major econometric challenges in testing the proposed effects. First, unobservable, time-invariant firm characteristics can be correlated with the explanatory variables. Second, certain outcome variables may have an effect on the explanatory variables and on themselves. A relationship between the explanatory variable and outcome might thus be spurious and due to effects from lags of the dependent variable on itself.
 
-In the original models, unobserved firm-level heterogeneity was accounted for with firm fixed effects and bias from autocorrelation was addressed by adding lags of the dependent variable (DV) to the right hand side of the equation. However, the fixed effects transformation (i.e. first differencing) of the lagged DV creates additional autocorrelation by definition. That is $\Delta y_{it-1}$ is correlated with the error term $e_{it}$ since $e_{i,t-1}$ is a component in not only $\Delta e_{it}$ (because $\Delta e_{i,t-1} = e_{i,t-1}-e_{i,t-2}$) but also $\Delta y_{it-1}$ (because $\Delta y_{i,t-1} = y_{i,t-1}-y_{i,t-2}$ and $e_{i,t-1}$ is a component of $y_{i,t-1}$).
+In the original models, unobserved firm-level heterogeneity was accounted for with firm fixed effects and bias from autocorrelation was addressed by adding lags of the dependent variable (DV) to the right hand side of the equation. However, the fixed effects transformation (i.e. first differencing) of the lagged DV creates additional autocorrelation by definition. That is, $\Delta y_{it-1}$ is correlated with the error term $e_{it}$ since $e_{i,t-1}$ is a component in not only $\Delta e_{it}$ (because $\Delta e_{i,t-1} = e_{i,t-1}-e_{i,t-2}$) but also $\Delta y_{it-1}$ (because $\Delta y_{i,t-1} = y_{i,t-1}-y_{i,t-2}$ and $e_{i,t-1}$ is a component of $y_{i,t-1}$).
 
 Arellano and Bond (1991) develop a Generalized Method of Moments estimator that instruments the differenced variables that are not strictly exogenous with all their available lags in levels. As illustrated by Arellano and Honore (2001), $y_{i,t-2}$ and further lags are valid instruments for $\Delta y_{i,t-1}$ when $E[e_{i,t-1}, e_{i,t-2}] = 0$. This occurs for two reasons. First, $y_{i,t-2}$ is correlated with $\Delta y_{i,t-1}$, because $\Delta y_{i,t-1} = y_{i,t-1}-y_{i,t-2}$ and second, $y_{i,t-2}$ is not correlated with $\Delta e_{it}$ because $\Delta e_{it} = e_{it}-e_{i,t-1}$ does not contain the element of $e_{i,t-2}$. Based on the assumption $E[e_{i,t-1}, e_{i,t-2}] = 0$, the $e_{i,t-1}$ element is not correlated with $e_{i,t-2}$. 
 
@@ -195,7 +195,7 @@ This estimator is generally appropriate for large $N$ small $t$ applications as 
 
 \section{Results}
 
-I begin with the symbolic effect of centrality as it relates to employee growth and sales through nonoperating income. As a first step I attempt to reproduce the proximate effects of nonoperating income on number of employees and sales, and the two-stage results of centrality on these performance measures through nonoperating income. Tables \ref{r1} and \ref{r2} show these results.
+I begin with the symbolic effect of centrality as it relates to employee growth and sales through nonoperating income. As a first step I attempt to reproduce the proximate effects of nonoperating income on number of employees and sales. In addition I attempt to reproduce the two-stage results of centrality on these performance measures through nonoperating income. Tables \ref{r1} and \ref{r2} show these results.
 
 \begin{table}[htbp]\centering \caption{Regression of Employees on Nonoperating Income\label{r1}}
 {
@@ -203,7 +203,7 @@ I begin with the symbolic effect of centrality as it relates to employee growth 
 \begin{tabular}{l*{3}{c}}
 \hline\hline
                     &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
-                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arrellano-Bond}&\multicolumn{1}{c}{Cent. $\rightarrow$ Nonop. Inc.}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{Cent. $\rightarrow$ Nonop. Inc.}\\
 \hline
 L.Employees         &       0.679\sym{***}&       0.509\sym{***}&       0.667\sym{***}\\
                     &    (0.0156)         &    (0.0642)         &     (0.130)         \\
@@ -228,7 +228,7 @@ ar2p                &                     &       0.293         &               
 \begin{tabular}{l*{3}{c}}
 \hline\hline
                     &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
-                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arrellano-Bond}&\multicolumn{1}{c}{Cent. $\rightarrow$ Nonop. Inc.}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{Cent. $\rightarrow$ Nonop. Inc.}\\
 \hline
 L.Sales             &       1.382\sym{***}&       1.446\sym{***}&       1.534\sym{***}\\
                     &    (0.0175)         &     (0.248)         &     (0.263)         \\
@@ -246,11 +246,11 @@ ar2p                &                     &       0.300         &               
 }
 \end{table}
 
-Table \ref{r1} Model 1 shows the results of a time-series regression with firm fixed-effects as was done in the original paper. Model 2 uses the more conservative Arellano-Bond estimator and Model 3 uses the same 2-stage least-squares method used in the original research. While the proximate effect of nonoperating income on employee growth holds even in the more conservative model, the two-stage results do not reproduce. In the regression of sales on nonoperating income in Table \ref{r2}, even the proximate effect doesn't reproduce with the more conservative model.
+Table \ref{r1}, Model 1 shows the results of a time-series regression with firm fixed-effects as was done in the original paper. Model 2 uses the more conservative Arellano-Bond estimator and Model 3 uses the same 2-stage least-squares method used in the original research. While the proximate effect of nonoperating income on employee growth holds even in the more conservative model, the two-stage results do not reproduce. In the regression of sales on nonoperating income in Table \ref{r2}, even the proximate effect is not reproducable with the more conservative model.
 
-However, recall from the above discussion that the symbolic effect of centrality on acquisition of new resources can depend on the uncertainty potential exchange partners have about the focal firm's ability to translate those resources into productive output. Under high language uncertainty, we'd expect the value of centrality in securing nonoperating income to be greater. 
+However, recall from the prior discussion that the symbolic effect of centrality on acquisition of new resources can depend on the uncertainty that potential exchange partners have about a firm's ability to translate invested resources into productive output. Under high language uncertainty, we'd expect the value of centrality in securing nonoperating income to be greater. Under low uncertainty, centrality should have little effect since quality is observable independent of the signal sent by a firm's affiliations. 
 
-Table \ref{r3} shows the proximate effect of centrality and its interaction with language uncertainty on nonoperating income. Models 1 and 2 fail to reproduce the main effects present in original research; however, Model 3 (with the interaction) shows the positive effect. This supports my hypothesis that language uncertainty will positively moderate the symbolic effects of centrality. Controlling for cumulative patents (as was done originally) as an alternative signaling explanation does not affect the results. Moreover, Table \ref{r4} shows updated 2SLS results with the interacted variable instrumenting for nonoperating income's effect on sales and employee growth and the effect returns. By interacting centrality with language uncertainty, I am able to reproduce the two-stage results (at p < 0.05) from the original model.
+Table \ref{r3} shows the proximate effect of centrality (and its interaction with language uncertainty) on nonoperating income. Models 1 and 2 fail to reproduce the main effects of Powell et al, (1999). This explains the lack of results in the two-stage estimations above. However, Model 3 (with the interaction) shows a strong positive effect ($p < 0.001$). This supports my hypothesis that language uncertainty will positively moderate the symbolic effects of centrality. Controlling for cumulative patents (as was done originally) as an alternative signaling explanation does not affect the results. Moreover, the 2SLS results reappear when using the interacted variable to instrument for nonoperating income's effect on sales and employee growth. This can be seen in Table \ref{r4}. In other words, by interacting centrality with language uncertainty, I am able to reproduce the two-stage results (at $p < 0.05$) from the original model.
 
 \begin{table}[htbp]\centering \caption{Regression of Nonoperating Income on Centrality\label{r3}}
 {
@@ -258,7 +258,7 @@ Table \ref{r3} shows the proximate effect of centrality and its interaction with
 \begin{tabular}{l*{3}{c}}
 \hline\hline
                     &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
-                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arrellano-Bond}&\multicolumn{1}{c}{L Unc. x Cent.}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{L Unc. x Cent.}\\
 \hline
 L.Nonop. Income     &       0.452\sym{***}&      0.0772         &       0.320         \\
                     &    (0.0275)         &     (0.110)         &     (0.199)         \\
@@ -280,13 +280,13 @@ ar2p                &                     &       0.331         &       0.761   
 }
 \end{table}
 
-\begin{table}[htbp]\centering \caption{2SLS Regression of Sales and Employees on Nonop. Inc. via Centrality\label{r4}}
+\begin{table}[htbp]\centering \caption[Regression of Sales and Employees on Nonop. Inc. via Centrality]{2SLS Regression of Sales and Employees on Nonop. Inc. via Centrality\label{r4}}
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \begin{tabular}{l*{2}{c}}
 \hline\hline
                     &\multicolumn{1}{c}{(Employees)}&\multicolumn{1}{c}{(Sales)}\\
-                    &\multicolumn{1}{c}{L Unc. x Cent. $\rightarrow$ Nonop. Inc.}&\multicolumn{1}{c}{L Unc. x Cent. $\rightarrow$ Nonop. Inc.}\\
+                    &\multicolumn{1}{c}{La. Unc. x Cent. $\rightarrow$ Nonop. Inc.}&\multicolumn{1}{c}{La. Unc. x Cent. $\rightarrow$ Nonop. Inc.}\\
 \hline
 L.Nonop. Inc.     &       4.456\sym{*}  &       2.896\sym{*}  \\
                     &     (1.789)         &     (1.172)         \\
@@ -302,6 +302,90 @@ r2\_w                &       0.576         &       0.854         \\
 \multicolumn{3}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }
+\end{table}
+
+\begin{table}[htbp]\centering \caption{Regression of Patents on Centrality \label{r5}}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{Div \& Expr. $\rightarrow$ Cent.}\\
+\hline
+L.New Patents       &     0.00268         &    -0.00956         &       0.746\sym{***}\\
+                    &   (0.00494)         &   (0.00942)         &    (0.0205)         \\
+L.Cum. Patents      &      0.0818\sym{***}&      0.0428\sym{+}  &     -0.0622\sym{***}\\
+                    &   (0.00454)         &    (0.0224)         &   (0.00529)         \\
+Centrality          &       17.79\sym{+}  &      -59.51\sym{+}  &       39.10         \\
+                    &     (9.219)         &     (33.24)         &     (55.54)         \\
+\hline
+Observations        &        3268         &        2689         &        2470         \\
+r2\_w                &       0.140         &                     &       0.446         \\
+hansenp             &                     &       0.383         &                     \\
+ar2p                &                     &       0.219         &                     \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
+
+\end{table}
+
+\begin{table}[htbp]\centering \caption{Regression of Abnormal Returns on Centrality\label{r6}}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{Div \& Expr. $\rightarrow$ Cent.}\\
+\hline
+L.Abnorm. Ret.      &      -0.151\sym{***}&     -0.0785\sym{*}  &      -0.223\sym{***}\\
+                    &    (0.0166)         &    (0.0355)         &    (0.0200)         \\
+Centrality          &      -0.301         &       0.721         &      -0.155         \\
+                    &     (0.320)         &     (1.203)         &     (1.667)         \\
+Idiosync. Risk      &       0.301\sym{***}&       0.407\sym{***}&                     \\
+                    &    (0.0126)         &    (0.0905)         &                     \\
+L.Idiosync. Risk    &      0.0416\sym{***}&       0.111\sym{**} &                     \\
+                    &    (0.0120)         &    (0.0425)         &                     \\
+L2.Idiosync. Risk   &     -0.0236\sym{**} &     -0.0428         &                     \\
+                    &   (0.00806)         &    (0.0262)         &                     \\
+\hline
+Observations        &         997         &         807         &        1116         \\
+r2\_w                &       0.639         &                     &       0.291         \\
+hansenp             &                     &       0.297         &                     \\
+ar2p                &                     &       0.353         &                     \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[htbp]\centering \caption{Regression of Patents and Ab. Ret. on R\&D through Centrality\label{r6}}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{2}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(Patents)}&\multicolumn{1}{c}{(Abnormal Returns)}\\
+                    &\multicolumn{1}{c}{R\&D $\rightarrow$ Centrality}&\multicolumn{1}{c}{R\&D $\rightarrow$ Centrality}\\
+\hline
+Centrality          &       0.310         &       184.3\sym{***}\\
+                    &     (1.119)         &     (22.88)         \\
+L.Abnorm. Ret.      &       0.130\sym{***}&                     \\
+                    &    (0.0231)         &                     \\
+L.New Patents       &                     &     0.00260         \\
+                    &                     &   (0.00524)         \\
+L.Cum. Patents      &                     &      0.0792\sym{***}\\
+                    &                     &   (0.00481)         \\
+\hline
+Observations        &        1222         &        3268         \\
+r2\_w                &       0.147         &      0.0356         \\
+\hline\hline
+\multicolumn{3}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{3}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
+
 
 \end{table}
 

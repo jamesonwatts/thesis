@@ -1,0 +1,27 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{Div \& Expr. $\rightarrow$ Cent.}\\
+\hline
+L.Abnorm. Ret.      &      -0.151\sym{***}&     -0.0785\sym{*}  &      -0.223\sym{***}\\
+                    &    (0.0166)         &    (0.0355)         &    (0.0200)         \\
+Centrality          &      -0.301         &       0.721         &      -0.155         \\
+                    &     (0.320)         &     (1.203)         &     (1.667)         \\
+Idiosync. Risk      &       0.301\sym{***}&       0.407\sym{***}&                     \\
+                    &    (0.0126)         &    (0.0905)         &                     \\
+L.Idiosync. Risk    &      0.0416\sym{***}&       0.111\sym{**} &                     \\
+                    &    (0.0120)         &    (0.0425)         &                     \\
+L2.Idiosync. Risk   &     -0.0236\sym{**} &     -0.0428         &                     \\
+                    &   (0.00806)         &    (0.0262)         &                     \\
+\hline
+Observations        &         997         &         807         &        1116         \\
+r2\_w                &       0.639         &                     &       0.291         \\
+hansenp             &                     &       0.297         &                     \\
+ar2p                &                     &       0.353         &                     \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
