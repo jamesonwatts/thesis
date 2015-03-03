@@ -106,13 +106,20 @@ su lcon
 gen mlcon = lcon-r(mean)
 su vcon
 gen mvcon = vcon-r(mean)
-su kld
-gen mkld = kld-r(mean)
 
 merge 1:m year using panel_yr
 //drop if _merge < 3
 drop _merge
 save panel_yr, replace
+
+use minority, clear
+rename fyear year
+keep mib mii tic year
+merge 1:m tic year using panel_yr
+drop if _merge == 1
+drop _merge
+save panel_yr, replace
+
 
 import delim using patents, clear
 rename dbf_id FID
@@ -127,15 +134,7 @@ merge 1:1 FID year using panel_yr
 drop _merge
 save panel_yr, replace
 
-//use minority, clear
-//rename fyear year
-//keep mib mii tic year
-//merge 1:m tic year using panel_yr
-//drop if _merge == 1
-//drop _merge
-//save panel_yr, replace
-
-import delim using patents3, clear
+import delim using patents2, clear
 rename freq patents2
 merge 1:m permno year using panel_yr
 drop if _merge == 1

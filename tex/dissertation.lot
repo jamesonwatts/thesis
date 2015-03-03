@@ -12,9 +12,12 @@
 \contentsline {table}{\numberline {4.3}{\ignorespaces Regression of Employees on Nonoperating Income}}{113}
 \contentsline {table}{\numberline {4.4}{\ignorespaces Regression of Sales on Nonoperating Income}}{114}
 \contentsline {table}{\numberline {4.5}{\ignorespaces Regression of Nonoperating Income on Centrality}}{115}
-\contentsline {table}{\numberline {4.6}{\ignorespaces Regression of Sales and Employees on Nonop. Inc. via Centrality}}{116}
+\contentsline {table}{\numberline {4.6}{\ignorespaces Regression of Sales and Emps. on Nonop. Inc. via Centrality}}{116}
 \contentsline {table}{\numberline {4.7}{\ignorespaces Regression of Patents on Centrality }}{116}
 \contentsline {table}{\numberline {4.8}{\ignorespaces Regression of Abnormal Returns on Centrality}}{117}
-\contentsline {table}{\numberline {4.9}{\ignorespaces Regression of Patents and Ab. Ret. on R\&D through Centrality}}{117}
+\contentsline {table}{\numberline {4.9}{\ignorespaces Regression of Patents and Ab. Ret. on Unc. x Centrality}}{118}
+\contentsline {table}{\numberline {4.10}{\ignorespaces Regression of R\&D on Centrality}}{119}
+\contentsline {table}{\numberline {4.11}{\ignorespaces Summary of Results}}{120}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {B.1}{\ignorespaces Regression of Patents (Alt) on Centrality}}{123}

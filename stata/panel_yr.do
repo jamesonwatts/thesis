@@ -91,78 +91,55 @@ esttab m1 m2 using "../tex/reg4.tex", se nogaps l mtitle("Lang Unc. x Cent. $\ri
 set more off
 xtreg patents2 L.patents2 L.tpat2 mecp I.year, fe
 est sto m1
-xtabond2 patents2 L.patents2 L.tpat2 mecp I.year, gmm(L.patents2 L.mecp, c) iv(I.year) two orthogonal robust noleveleq
+xtabond2 patents2 L.patents2 L.tpat2 mecp I.year, gmm(L.patents2 L.tpat2 L.mecp, c) iv(I.year) two orthogonal robust noleveleq
 est sto m2
-xtivreg patents2 L.patents2 L.tpat2 (mecp = L.act_div L2.expr L2.expr2) I.year, fe
+xtivreg patents2 L.patents2 L.tpat2 (mecp = d_r) I.year, fe
 est sto m3
-esttab m1 m2 m3 using "../tex/reg5.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "Div \& Expr. $\rightarrow$ Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
+esttab m1 m2 m3 using "../tex/reg5.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "R\&D $\rightarrow$ Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
 //no main effect
 
 //abnormal returns
 set more off
-xtreg aret L.aret mecp L(0/2).irisk I.year, fe
+xtreg aret L.aret mecp L(0/2).irisk act_div L.patents2 I.year, fe
 est sto m1 
-xtabond2 aret L.aret mecp L(0/2).irisk I.year, gmm(L.aret L.mecp L3.irisk, c) iv(I.year) two orthogonal robust noleveleq
+xtabond2 aret L.aret mecp L(0/2).irisk act_div L.patents2 I.year, gmm(L.aret L.mecp L3.irisk L.act_div L2.patents2, c) iv(I.year) two orthogonal robust noleveleq
 est sto m2
-xtivreg aret L.aret (mecp = L.act_div L2.expr L2.expr2) I.year, fe
+xtivreg aret L.aret act_div L.patents2 L(0/2).irisk (mecp = d_r) I.year, fe
 est sto m3
-esttab m1 m2 m3 using "../tex/reg6.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "Div \& Expr. $\rightarrow$ Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
+esttab m1 m2 m3 using "../tex/reg6.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "R\&D $\rightarrow$ Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
 //no main effect
 
 //maybe the effect of R&D on performance is more direct rather than traveling through experience and diversity
-set more off
-xtivreg aret L.aret (mecp = d_r) I.year, fe
-est sto m1
-xtivreg patents2 L.patents2 L.tpat2 (mecp = d_r) I.year, fe
-est sto m2
-//okay, but only 3% variation explained by cent from r&d
-esttab m1 m2 using "../tex/reg7.tex", se nogaps l mtitle("R\&D $\rightarrow$ Centrality" "R\&D $\rightarrow$ Centrality") sca(r2_w) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
-//so what's going on????
 
 //patents and aret with interaction
-xtabond2 patents2 L.patents2 L.tpat2 LC.mvcon##C.mecp act_div L.expr L.expr2 I.year, gmm(L.patents2 L2.tpat2 L2C.mvcon##LC.mecp L.act_div L2.expr L2.expr2, c) iv(I.year) two orthogonal robust noleveleq
-xtabond2 aret L.aret LC.mvcon##C.mecp L(0/2).irisk act_div L.expr L.expr2 I.year, gmm(L.aret L2C.mvcon##LC.mecp L3.irisk L.act_div L2.expr L2.expr2, c) iv(I.year) two orthogonal robust noleveleq
-
-
-
-
-
-
-
-
-//post-hoc
-
-//centrality:
 set more off
-xtreg ecp L.ecp L.act_div L2.expr L2.expr2 I.year, fe
+xtabond2 patents2 L.patents2 L.tpat2 LC.mvcon##C.mecp I.year, gmm(L.patents2 L2.tpat2 L2C.mvcon##LC.mecp, c) iv(I.year) two orthogonal robust noleveleq
 est sto m1
-xtabond2 ecp L.ecp L.act_div L2.expr L2.expr2 I.year, gmm(L.ecp L2.act_div L3.expr L3.expr2, c) iv(I.year) two orthogonal robust noleveleq
+xtabond2 aret L.aret LC.mvcon##C.mecp L(0/2).irisk act_div L.patents2 I.year, gmm(L.aret L2C.mvcon##LC.mecp L3.irisk L.act_div L2.patents2, c) iv(I.year) two orthogonal robust noleveleq
 est sto m2
-xtivreg ecp L.ecp (L.act_div = L.d_r) I.year, fe
-est sto m3
-xtivreg ecp L.ecp (L2.expr = L.d_r) I.year, fe
-est sto m4
-esttab m1 m2 m3 m4 using "../tex/reg5.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "R\&D $\rightarrow$ Div." "R\&D $\rightarrow$ Expr." ) sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
-//nothin... what about direct effect of R&D?
+esttab m1 m2 using "../tex/reg7.tex", se nogaps l mtitle("Patents" "Abnorm. Ret.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year) replace
 
-
-//centrality direct effect of R&D controlling for others.
+//now let's look at centrality's effect on R&D ties. 
 set more off
-xtreg ecp L.ecp L.d_r L.act_div L2.expr L2.expr2 I.year, fe
+xtreg d_r L.d_r L.mecp I.year, fe
 est sto m1
-xtabond2 ecp L.ecp L.d_r L.act_div L2.expr L2.expr2 I.year, gmm(L.ecp L2.d_r L2.act_div L3.expr L3.expr2, c) iv(I.year) two orthogonal robust noleveleq
+xtabond2 d_r L.d_r L.mecp I.year, gmm(L.d_r L2.mecp) iv(I.year) two orthogonal robust noleveleq
 est sto m2
-esttab m1 m2 using "../tex/reg6.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
-//nope. but remember the interaction... let's look 
-
-
-//now let's look at centrality's effect on R&D ties. Again we start with with Powell et al. 1999 model
-xtreg d_r L.d_r L.mecp L2.emps L2.public I.year, fe
-xtivreg d_r L.d_r (L2.public = L.mecp) I.year, fe
-xtreg d_r L.d_r L2C.mvcon##LC.mecp I.year, fe
 xtabond2 d_r L.d_r L2C.mvcon##LC.mecp I.year, gmm(L.d_r L3C.mvcon##L2C.mecp) iv(I.year) two orthogonal robust noleveleq
-//opposite.
+est sto m3
+esttab m1 m2 m3 using "../tex/reg8.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "Lang Uncert x Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
 
+
+
+//robustness
+//alt patents with interaction
+xtreg patents L.patents L.tpat1 mecp L.public L.sale  I.year, fe
+est sto m1
+xtabond2 patents L.patents L.tpat1 mecp L.public L.sale I.year, gmm(L.patents L2.tpat1 L.mecp L2.public L2.sale, c) iv(I.year) two orthogonal robust noleveleq
+est sto m2
+xtabond2 patents L.patents L.tpat1 LC.mvcon##C.mecp L.public I.year, gmm(L.patents L2.tpat1 L2C.mvcon##LC.mecp L2.public, c) iv(I.year) two orthogonal robust noleveleq small
+est sto m3
+esttab m1 m2 m3 using "../tex/reg9.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "Lang Uncert x Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
 
 //steps
 //difference gmm with forward orthogonal transformation

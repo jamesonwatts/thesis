@@ -1,0 +1,25 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{Lang Uncert x Cent.}\\
+\hline
+L.R\&D Ties         &       0.654\sym{***}&       0.532\sym{***}&       0.558\sym{***}\\
+                    &    (0.0132)         &     (0.104)         &    (0.0870)         \\
+L.Centrality        &       7.345\sym{***}&       8.569\sym{+}  &      -4.026         \\
+                    &     (1.701)         &     (5.113)         &     (4.712)         \\
+year=1994           &           0         &                     &                     \\
+                    &         (.)         &                     &                     \\
+L2.Lang Unc. $\times$ L.Centrality&                     &                     &      -11.82\sym{*}  \\
+                    &                     &                     &     (4.604)         \\
+\hline
+Observations        &        3272         &        2693         &        2196         \\
+r2\_w                &       0.569         &                     &                     \\
+hansenp             &                     &      0.0865         &       0.328         \\
+ar2p                &                     &       0.363         &       0.235         \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
