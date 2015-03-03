@@ -93,11 +93,11 @@ d_{it}=1-\sum_{j=1}^Jp_{it,j}^2,
  
 Since the primary goal of this Chapter is to extend the theory and analysis of Powell et al., (1999), I adhere in a strict sense to their operationalization of network centrality. Further justification can be found in the original papers, however the essential intuition is that overall position in the network of DBFs can be best captured by mapping two-mode ties onto the one-mode network. Thus, two biotech firms are assumed affiliated through mutual association with a third party (e.g. Breiger 1974). For instance, two DBFs may each have a separate alliance with the same large pharmaceutical firm. The imputed network treats this scenario as one in which these two firms are themselves tied (cf. Powell et al., 1996).
 
-From the resultant network, a firm's centrality is computed using the Bonacich (1972; 1987) eigenvector measure, which takes into account both a firm's number of ties and how well connected those ties are in turn. The measure is thus representative of a firm's embeddedness in the overall biotech network, but also the degree to which it is connected to others of similar prominence (Podolny 2001). It has been used elsewhere to measure power, prestige and status (Burt 1982; Baker et al., 1998).
+From the resultant network, a firm's centrality is computed using the Bonacich (1972; 1987) eigenvector measure, which takes into account both a firm's number of ties and how well connected those ties are in turn. The measure is thus representative of a firm's embeddedness in the overall biotech network, but also the degree to which it is connected to others of similar prominence (Podolny 2001). It has been used elsewhere to measure power, prestige and status (Burt 1982; Baker et al., 1998).\footnote{Note that alliance characteristics are collected in April and refer to activity about the prior year. As such, network variables are already `lagged' behind the depended variable in time.}
 
-Patents are measured as a simple count of the patents granted to each DBF in a given year. Though not a perfect measure of a firm's intellectual output, it is used frequently in academic work as a proxy (cf. Powell et. al., 1999; Traditionberg 1990). I track both the number of new patents and the cumulative total. The cumulative count can play a signaling role in attracting potential collaborators (e.g. Smith-Doerr et al., 1998) and so also serves as an important control variable (and potential confound) in certain regressions dealing with the symbolic value of centrality. 
+Patents are measured as a simple count of the patents granted to each DBF in a given year. Though not a perfect measure of a firm's intellectual output, it is used frequently in academic work as a proxy (cf. Powell et. al., 1999; Tratenberg 1990). I track both the number of new patents and the cumulative total. The cumulative count can play a signaling role in attracting potential collaborators (e.g. Smith-Doerr et al., 1998) and so also serves as an important control variable (and potential confound) in certain regressions dealing with the symbolic value of centrality. 
 
-Language data is collected and prepared as described in Chapter \ref{lang}; however, firm-level data is at the yearly, not monthly, level. Since I am interested in the environmental uncertainty reflected in the industry's (lack of) language consistency, I operationalize a measure of language uncertainty as the standard deviation of the monthly consistency measure developed in the prior chapter.
+Language data is collected and prepared as described in Chapter \ref{lang}; however, firm-level data is at the yearly, not monthly, level. Since I am interested in the environmental uncertainty reflected in the industry's (lack of) language consistency, I operationalize a measure of language uncertainty as the standard deviation of the monthly consistency measure developed in the prior chapter and scaled up by a factor of 100 to increase interpretability of the coefficient estimates.
 
 For financial outcomes, I used sales, non operating income and abnormal stock returns. Sales are netted revenue generated from billing customers, but reduced by discounts and return allowances. The measure also includes equity income from R\&D joint ventures if reported as operating income. By contrast, nonoperating income results from secondary business-related activities like grants, licensing or other royalties, investment income, externally-sponsored research and anything else not classified as sales.
 
@@ -161,7 +161,7 @@ Age&0.061&0.158&0.638&0.096&0.026&0.179&0.026&0.099&0.089&-0.002&-0.044&0.278&1.
 
 
 \section{Model}
-The model of Powell et al. (1999) is one in which network centrality plays a substantial role in determining firm performance. This can be seen clearly from Figure \ref{omodel} reproduced here by permission of the original authors. However, this visual representation illustrates the outcome of a 3-stage regression and many of the mechanisms driving these results are hidden in the one and two stage results.  For instance, it is reasoned that network centrality plays a largely symbolic role in attracting the grants, licensing deals and externally sponsored research that show up as nonoperating income in the firms' financial statements. Moreover, a firm's sales and employee growth are driven largely by centrality's prior effect on nonoperating income rather than the direct effect as depicted. This is demonstrated by the fact that nearly all variance in the proximate effect of nonoperating income on sales and employee growth is accounted for in the two-stage model in which nonoperating income is merely `instrumental' in the effect that centrality plays on these two performance outcomes.
+The model of Powell et al. (1999) is one in which network centrality plays a substantial role in determining firm performance. This can be seen clearly from Figure \ref{omodel} reproduced here by permission of the original authors. However, this visual representation illustrates the outcome of a 3-stage regression and many of the mechanisms driving these results are hidden in the one- and two-stage results.  For instance, it is reasoned that network centrality plays a largely symbolic role in attracting the grants, licensing deals and externally sponsored research that show up as nonoperating income in the firms' financial statements. Moreover, a firm's sales and employee growth are driven largely by centrality's prior effect on nonoperating income rather than the direct effect as depicted. This is demonstrated by the fact that nearly all variance in the proximate effect of nonoperating income on sales and employee growth is accounted for in the two-stage model in which nonoperating income is merely `instrumental' in the effect that centrality plays on these two performance outcomes.
 
 In contrast, centrality is postulated to play a largely substantive role in translating the fruits of R\&D alliances into defensible intellectual property in the form of patents. This is demonstrated in the two- and three-stage regressions in which centrality is instrumental in the effect of R\&D ties, alliance experience and portfolio diversity on patent production. Indeed, Powell et al., (1999, p. 20) assert that centrality ``clearly enables firms to select and complete research projects that prove worthy of patent protection."
 
@@ -187,13 +187,13 @@ Figure \ref{model} illustrates the elements from the Powell et al., (1999) model
 
 \section{Methods}
 
-For each of the theorized causal links, I first test the relationship using the same method used in the original paper and then compare results with those obtained from a newer method that controls for additional sources of potential bias. In general there are two major econometric challenges in testing the proposed effects. First, unobservable, time-invariant firm characteristics can be correlated with the explanatory variables. Second, certain outcome variables may have an effect on the explanatory variables and on themselves. A relationship between the explanatory variable and outcome might thus be spurious and due to effects from lags of the dependent variable on itself.
+For each of the theorized causal links, I first test the relationship using the same method used in the original paper and then compare results with those obtained from a newer method that controls for additional sources of potential bias. In general there are two major econometric challenges in testing the proposed effects. First, unobservable, time-invariant firm characteristics can be correlated with the explanatory variables. Second, certain outcome variables may have an effect on the explanatory variables and on themselves. A statistically significant result might thus be spurious and due to effects from lags of the dependent variable on itself.
 
 In the original models, unobserved firm-level heterogeneity was accounted for with firm fixed effects and bias from autocorrelation was addressed by adding lags of the dependent variable (DV) to the right hand side of the equation. However, the fixed effects transformation (i.e. first differencing) of the lagged DV creates additional autocorrelation by definition. That is, $\Delta y_{it-1}$ is correlated with the error term $e_{it}$ since $e_{i,t-1}$ is a component in not only $\Delta e_{it}$ (because $\Delta e_{i,t-1} = e_{i,t-1}-e_{i,t-2}$) but also $\Delta y_{it-1}$ (because $\Delta y_{i,t-1} = y_{i,t-1}-y_{i,t-2}$ and $e_{i,t-1}$ is a component of $y_{i,t-1}$).
 
-Arellano and Bond (1991) develop a Generalized Method of Moments estimator that instruments the differenced variables that are not strictly exogenous with all their available lags in levels. As illustrated by Arellano and Honore (2001), $y_{i,t-2}$ and further lags are valid instruments for $\Delta y_{i,t-1}$ when $E[e_{i,t-1}, e_{i,t-2}] = 0$. This occurs for two reasons. First, $y_{i,t-2}$ is correlated with $\Delta y_{i,t-1}$, because $\Delta y_{i,t-1} = y_{i,t-1}-y_{i,t-2}$ and second, $y_{i,t-2}$ is not correlated with $\Delta e_{it}$ because $\Delta e_{it} = e_{it}-e_{i,t-1}$ does not contain the element of $e_{i,t-2}$. Based on the assumption $E[e_{i,t-1}, e_{i,t-2}] = 0$, the $e_{i,t-1}$ element is not correlated with $e_{i,t-2}$. 
+Arellano and Bond (1991) develop a Generalized Method of Moments (GMM) estimator that instruments the differenced variables that are not strictly exogenous with all their available lags in levels. As was shown in Arellano and Honore (2001), $y_{i,t-2}$ and further lags are valid instruments for $\Delta y_{i,t-1}$ when $E[e_{i,t-1}, e_{i,t-2}] = 0$. This occurs for two reasons. First, $y_{i,t-2}$ is correlated with $\Delta y_{i,t-1}$, because $\Delta y_{i,t-1} = y_{i,t-1}-y_{i,t-2}$ and second, $y_{i,t-2}$ is not correlated with $\Delta e_{it}$ because $\Delta e_{it} = e_{it}-e_{i,t-1}$ does not contain $e_{i,t-2}$. Using the assumption $E[e_{i,t-1}, e_{i,t-2}] = 0$, $e_{i,t-1}$ is not correlated with $e_{i,t-2}$. 
 
-This estimator is generally appropriate for large $N$ small $t$ applications as I have in the current context (Arellano and Bover 1995). However, with several explanatory variables and all of their lagged values as instruments, the instrument count can get quite high. When the instrument count approaches $N$, which is often the case, the estimator can start to produce inconsistent results and it can be useful to collapse the instrument matrix into a single vector (Roodman 2006). In all models, the AR(2) tests (Arellano and Bond 1991) suggest that the second-order differenced error terms ($e_{it}-e_{i,t-1}$) and ($e_{it-2}-e_{i,t-3}$) are not correlated, indicating that $e_{it}$ is not serially correlated and thus the assumption $E[e_{i,t-1}, e_{i,t-2}] = 0$ holds. In addition, the Hansen tests of overidentifying restrictions fail to reject the null, indicating that the instruments are valid (the p-values of AR(2) and Hansen tests are reported in each Table). Following the same logic, I treat the other potentially endogenous variables with lagged levels as instruments. For instance, $Centrality_{i,t-1}$ and further lags are used to instrument $\Delta Centrality_{it}$. Thus, the Arellano-Bond GMM approach effectively accounts for the endogeneity of each explanatory variable.\footnote{Note that all regressions also include yearly fixed effects as in the original models and as recommended by Roodman (2006). However, this also means that a coefficient for the main effect of language uncertainty is not estimated in any model using the interaction with centrality. This is because language uncertainty is collinear with the time fixed effects.}
+This estimator is generally appropriate for large $N$ small $t$ applications as I have in the current context (Arellano and Bover 1995). However, with several explanatory variables and all available lags as instruments, the instrument count can get quite high. When the instrument count approaches $N$, which is often the case, the estimator can start to produce inconsistent results and it can be useful to collapse the instrument matrix into a single vector (Roodman 2006). When necessary, this is the strategy used. In all models, the AR(2) tests (Arellano and Bond 1991) suggest that the second-order differenced error terms ($e_{it}-e_{i,t-1}$) and ($e_{it-2}-e_{i,t-3}$) are not correlated, indicating that $e_{it}$ is not serially correlated and thus the assumption $E[e_{i,t-1}, e_{i,t-2}] = 0$ holds. In addition, the Hansen tests of overidentifying restrictions fail to reject the null, indicating that the instruments are valid (the p-values of AR(2) and Hansen tests are reported in each Table). Following the same logic, I treat the other potentially endogenous variables with lagged levels as instruments. For instance, $Centrality_{i,t-1}$ and further lags are used to instrument $\Delta Centrality_{it}$. Thus, the Arellano-Bond GMM approach effectively accounts for the endogeneity of each explanatory variable.\footnote{Note that all regressions also include yearly fixed effects as in the original models and as recommended by Roodman (2006). However, this also means that a coefficient for the main effect of language uncertainty is not estimated in any model using the interaction with centrality. This is because language uncertainty is collinear with the time fixed effects.}
 
 \section{Results}
 
@@ -370,7 +370,7 @@ AR(2) p-value                &                     &       0.310         &      
 
 In Table \ref{r7}, I attempt to resolve the lack of proximate effect of centrality on both patenting and abnormal returns by including the interaction with language uncertainty. In the case of patents, I am still unable to reproduce the results, however I explore some explanations for this lack of finding in Appendix \ref{apndxB}. In the case of abnormal returns, the interaction of language uncertainty with centrality has the hypothesized negative and statistically significant effect ($p<0.001$).
 
-\begin{table}[htbp]\centering \caption{Regression of Patents and Ab. Ret. on Unc. x Centrality\label{r7}}
+\begin{table}[htbp]\centering \caption[Regression of Patents and Ab. Ret. on Unc. x Centrality]{Patents and Ab. Ret. on Unc. x Centrality\label{r7}}
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \begin{tabular}{l*{2}{c}}
@@ -438,16 +438,42 @@ AR(2) p-value                &                     &       0.363         &      
 
 \section{Discussion}
 
-\begin{landscape}
+
+
+Network centrality can bring both symbolic and substantive advantage to a firm. Symbolic advantage is attained when the quality signaled by a firm's affiliation with high-status alters attracts new resources. Substantive advantage occurs when the information and resources flowing across extant network ties are useful in production. 
+
+For biotechnology firms, centrality leads to increases in the nonoperating income linked to research grants and licensing deals. However, this advantage is only present under high language uncertainty as illustrated in Figure \ref{canopy}. In the years following the research by Powell et al. (1999), uncertainty in the biotech industry dropped. This may have emboldened investors to place bets on less established firms. The presence of main effects in the original study thus become a matter of research timing and misses a crucial moderating factor.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=.5]{../figures/CentralityNopi.png}
+\caption[Marginal effects of centrality on nonop. income]{Marginal effects of centrality on nonoperating income at different levels of language uncertainty.\label{cnopi}}
+\end{center}
+\end{figure}
+
+Centrality has a substantive advantage for biotechnology firms in the selection of R\&D partners. However, this advantage disappears when language uncertainty passes the 3rd quantile of in-sample values as shown in Figure \ref{crd}. The fact that advantage persists until uncertainty is quite high suggests that one could still find a main effect in periods of relatively high uncertainty as occurred in the original two studies.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=.5]{../figures/CentralityRD.png}
+\caption[Marginal effects of centrality on R\&D]{Marginal effects of centrality on R\&D ties at different levels of language uncertainty.\label{crd}}
+\end{center}
+\end{figure}
+
+Centrality's advantage in relation to stock returns appears in the form of liability mitigation. Central firms are larger, older and thus, may grow at a slower rate than smaller or younger firms. If these central firms were unable to use the information and resources at their disposal because of a favorable network position, centrality might have a negative main effect on abnormal returns. As it stands, the effect is neutral; however, as language uncertainty increases, central firms find it more difficult to use the information flowing across network ties and the liability of maturity reveals itself in the negative interaction.
+
+Table \ref{summary} summarizes my empirical results. 
+
+%\begin{landscape}
 \begin{table}[htbp]\centering \caption{Summary of Results\label{summary}}
 \begin{tabular}{l  c  c  c  }\hline\hline
-\multicolumn{1}{c}{Relationship} & Reproduced & Resolved by (Unc. x Cent.) & Hypothesized \\ \hline
+\multicolumn{1}{c}{Relationship} & Reproduced & (Unc. x Cent.) & Pred. \\ \hline
 Symbolic \\ \hline
-Centrality $\rightarrow$ Nonop. Income & No & Yes & Yes\\
-Nonop. Income $\rightarrow$ Employees & Yes\\
-Centrality $\rightarrow$ Nonop. Income $\rightarrow$ Employees & No & Yes\\
+Centrality $\rightarrow$ Nonop. Inc. & No & Yes & Yes\\
+Nonop. Income $\rightarrow$ Emps. & Yes\\
+Centrality $\rightarrow$ Nonop. Inc. $\rightarrow$ Emps. & No & Yes\\
 Nonop. Income $\rightarrow$ Sales & No\\
-Centrality $\rightarrow$ Nonop. Income $\rightarrow$ Sales & No & Yes\\
+Centrality $\rightarrow$ Nonop. Inc. $\rightarrow$ Sales & No & Yes\\
 \hline
 Substantive \\ \hline
 Centrality $\rightarrow$ Patents & No & No & Yes\\
@@ -458,4 +484,6 @@ Centrality $\rightarrow$ R\&D Ties & Marginal & Yes & Yes\\
 \hline \hline 
  \end{tabular}
 \end{table}
-\end{landscape}
+%\end{landscape}
+
+

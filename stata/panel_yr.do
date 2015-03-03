@@ -129,17 +129,19 @@ xtabond2 d_r L.d_r L2C.mvcon##LC.mecp I.year, gmm(L.d_r L3C.mvcon##L2C.mecp) iv(
 est sto m3
 esttab m1 m2 m3 using "../tex/reg8.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "Lang Uncert x Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
 
-
+xtreg d_r L.d_r L2C.mvcon##LC.mecp I.year, fe
+margins, dydx(L.mecp) over(L2.mvcon) predict(xb fixedonly)
 
 //robustness
 //alt patents with interaction
+set more off
 xtreg patents L.patents L.tpat1 mecp L.public L.sale  I.year, fe
 est sto m1
 xtabond2 patents L.patents L.tpat1 mecp L.public L.sale I.year, gmm(L.patents L2.tpat1 L.mecp L2.public L2.sale, c) iv(I.year) two orthogonal robust noleveleq
 est sto m2
 xtabond2 patents L.patents L.tpat1 LC.mvcon##C.mecp L.public I.year, gmm(L.patents L2.tpat1 L2C.mvcon##LC.mecp L2.public, c) iv(I.year) two orthogonal robust noleveleq small
 est sto m3
-esttab m1 m2 m3 using "../tex/reg9.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "Lang Uncert x Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
+esttab m1 m2 m3 using "../tex/reg9.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "Lang Uncert x Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year _cons) replace
 
 //steps
 //difference gmm with forward orthogonal transformation
