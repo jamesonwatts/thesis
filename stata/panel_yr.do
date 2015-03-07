@@ -89,11 +89,11 @@ esttab m1 m2 using "../tex/reg4.tex", se nogaps l mtitle("Lang Unc. x Cent. $\ri
 
 //patents: 
 set more off
-xtreg patents2 L.patents2 L.tpat2 mecp I.year, fe
+xtreg patents2 L.patents2 L.tpat2 mecp I.year if public, fe
 est sto m1
-xtabond2 patents2 L.patents2 L.tpat2 mecp I.year, gmm(L.patents2 L.tpat2 L.mecp, c) iv(I.year) two orthogonal robust noleveleq
+xtabond2 patents2 L.patents2 L.tpat2 mecp I.year if public, gmm(L.patents2 L.tpat2 L.mecp, c) iv(I.year) two orthogonal robust noleveleq
 est sto m2
-xtivreg patents2 L.patents2 L.tpat2 (mecp = d_r) I.year, fe
+xtivreg patents2 L.patents2 L.tpat2 (mecp = d_r) I.year if public, fe
 est sto m3
 esttab m1 m2 m3 using "../tex/reg5.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "R\&D $\rightarrow$ Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
 //no main effect
@@ -113,7 +113,7 @@ esttab m1 m2 m3 using "../tex/reg6.tex", se nogaps l mtitle("Fixed Effects" "Are
 
 //patents and aret with interaction
 set more off
-xtabond2 patents2 L.patents2 L.tpat2 LC.mvcon##C.mecp I.year, gmm(L.patents2 L2.tpat2 L2C.mvcon##LC.mecp, c) iv(I.year) two orthogonal robust noleveleq
+xtabond2 patents2 L.patents2 L.tpat2 LC.mvcon##C.mecp I.year if public, gmm(L.patents2 L2.tpat2 L2C.mvcon##LC.mecp, c) iv(I.year) two orthogonal robust noleveleq
 est sto m1
 xtabond2 aret L.aret LC.mvcon##C.mecp L(0/2).irisk act_div L.patents2 I.year, gmm(L.aret L2C.mvcon##LC.mecp L3.irisk L.act_div L2.patents2, c) iv(I.year) two orthogonal robust noleveleq
 est sto m2
@@ -129,8 +129,24 @@ xtabond2 d_r L.d_r L2C.mvcon##LC.mecp I.year, gmm(L.d_r L3C.mvcon##L2C.mecp) iv(
 est sto m3
 esttab m1 m2 m3 using "../tex/reg8.tex", se nogaps l mtitle("Fixed Effects" "Arellano-Bond" "Lang Uncert x Cent.") sca(r2_w hansenp ar2p) star(+ 0.1 * 0.05 ** 0.01 *** 0.001) drop(1994.year 1995.year 1996.year 1997.year 1998.year 1999.year 2000.year 2001.year 2002.year 2003.year _cons) replace
 
-xtreg d_r L.d_r L2C.mvcon##LC.mecp I.year, fe
-margins, dydx(L.mecp) over(L2.mvcon) predict(xb fixedonly)
+
+
+//graphs
+set more off
+reg nopi L.nopi LC.vcon##C.ecp L.tpat2 I.FID
+margins, dydx(ecp) at(L.vcon=(0.3(0.1)1.1)) 
+marginsplot
+
+
+set more off
+reg d_r L.d_r L2C.vcon##LC.ecp //I.year
+margins, dydx(L.ecp) at(L2.vcon=(0.3(0.1)1.1)) 
+marginsplot
+
+
+xtabond2 aret L.aret LC.vcon##C.ecp L(0/2).irisk act_div L.patents2 I.year, gmm(L.aret L2C.vcon##LC.ecp L3.irisk, c) iv(I.year) two orthogonal robust noleveleq
+margins, dydx(ecp) at(L.vcon=(0.3(0.1)1.1)) nose
+marginsplot
 
 //robustness
 //alt patents with interaction
