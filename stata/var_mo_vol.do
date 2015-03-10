@@ -11,6 +11,7 @@ forvalues i=1993(1)2005 {
 
 collapse (mean) firms aret srisk=irisk turnover volume nyse_volume words vocab vent entropy=klent1000, by(year month) 
 keep if year > 1992 & year < 2004
+//keep if year < 2004
 
 gen date = ym(year, month)
 format date %tm
@@ -54,13 +55,14 @@ esttab using "../tex/vec.tex", z nogaps wide compress replace
 vecstable
 veclmar, ml(9)
 
+predict ce1 if e(sample), ce equ(#1)
+tsline ce1 if e(sample)
+
+
 //test for short-run granger causality
 test ([D_LVOL]: L2D.LVOL L2D.LCON) ([D_LCON]: L2D.LCON L2D.LVOL)
 test ([D_LVOL]: LD.LCON L2D.LCON)
 test ([D_LCON]: LD.LVOL L2D.LVOL) 
-
-predict ce1 if e(sample), ce equ(#1)
-tsline ce1 if e(sample)
 
 //obvious from cointegration graph that problematic unless drop pre-1993
 //also remember to talk about deseasonalization of lcon
@@ -76,6 +78,9 @@ irf graph oirf //
 vecrank LVOL lnyse_volume LCON, lags(3)
 set more off
 vec LVOL lnyse_volume LCON, r(1) lags(3) 
+esttab using "../tex/vec2.tex", z nogaps wide compress replace
+
+
 
 //robustness with srisk and aret
 egen scon = std(rlcon)

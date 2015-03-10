@@ -150,10 +150,11 @@ marginsplot
 
 //robustness
 //alt patents with interaction
+//drop if !public
 set more off
 xtreg patents L.patents L.tpat1 mecp L.public L.sale  I.year, fe
 est sto m1
-xtabond2 patents L.patents L.tpat1 mecp L.public L.sale I.year, gmm(L.patents L2.tpat1 L.mecp L2.public L2.sale, c) iv(I.year) two orthogonal robust noleveleq
+xtabond2 patents L.patents L.tpat1 mecp L.public I.year, gmm(L.patents L2.tpat1 L.mecp L2.public, c) iv(I.year) two orthogonal robust noleveleq
 est sto m2
 xtabond2 patents L.patents L.tpat1 LC.mvcon##C.mecp L.public I.year, gmm(L.patents L2.tpat1 L2C.mvcon##LC.mecp L2.public, c) iv(I.year) two orthogonal robust noleveleq small
 est sto m3

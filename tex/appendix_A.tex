@@ -1,10 +1,71 @@
 \chapter{Robustness: Language Models\label{apndxA}}
 
-[UNDER CONSTRUCTION]
+\section{Cointegration}
 
-\begin{enumerate}
-  \item Show inconsistency of cointegrating equation when including first two years.
-  \item Robust to inclusion of nyse trading volume
-  \item Robust to different k and different top X features
-\end{enumerate}
+In Chapter \ref{lang} I dropped the first two years of textual data before running the vector error-correction model (VECM). I justified this step because the vocabulary had nearly doubled during these two years as the trade journal ramped up production. However, there is a statistical reason as well. Figure \ref{coint} shows predictions from the cointegrating equation after running the VECM on the full range of data. Note the distinct downward trend in the first few years, which violates a model assumption that the cointegrating equation is stationary around mean zero.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=.5]{../figures/cointegration.png}
+\caption[Graph of cointegrating equation]{Graph of cointegrating equation including the first two years of Bioworld data \label{coint}}
+\end{center}
+\end{figure}
+
+\section{Global Trends}
+
+One alternative explanation for the results in Chapter \ref{lang} is that both the language consistency measure and trading volume are both affected by broader market trends. To account for this possibility, I collected monthly trading volume from the New York Stock Exchange website \footnote{http://www.nyse.com} and include it in the VECM model denoted $LNYSE$. The results are shown in Table \ref{vec2}. As you can see, both the long-term and short-term relationships between language consistency and biotech trading volume still hold. Moreover, there is no cointegrating relationship with $LNYSE$ since the $L.\_ce1$ coefficient is not significant for that variable, nor does $LNYSE$ have any significant short-term effects on either of the other two variables. 
+
+\begin{table}
+\begin{center}
+\caption[VECM Results w/ NYSE Volume]{Results of Vector Error Correction Model inc. NYSE\label{vec2}}
+\vspace{0.3in}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{1}{cc}}
+\hline\hline
+          &\multicolumn{2}{c}{Coef.}     \\
+          &\multicolumn{2}{c}{z}        \\
+\hline
+D\_LVOL    &                  &         \\
+L.\_ce1    &   -0.121\sym{***}&  (-3.75)\\
+LD.LVOL   &-0.000532         &  (-0.01)\\
+L2D.LVOL  &  -0.0290         &  (-0.31)\\
+LD.LNYSE&   -0.286         &  (-1.67)\\
+L2D.LNYSE&   -0.334         &  (-1.96)\\
+LD.LCON   &  -0.0771\sym{**} &  (-3.05)\\
+L2D.LCON  &  -0.0281         &  (-1.23)\\
+\_cons    &   0.0301         &   (1.93)\\
+\hline
+D\_LNYSE&                  &         \\
+L.\_ce1    &  -0.0231         &  (-1.34)\\
+LD.LVOL   &    0.115\sym{*}  &   (2.33)\\
+L2D.LVOL  &  -0.0269         &  (-0.53)\\
+LD.LNYSE&   -0.493\sym{***}&  (-5.38)\\
+L2D.LNYSE&   -0.323\sym{***}&  (-3.54)\\
+LD.LCON   & -0.00629         &  (-0.47)\\
+L2D.LCON  &  -0.0334\sym{**} &  (-2.75)\\
+\_cons    &   0.0234\sym{**} &   (2.81)\\
+\hline
+D\_LCON    &                  &         \\
+L.\_ce1    &    0.466\sym{***}&   (3.53)\\
+LD.LVOL   &   -0.502         &  (-1.33)\\
+L2D.LVOL  &   -0.907\sym{*}  &  (-2.36)\\
+LD.LNYSE&    0.427         &   (0.61)\\
+L2D.LNYSE&   0.0907         &   (0.13)\\
+LD.LCON   &   -0.151         &  (-1.46)\\
+L2D.LCON  &   -0.259\sym{**} &  (-2.79)\\
+\_cons    &  0.00901         &   (0.14)\\
+\hline
+\(N\)     &      129         &         \\
+\hline\hline
+\multicolumn{3}{l}{\footnotesize \textit{z} statistics in parentheses}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
+
+\end{center}
+\end{table}
+
+\section{Feature Boundaries}
+Robust to different k and different top X features
 
