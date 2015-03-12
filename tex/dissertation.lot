@@ -1,25 +1,25 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces English Stopwords}}{54}
-\contentsline {table}{\numberline {3.2}{\ignorespaces Top Words (1991-1997)}}{55}
-\contentsline {table}{\numberline {3.3}{\ignorespaces Top Words (1998-2003)}}{56}
-\contentsline {table}{\numberline {3.4}{\ignorespaces Language Frequencies by Year}}{64}
-\contentsline {table}{\numberline {3.5}{\ignorespaces VECM Results}}{77}
+\contentsline {table}{\numberline {3.1}{\ignorespaces English Stopwords}}{46}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Top Words (1991-1997)}}{47}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Top Words (1998-2003)}}{48}
+\contentsline {table}{\numberline {3.4}{\ignorespaces Language Frequencies by Year}}{55}
+\contentsline {table}{\numberline {3.5}{\ignorespaces VECM Results}}{67}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Summary Statistics }}{102}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Variable Correlations}}{103}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Regression of Employees on Nonoperating Income}}{110}
-\contentsline {table}{\numberline {4.4}{\ignorespaces Regression of Sales on Nonoperating Income}}{111}
-\contentsline {table}{\numberline {4.5}{\ignorespaces Regression of Nonoperating Income on Centrality}}{112}
-\contentsline {table}{\numberline {4.6}{\ignorespaces Regression of Sales and Emps. on Nonop. Inc. via Centrality}}{113}
-\contentsline {table}{\numberline {4.7}{\ignorespaces Regression of Patents on Centrality }}{113}
-\contentsline {table}{\numberline {4.8}{\ignorespaces Regression of Abnormal Returns on Centrality}}{114}
-\contentsline {table}{\numberline {4.9}{\ignorespaces Regression of Patents and Ab. Ret. on Unc. x Centrality}}{115}
-\contentsline {table}{\numberline {4.10}{\ignorespaces Regression of R\&D on Centrality}}{116}
-\contentsline {table}{\numberline {4.11}{\ignorespaces Summary of Results}}{119}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Summary Statistics }}{92}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Variable Correlations}}{93}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Regression of Employees on Nonoperating Income}}{100}
+\contentsline {table}{\numberline {4.4}{\ignorespaces Regression of Sales on Nonoperating Income}}{101}
+\contentsline {table}{\numberline {4.5}{\ignorespaces Regression of Nonoperating Income on Centrality}}{102}
+\contentsline {table}{\numberline {4.6}{\ignorespaces Regression of Sales and Emps. on Nonop. Inc. via Centrality}}{103}
+\contentsline {table}{\numberline {4.7}{\ignorespaces Regression of Patents on Centrality }}{103}
+\contentsline {table}{\numberline {4.8}{\ignorespaces Regression of Abnormal Returns on Centrality}}{104}
+\contentsline {table}{\numberline {4.9}{\ignorespaces Regression of Patents and Ab. Ret. on Unc. x Centrality}}{105}
+\contentsline {table}{\numberline {4.10}{\ignorespaces Regression of R\&D on Centrality}}{106}
+\contentsline {table}{\numberline {4.11}{\ignorespaces Summary of Results}}{109}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces VECM Results w/ NYSE Volume}}{128}
+\contentsline {table}{\numberline {A.1}{\ignorespaces VECM Results w/ NYSE Volume}}{125}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Regression of Patents (Alt) on Centrality}}{130}
+\contentsline {table}{\numberline {B.1}{\ignorespaces Regression of Patents (Alt) on Centrality}}{127}
