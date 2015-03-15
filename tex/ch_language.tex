@@ -374,21 +374,21 @@ There is a strong connection between cointegration and causality in that at leas
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=.5]{../figures/irf1.png}
+\includegraphics[scale=.6]{../figures/irfc1.png}
 \caption[Orthoganalized Impulse Response (LCON on LVOL)]{Orthoganalized Impulse Response (LCON on LVOL)\label{irf1}}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=.5]{../figures/irf2.png}
+\includegraphics[scale=.6]{../figures/irfc2.png}
 \caption[Orthoganalized Impulse Response (LVOL on LCON)]{Orthoganalized Impulse Response (LVOL on LCON)\label{irf2}}
 \end{center}
 \end{figure}
 
-Unlike a vector autoregresive model, the variables in a cointegrating VECM are not mean reverting, so the effects of some shocks will not die out over time. This can be clearly seen in the OIRFS from Figures \ref{irf1} and \ref{irf2}. An increase in language consistency has a long-term permanent effect on trading volume, and similarly, an increase in trading volume appears to have a permanent effect on language consistency after a transitory drop in month two. Both variables are ``pulling" each other higher in accordance with their long-term average.
+Unlike a vector autoregresive model, the variables in a cointegrating VECM are not mean reverting, so the effects of some shocks will not die out over time. This can be clearly seen in the OIRFS from Figures \ref{irf1} and \ref{irf2}. An increase in language consistency has a long-term permanent effect on trading volume, and similarly, an increase in trading volume appears to have a permanent effect on language consistency. Both variables are ``pulling" each other higher in accordance with their long-term average.
 
-The remaining coefficients in Table \ref{vec} also provide evidence of short-term causal effects. The coefficients prefixed with $LD$ and $L2D$ are the effects of first and second lagged variable differences on themselves and on each other. $LCON$ has a negative short-term effect on $LVOL$ in the first lag and $LVOL$ has a negative short-term effect on $LCON$ in its second lag. The short-term destabilizing effect of an increase in trading volume on language consistency is also apparent in the levels equation as was previously illustrated in Figure \ref{irf2}; however, the short-term negative effect of $LCON$ on $LVOL$ in differences in particularly intriguing. Recall from my discussion in section \ref{kld} that the KLD captures the new information represented by the current set of word frequencies (as compared to the last three months). Language consistency was defined as $1-KLD$, or essentially, the \emph{lack} of information in the current set of word-stems. The negative short-term effect of $LCON$ on $LVOL$ in the VECM is thus the equivalent of saying that new information (a drop in $LCON$) granger causes a transitory spike in trading volume.
+The remaining coefficients in Table \ref{vec} also provide evidence of short-term causal effects. The coefficients prefixed with $LD$ and $L2D$ are the effects of first and second lagged variable differences on themselves and on each other. $LCON$ has a negative short-term effect on $LVOL$ in the first lag and $LVOL$ has a negative short-term effect on $LCON$ in its second lag. The short-term destabilizing effect of an increase in trading volume on language consistency is also apparent in the levels equation (though insignificant at 95\% confidence) as can be seen in Figure \ref{irf2}; however, the short-term negative effect of $LCON$ on $LVOL$ in differences is particularly intriguing. Recall from my discussion in section \ref{kld} that the KLD captures the new information represented by the current set of word frequencies (as compared to the last three months). Language consistency was defined as $1-KLD$, or essentially, the \emph{lack} of information in the current set of word-stems. The negative short-term effect of $LCON$ on $LVOL$ in the VECM is thus the equivalent of saying that new information (a drop in $LCON$) granger causes a transitory spike in trading volume.
 
 These two distinct effects--the short-term and the long-term--describe a nuanced system of relationships between language consistency and trading volume. While both variables tend to elevate each other in an increasing long-term trend, \emph{drops} in consistency (i.e. new information) can also increase trading volume, if only briefly. In a general sense, this is consistent with the propositions developed in Chapter \ref{law}. As knowledge in the  biotechnology industry becomes ``common" knowledge over time, the liquidity of (and possibly the demand for) a firm's shares can increase. This occurs because more investors understand the nature of the investment. However, in the shorter-term, new information can jolt trading volume from it's long term equilibrium in a transitory spike of increased activity \citep{fama1969}.
 

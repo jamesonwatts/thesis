@@ -18,3 +18,10 @@ xtdpdsys patents y1-y17, end(ecp) two vce(robust)
 
 sort year
 by year: egen srisk = mean(irisk)
+
+
+gen firms = 0
+forvalues i=1993(1)2005 {
+	count if year == `i' & month == 1
+	replace firms = r(N) if year == `i'
+}

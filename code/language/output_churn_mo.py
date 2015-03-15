@@ -6,12 +6,12 @@ import scipy.stats as stats
 
 #settings
 ma = 3
-wrange = [50,100,500,1000,2000]  
+wrange = [50,100,250,500,1000,2000]  
 
 dists = []
 xs = []
 #grab data
-for year in range(1991, 2005):
+for year in range(1991, 2004):
     for month in range(1,13):
         d = str(year)+'-'+str(month) if month > 9 else str(year)+'-0'+str(month)
         xs.append(parser.parse(d))
@@ -60,6 +60,6 @@ for dist in dists:
    
    
 #save data to csv
-data = zip([dt.strftime("%Y") for dt in xs[ma:]],[dt.strftime("%m") for dt in xs[ma:]],nvol[(ma-1):],[len(dist) for dist in dists[(ma-1):]],klent[50],klent[100],klent[500],klent[1000],klent[2000],churn[50],churn[100],churn[500],churn[1000],churn[2000],rankc[50],rankc[100],rankc[500],rankc[1000],rankc[2000])
-np.savetxt("/Users/research/GDrive/Dissertation/thesis/stata/language_mo.csv",data,delimiter=",",header="year,month,words,vocab,klent50,klent100,klent500,klent1000,klent2000,churn50,churn100,churn500,churn1000,churn2000,rank50,rank100,rank500,rank1000,rank2000",fmt="%s")
+data = zip([dt.strftime("%Y") for dt in xs[ma:]],[dt.strftime("%m") for dt in xs[ma:]],nvol[(ma-1):],[len(dist) for dist in dists[(ma-1):]],klent[50],klent[100],klent[500],klent[250],klent[1000],klent[2000],churn[50],churn[100],churn[500],churn[1000],churn[2000],rankc[50],rankc[100],rankc[500],rankc[1000],rankc[2000])
+np.savetxt("/Users/research/GDrive/Dissertation/thesis/stata/language_mo3.csv",data,delimiter=",",header="year,month,words,vocab,klent50,klent100,klent250,klent500,klent1000,klent2000,churn50,churn100,churn500,churn1000,churn2000,rank50,rank100,rank500,rank1000,rank2000",fmt="%s")
 
