@@ -2,11 +2,15 @@
 
 \section{Sample Selection Bias}
 
-Certain firms 
+Certain analysis may be biased by self selection, undercoverage or survivorship. Even though the majority of firms eventually enter into at least one alliance, some choose not to and others hold off for several years. Since firms are strategic in this choice, self-selecting into this behavior could require any conclusions drawn from my analysis to be conditional on this choice. 
+
+Similarly, firms are strategic in their choice to go public and several regressions are limited by the availability of data on public firms. This results in undercoverage of the relevant firms subject to my theoretical arguments. Lastly, some firms leave the sample because of failure or acquisition. This can bias results towards some characteristic of the surviving firms.
+
+I tested the implications of these potential biases using a two-stage Heckman procedure. In the first stage, I ran a Probit regression of the selection criteria on all relevant firm characteristics and then calculated the firm-specific inverse Mills ratio from the predicted values. This variable was then included in subsequent Arellano-Bond regressions as an exogenous control for the bias. Tables \ref{sel1}, \ref{sel2} and \ref{sel3} show the results of these regressions, which are qualitatively the same as those presented in the body of the thesis.
 
 \begin{table}
 \begin{center}
-\caption[Sample Selection on Public]{Accounting for sample selection based on whether firm is publicly traded.\label{sel1}}
+\caption[Sample Selection on Alliance Use]{Accounting for sample selection based on choice to use alliances.\label{sel1}}
 \vspace{0.3in}
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
@@ -15,38 +19,40 @@ Certain firms
                     &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
                     &\multicolumn{1}{c}{Nonop. Inc.}&\multicolumn{1}{c}{Patents}&\multicolumn{1}{c}{Abnorm. Ret.}&\multicolumn{1}{c}{R\&D}\\
 \hline
-L.Nonop. Inc.       &       0.282         &                     &                     &                     \\
-                    &     (0.189)         &                     &                     &                     \\
-Cent.               &       66.04         &       13.66         &      -0.940         &                     \\
-                    &     (66.18)         &     (9.624)         &     (1.051)         &                     \\
-L.Lang Unc. $\times$ Cent.&       226.2\sym{**} &       25.57\sym{+}  &      -1.793\sym{**} &                     \\
-                    &     (86.03)         &     (13.18)         &     (0.622)         &                     \\
-L.Cent.             &                     &                     &                     &      -0.403         \\
+L.Nonop. Inc.       &       0.234         &                     &                     &                     \\
+                    &     (0.170)         &                     &                     &                     \\
+Cent.               &       32.28         &      -18.73         &      -1.581         &                     \\
+                    &     (57.85)         &     (21.64)         &     (1.032)         &                     \\
+L.Lang Unc. $\times$ Cent.&       247.8\sym{**} &      -23.79         &      -1.498\sym{*}  &                     \\
+                    &     (83.51)         &     (19.26)         &     (0.613)         &                     \\
+L.Cent.             &                     &                     &                     &      -4.944         \\
+                    &                     &                     &                     &     (4.666)         \\
+L.Emps.             &      0.0128\sym{+}  &                     &   0.0000356         &                     \\
+                    &   (0.00665)         &                     & (0.0000230)         &                     \\
+L.invm              &      -64.04         &      -30.47\sym{*}  &       0.745         &      -0.649         \\
+                    &     (99.88)         &     (15.08)         &     (0.656)         &     (4.349)         \\
+L.New Pats.         &                     &       0.731\sym{***}&                     &                     \\
+                    &                     &     (0.112)         &                     &                     \\
+L.Cum. Pats.        &                     &     -0.0131         &                     &                     \\
+                    &                     &    (0.0341)         &                     &                     \\
+L.Abnorm. Ret.      &                     &                     &     -0.0873\sym{***}&                     \\
+                    &                     &                     &    (0.0241)         &                     \\
+Idiosync. Risk      &                     &                     &       0.370\sym{***}&                     \\
+                    &                     &                     &    (0.0573)         &                     \\
+L.Idiosync. Risk    &                     &                     &      0.0918\sym{***}&                     \\
+                    &                     &                     &    (0.0183)         &                     \\
+L2.Idiosync. Risk   &                     &                     &     -0.0515\sym{*}  &                     \\
+                    &                     &                     &    (0.0229)         &                     \\
+Diversity           &                     &                     &      -0.164         &                     \\
+                    &                     &                     &     (0.166)         &                     \\
+L.R\&D Ties         &                     &                     &                     &       0.564\sym{***}\\
+                    &                     &                     &                     &    (0.0861)         \\
+L2.Lang Unc. $\times$ L.Cent.&                     &                     &                     &      -12.76\sym{*}  \\
                     &                     &                     &                     &     (5.044)         \\
-L.Cum. Pats.        &      0.0817\sym{*}  &     -0.0832\sym{+}  &                     &                     \\
-                    &    (0.0392)         &    (0.0450)         &                     &                     \\
-L.invm              &      -1.113         &      -1.074         &     0.00342         &       0.380         \\
-                    &     (4.376)         &     (0.948)         &    (0.0617)         &     (0.473)         \\
-L.New Pats.         &                     &       1.006\sym{***}&    0.000526         &                     \\
-                    &                     &     (0.235)         &   (0.00150)         &                     \\
-L.Abnorm. Ret.      &                     &                     &     -0.0803\sym{***}&                     \\
-                    &                     &                     &    (0.0222)         &                     \\
-Idiosync. Risk      &                     &                     &       0.397\sym{***}&                     \\
-                    &                     &                     &    (0.0562)         &                     \\
-L.Idiosync. Risk    &                     &                     &      0.0815\sym{***}&                     \\
-                    &                     &                     &    (0.0192)         &                     \\
-L2.Idiosync. Risk   &                     &                     &     -0.0427\sym{+}  &                     \\
-                    &                     &                     &    (0.0232)         &                     \\
-Diversity           &                     &                     &      -0.153         &                     \\
-                    &                     &                     &     (0.174)         &                     \\
-L.R\&D Ties         &                     &                     &                     &       0.581\sym{***}\\
-                    &                     &                     &                     &    (0.0968)         \\
-L2.Lang Unc. $\times$ L.Cent.&                     &                     &                     &      -21.09\sym{**} \\
-                    &                     &                     &                     &     (8.112)         \\
 \hline
-Observations        &        1046         &        1649         &         799         &        2076         \\
-hansenp             &      0.0748         &       0.423         &       0.426         &      0.0426         \\
-ar2p                &       0.819         &       0.560         &       0.312         &       0.437         \\
+Observations        &        1054         &         627         &         798         &        2080         \\
+Hansen p-value             &       0.306         &       0.421         &       0.206         &       0.388         \\
+AR(2) p-value                &       0.930         &       0.294         &       0.162         &       0.247         \\
 \hline\hline
 \multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
 \multicolumn{5}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
@@ -58,52 +64,49 @@ ar2p                &       0.819         &       0.560         &       0.312   
 
 \begin{table}
 \begin{center}
-\caption[Sample Selection on Alliance Use]{Accounting for sample selection based on choice to use alliances.\label{sel2}}
+\caption[Sample Selection on Public]{Accounting for sample selection based on whether firm is publicly traded.\label{sel2}}
 \vspace{0.3in}
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{l*{4}{c}}
+\begin{tabular}{l*{3}{c}}
 \hline\hline
-                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
-                    &\multicolumn{1}{c}{Nonop. Inc.}&\multicolumn{1}{c}{Patents}&\multicolumn{1}{c}{Abnorm. Ret.}&\multicolumn{1}{c}{R\&D}\\
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{Nonop. Inc.}&\multicolumn{1}{c}{Patents}&\multicolumn{1}{c}{Abnorm. Ret.}\\
 \hline
-L.Nonop. Inc.       &       0.288         &                     &                     &                     \\
-                    &     (0.197)         &                     &                     &                     \\
-Cent.               &       43.38         &       6.027         &      -1.646         &                     \\
-                    &     (55.46)         &     (12.97)         &     (1.154)         &                     \\
-L.Lang Unc. $\times$ Cent.&       229.9\sym{**} &       29.35\sym{+}  &      -1.521\sym{*}  &                     \\
-                    &     (81.87)         &     (17.00)         &     (0.598)         &                     \\
-L.Cent.             &                     &                     &                     &      -4.664         \\
-                    &                     &                     &                     &     (4.609)         \\
-L.Cum. Pats.        &      0.0771\sym{*}  &     -0.0918\sym{*}  &                     &                     \\
-                    &    (0.0390)         &    (0.0381)         &                     &                     \\
-L.invm              &      -67.95         &      -10.39         &       0.312         &      -0.649         \\
-                    &     (101.4)         &     (7.431)         &     (0.688)         &     (4.349)         \\
-L.New Pats.         &                     &       1.097\sym{***}&    0.000308         &                     \\
-                    &                     &     (0.179)         &   (0.00137)         &                     \\
-L.Abnorm. Ret.      &                     &                     &     -0.0784\sym{**} &                     \\
-                    &                     &                     &    (0.0245)         &                     \\
-Idiosync. Risk      &                     &                     &       0.390\sym{***}&                     \\
-                    &                     &                     &    (0.0555)         &                     \\
-L.Idiosync. Risk    &                     &                     &      0.0900\sym{***}&                     \\
-                    &                     &                     &    (0.0186)         &                     \\
-L2.Idiosync. Risk   &                     &                     &     -0.0537\sym{*}  &                     \\
-                    &                     &                     &    (0.0224)         &                     \\
-Diversity           &                     &                     &      -0.170         &                     \\
-                    &                     &                     &     (0.182)         &                     \\
-L.R\&D Ties         &                     &                     &                     &       0.564\sym{***}\\
-                    &                     &                     &                     &    (0.0861)         \\
-L2.Lang Unc. $\times$ L.Cent.&                     &                     &                     &      -12.76\sym{*}  \\
-                    &                     &                     &                     &     (5.044)         \\
+L.Nonop. Inc.       &       0.237         &                     &                     \\
+                    &     (0.168)         &                     &                     \\
+Cent.               &       39.92         &      -14.93         &      -1.611         \\
+                    &     (52.46)         &     (27.55)         &     (1.214)         \\
+L.Lang Unc. $\times$ Cent.&       241.7\sym{**} &      -16.82         &      -1.544\sym{*}  \\
+                    &     (80.67)         &     (28.88)         &     (0.607)         \\
+L.Emps.             &      0.0129\sym{+}  &                     &   0.0000366         \\
+                    &   (0.00670)         &                     & (0.0000273)         \\
+L.invm              &      -0.874         &      -3.525\sym{*}  &     0.00410         \\
+                    &     (4.467)         &     (1.511)         &    (0.0689)         \\
+L.New Pats.         &                     &       0.727\sym{***}&                     \\
+                    &                     &     (0.111)         &                     \\
+L.Cum. Pats.        &                     &    -0.00974         &                     \\
+                    &                     &    (0.0346)         &                     \\
+L.Abnorm. Ret.      &                     &                     &     -0.0841\sym{***}\\
+                    &                     &                     &    (0.0248)         \\
+Idiosync. Risk      &                     &                     &       0.373\sym{***}\\
+                    &                     &                     &    (0.0583)         \\
+L.Idiosync. Risk    &                     &                     &      0.0876\sym{***}\\
+                    &                     &                     &    (0.0185)         \\
+L2.Idiosync. Risk   &                     &                     &     -0.0514\sym{*}  \\
+                    &                     &                     &    (0.0235)         \\
+Diversity           &                     &                     &      -0.185         \\
+                    &                     &                     &     (0.175)         \\
 \hline
-Observations        &        1054         &        1608         &         798         &        2080         \\
-hansenp             &       0.288         &       0.588         &       0.169         &       0.388         \\
-ar2p                &       0.823         &       0.533         &       0.266         &       0.247         \\
+Observations        &        1041         &         624         &         797         \\
+Hansen p-value             &       0.337         &       0.353         &       0.209         \\
+AR(2) p-value                &       0.910         &       0.300         &       0.205         \\
 \hline\hline
-\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{5}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }
+
 \end{center}
 \end{table}
 
@@ -112,7 +115,6 @@ ar2p                &       0.823         &       0.533         &       0.266   
 \begin{center}
 \caption[Sample Selection on Exit]{Accounting for sample selection based on failure or acquisition.\label{sel3}}
 \vspace{0.3in}
-
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \begin{tabular}{l*{4}{c}}
@@ -120,49 +122,59 @@ ar2p                &       0.823         &       0.533         &       0.266   
                     &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
                     &\multicolumn{1}{c}{Nonop. Inc.}&\multicolumn{1}{c}{Patents}&\multicolumn{1}{c}{Abnorm. Ret.}&\multicolumn{1}{c}{R\&D}\\
 \hline
-L.Nonop. Inc.       &       0.281         &                     &                     &                     \\
-                    &     (0.189)         &                     &                     &                     \\
-Cent.               &       64.50         &       15.55         &      -0.493         &                     \\
-                    &     (66.18)         &     (11.05)         &     (1.284)         &                     \\
-L.Lang Unc. $\times$ Cent.&       223.9\sym{**} &       22.78\sym{+}  &      -1.903\sym{**} &                     \\
-                    &     (85.58)         &     (13.79)         &     (0.669)         &                     \\
-L.Cent.             &                     &                     &                     &       5.187         \\
-                    &                     &                     &                     &     (7.344)         \\
-L.Cum. Pats.        &      0.0800\sym{*}  &     -0.0857\sym{+}  &                     &                     \\
-                    &    (0.0388)         &    (0.0477)         &                     &                     \\
-L.invm              &       2.174         &      0.0835         &       0.164         &       1.460         \\
-                    &     (8.464)         &     (1.737)         &     (0.214)         &     (0.984)         \\
-L.New Pats.         &                     &       1.017\sym{***}&    0.000345         &                     \\
-                    &                     &     (0.249)         &   (0.00155)         &                     \\
-L.Abnorm. Ret.      &                     &                     &     -0.0810\sym{***}&                     \\
-                    &                     &                     &    (0.0198)         &                     \\
-Idiosync. Risk      &                     &                     &       0.392\sym{***}&                     \\
-                    &                     &                     &    (0.0536)         &                     \\
-L.Idiosync. Risk    &                     &                     &      0.0706\sym{***}&                     \\
-                    &                     &                     &    (0.0198)         &                     \\
-L2.Idiosync. Risk   &                     &                     &     -0.0434\sym{*}  &                     \\
-                    &                     &                     &    (0.0200)         &                     \\
-Diversity           &                     &                     &      -0.280         &                     \\
-                    &                     &                     &     (0.220)         &                     \\
-L.R\&D Ties         &                     &                     &                     &       0.555\sym{***}\\
-                    &                     &                     &                     &     (0.101)         \\
-L2.Lang Unc. $\times$ L.Cent.&                     &                     &                     &      -19.85\sym{*}  \\
-                    &                     &                     &                     &     (8.206)         \\
+L.Nonop. Inc.       &       0.238         &                     &                     &                     \\
+                    &     (0.169)         &                     &                     &                     \\
+Cent.               &       38.23         &      -13.81         &      -1.015         &                     \\
+                    &     (46.54)         &     (31.75)         &     (1.358)         &                     \\
+L.Lang Unc. $\times$ Cent.&       242.9\sym{**} &      -22.86         &      -1.642\sym{*}  &                     \\
+                    &     (80.66)         &     (26.35)         &     (0.661)         &                     \\
+L.Cent.             &                     &                     &                     &      -2.660         \\
+                    &                     &                     &                     &     (6.237)         \\
+L.Emps.             &      0.0129\sym{+}  &                     &   0.0000258         &                     \\
+                    &   (0.00679)         &                     & (0.0000258)         &                     \\
+L.invm              &      -2.778         &      -1.518         &       0.164         &       0.437         \\
+                    &     (9.476)         &     (3.879)         &     (0.199)         &     (0.900)         \\
+L.New Pats.         &                     &       0.738\sym{***}&                     &                     \\
+                    &                     &     (0.113)         &                     &                     \\
+L.Cum. Pats.        &                     &     -0.0151         &                     &                     \\
+                    &                     &    (0.0338)         &                     &                     \\
+L.Abnorm. Ret.      &                     &                     &     -0.0859\sym{***}&                     \\
+                    &                     &                     &    (0.0224)         &                     \\
+Idiosync. Risk      &                     &                     &       0.367\sym{***}&                     \\
+                    &                     &                     &    (0.0566)         &                     \\
+L.Idiosync. Risk    &                     &                     &      0.0804\sym{***}&                     \\
+                    &                     &                     &    (0.0179)         &                     \\
+L2.Idiosync. Risk   &                     &                     &     -0.0509\sym{*}  &                     \\
+                    &                     &                     &    (0.0199)         &                     \\
+Diversity           &                     &                     &      -0.286         &                     \\
+                    &                     &                     &     (0.207)         &                     \\
+L.R\&D Ties         &                     &                     &                     &       0.570\sym{***}\\
+                    &                     &                     &                     &    (0.0842)         \\
+L2.Lang Unc. $\times$ L.Cent.&                     &                     &                     &      -12.73\sym{*}  \\
+                    &                     &                     &                     &     (5.102)         \\
 \hline
-Observations        &        1046         &        1649         &         799         &        2076         \\
-hansenp             &      0.0708         &       0.427         &       0.350         &      0.0769         \\
-ar2p                &       0.822         &       0.556         &       0.334         &       0.431         \\
+Observations        &        1041         &         624         &         797         &        2042         \\
+Hansen p-value             &       0.342         &       0.376         &       0.182         &       0.429         \\
+AR(2) p-value                &       0.904         &       0.307         &       0.200         &       0.261         \\
 \hline\hline
 \multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
 \multicolumn{5}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }
+
 \end{center}
 \end{table}
 
 \section{Alternative Patent Measure}
 
-\begin{table}[htbp]\centering \caption{Regression of Patents (Alt) on Centrality\label{r9}}
+The patent measure used in the main analysis relied on data collected from the Center for Research on Innovation and Entrepreneurship, which uses a firm's unique identifier (like its stock ticker or permno) to search the government patent database. Using this data, I found no relationship between centrality and number of patents, even when accounting for the interaction with language uncertainty. However, there are two possible explanations for why this is. The first has to do with the way in which patents are assigned. In biotech, identifying patents to a particular company can be quite difficult if, for instance, ownership is attributed to multiple scientists working across firms. In the data collected by \citet{powell1999}, some care was taken to identify the substantive ownership of intellectual property.
+
+Table \ref{aptly} shows the results from a regression of \citet{powell1999}'s patent data on centrality and the interaction of centrality with language uncertainty. The main effect is still absent, but Model 3 shows a marginally significant interaction in the predicted direction. However, their data ends in the year 1999, which leads me to believe this may actually be related to the second explanation for the non-finding as explained next.
+
+\begin{table}
+\begin{center}
+\caption[Alternative Patents Measure]{Using patent counts from Powell et al., 1999 data.\label{altpat}}
+\vspace{0.3in}
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \begin{tabular}{l*{3}{c}}
@@ -170,34 +182,140 @@ ar2p                &       0.822         &       0.556         &       0.334   
                     &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
                     &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{Lang Uncert x Cent.}\\
 \hline
-L.patents           &    0.000787         &     -0.0145         &     0.00426         \\
-                    &   (0.00880)         &    (0.0216)         &   (0.00810)         \\
-L.tpat1             &       0.203\sym{***}&       0.239\sym{*}  &       0.203\sym{**} \\
-                    &    (0.0148)         &     (0.112)         &    (0.0784)         \\
-Centrality          &       34.78\sym{+}  &       0.791         &      -52.15\sym{**} \\
-                    &     (20.75)         &     (35.89)         &     (18.87)         \\
-L.public            &       4.489\sym{*}  &       3.473         &       4.649\sym{*}  \\
-                    &     (1.965)         &     (3.121)         &     (2.232)         \\
-L.Sales             &     0.00979\sym{*}  &     -0.0253         &                     \\
-                    &   (0.00436)         &    (0.0303)         &                     \\
-L.Lang Unc. $\times$ Centrality&                     &                     &      -149.0\sym{***}\\
-                    &                     &                     &     (42.05)         \\
+L.patents           &       0.582\sym{***}&       0.525\sym{***}&       0.558\sym{***}\\
+                    &    (0.0341)         &     (0.111)         &     (0.100)         \\
+L.tpat1             &     -0.0159         &     -0.0536         &     -0.0380         \\
+                    &    (0.0152)         &    (0.0590)         &    (0.0471)         \\
+Cent.               &       11.23         &       4.309         &      -18.65         \\
+                    &     (11.72)         &     (22.41)         &     (17.91)         \\
+L.public            &       1.163         &       3.023         &       1.476         \\
+                    &     (0.829)         &     (2.356)         &     (1.191)         \\
+L.Emps.             &     0.00867\sym{***}&      0.0195         &      0.0182\sym{**} \\
+                    &   (0.00103)         &    (0.0126)         &   (0.00661)         \\
+L.Exper.            &       1.020         &       1.072         &       3.112         \\
+                    &     (1.105)         &     (5.383)         &     (2.424)         \\
+L.Exper.\^2         &     -0.0243\sym{+}  &    -0.00126         &     -0.0274\sym{+}  \\
+                    &    (0.0129)         &    (0.0141)         &    (0.0166)         \\
+Diversity           &       0.600         &       13.74\sym{*}  &       3.212         \\
+                    &     (1.747)         &     (6.254)         &     (2.904)         \\
+L.Lang Unc. $\times$ Cent.&                     &                     &      -51.68\sym{+}  \\
+                    &                     &                     &     (27.80)         \\
 \hline
-Observations        &        1080         &         862         &        1495         \\
-r2\_w                &       0.280         &                     &                     \\
-hansenp             &                     &       0.478         &       0.108         \\
-ar2p                &                     &       0.161         &       0.138         \\
+Observations        &        1786         &        1420         &        1420         \\
+$R^2$ within               &       0.455         &                     &                     \\
+Hansen p-value             &                     &       0.328         &       0.106         \\
+AR(2) p-value                &                     &       0.354         &       0.327         \\
 \hline\hline
 \multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
 \multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }
+\end{center}
+\end{table}
+
+A second reason for the statistically insignificant result on patents has to do with changing practices within the industry itself. In technology-driven industries, copycat products can be a large problem \citep{teece1986} and biotech is no exception. During the 1990's firms started taking a biological compound patented by another firm, altering a few inconsequential elements and then using it for their own competing product \citep{wolff2001}. In response, firms started hiding the important patent in a host of unrelated patent applications. This made it harder for competitor firms to discern the true innovation from the ``chaff," but also makes patent counts an inaccurate measure of a firm's intellectual output.
+
+Table \ref{chaff} shows a three-way interaction between centrality, language uncertainty and a dummy variable indicating the period after 1997 (the last year reported in the original \citep{powell1999} study. The parameter estimate on the two-way uncertainty by centrality interaction is thus an estimate on the pre-1998 data conditional on the data that follows. As you can see, this interaction is marginally statistically significant and in the predicted direction providing at least some support for the hypothesis presented in the body of the paper.
+
+
+\begin{table}
+\begin{center}
+\caption[Structural Break in Patenting Activity]{Accounting for change in patenting practice using 3-way interaction.\label{chaff}}
+\vspace{0.3in}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{1}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}\\
+                    &\multicolumn{1}{c}{Chaff}\\
+\hline
+L.New Pats.         &       0.284         \\
+                    &     (0.176)         \\
+L.Cum. Pats.        &      0.0450         \\
+                    &    (0.0519)         \\
+Cent.               &      -60.61         \\
+                    &     (37.65)         \\
+L.Lang Unc. $\times$ Cent.&      -194.4\sym{+}  \\
+                    &     (115.6)         \\
+chaff=1             &       0.197         \\
+                    &     (0.838)         \\
+chaff=1 $\times$ Cent.&       127.2\sym{+}  \\
+                    &     (76.11)         \\
+chaff=1 $\times$ L.Lang Unc. $\times$ Cent.&       189.4         \\
+                    &     (122.9)         \\
+\hline
+Observations        &         753         \\
+$R^2$ within               &                     \\
+Hansen p-value             &       0.203         \\
+AR(2) p-value                &       0.211         \\
+\hline\hline
+\multicolumn{2}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{2}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
+\end{center}
 \end{table}
 
 
+
 \section{Relation to Systematic Risk}
- Language variable actually picks up variation better than systematic risk
- Language variable is actually a leading indicator of systematic risk
+Another potential criticism of this work is that language uncertainty is an unnecessarily complicated construct given that systematic risk (in the stock market) has been successfully used as a proxy for environmental uncertainty elsewhere \citep[see e.g.][]{lavie2007}. While I would argue that language uncertainty captures the state of knowledge heterogeneity rather than the broader environmental uncertainty construct, it is worth checking the confound. 
 
-\section{Market Structure}
+In Table \ref{sys}, I've included an additional systematic risk by centrality interaction variable to each of the consequential models. As you can see, the interaction with systematic risk is only marginally significant in Model 1 and insignificant in Models 2 and 3. Moreover, the language uncertainty interaction does a much better job of capturing the variance of in DV. 
 
+Interestingly, the two interactions go in opposite directions when predicting growth in R\&D alliances. The language uncertainty interaction is negative as was shown in the body of thesis; however, the systematic risk interaction is positive. This suggests that the two constructs may be picking up different things. While systematic risk can be triggered by for instance, general uncertainty regarding the availability of financing, language uncertainty deals more directly with the heterogeneity of knowledge within the industry. In this case it would make sense that high language uncertainty provides a selection disadvantage to centrality while more general systematic risk brings an attraction advantage to centrality \citep[e.g.][]{podolny1994}. 
+
+\begin{table}
+\begin{center}
+\caption[Accounting for systematic Risk]{Accounting for systematic risk by including additional two-way interaction.\label{sys}}
+\vspace{0.3in}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                    &\multicolumn{1}{c}{Nonop. Inc.}&\multicolumn{1}{c}{Patents}&\multicolumn{1}{c}{Abnorm. Ret.}&\multicolumn{1}{c}{R\&D}\\
+\hline
+L.Nonop. Inc.       &       0.234         &                     &                     &                     \\
+                    &     (0.165)         &                     &                     &                     \\
+Cent.               &      -51.61         &      -46.13         &      -1.400         &                     \\
+                    &     (52.69)         &     (33.21)         &     (1.009)         &                     \\
+L.Lang Unc. $\times$ Cent.&       176.5\sym{**} &      -47.73         &      -1.341\sym{*}  &                     \\
+                    &     (61.24)         &     (38.21)         &     (0.672)         &                     \\
+L.srisk $\times$ Cent.&       206.3\sym{+}  &       12.26         &      -0.702         &                     \\
+                    &     (115.8)         &     (42.89)         &     (1.046)         &                     \\
+L.Cent.             &                     &                     &                     &      -7.259         \\
+                    &                     &                     &                     &     (6.679)         \\
+L.Emps.             &      0.0119\sym{*}  &                     &   0.0000381\sym{+}  &                     \\
+                    &   (0.00580)         &                     & (0.0000218)         &                     \\
+L.New Pats.         &                     &       0.665\sym{***}&                     &                     \\
+                    &                     &     (0.111)         &                     &                     \\
+L.Cum. Pats.        &                     &     0.00702         &                     &                     \\
+                    &                     &    (0.0331)         &                     &                     \\
+L.Abnorm. Ret.      &                     &                     &     -0.0911\sym{***}&                     \\
+                    &                     &                     &    (0.0223)         &                     \\
+Idiosync. Risk      &                     &                     &       0.335\sym{***}&                     \\
+                    &                     &                     &    (0.0554)         &                     \\
+L.Idiosync. Risk    &                     &                     &       0.102\sym{***}&                     \\
+                    &                     &                     &    (0.0185)         &                     \\
+L2.Idiosync. Risk   &                     &                     &     -0.0462\sym{+}  &                     \\
+                    &                     &                     &    (0.0241)         &                     \\
+Diversity           &                     &                     &      -0.171         &                     \\
+                    &                     &                     &     (0.167)         &                     \\
+L.R\&D Ties         &                     &                     &                     &       0.540\sym{***}\\
+                    &                     &                     &                     &    (0.0850)         \\
+L2.Lang Unc. $\times$ L.Cent.&                     &                     &                     &      -14.70\sym{**} \\
+                    &                     &                     &                     &     (5.205)         \\
+L2.srisk $\times$ L.Cent.&                     &                     &                     &       13.06\sym{**} \\
+                    &                     &                     &                     &     (4.834)         \\
+\hline
+Observations        &        1242         &         747         &         802         &        2196         \\
+Hansen p-value             &       0.256         &       0.479         &       0.351         &       0.467         \\
+AR(2) p-value                &       0.943         &       0.268         &       0.105         &       0.249         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
+\end{center}
+\end{table}

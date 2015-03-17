@@ -1,44 +1,40 @@
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{l*{4}{c}}
+\begin{tabular}{l*{3}{c}}
 \hline\hline
-                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
-                    &\multicolumn{1}{c}{Nonop. Inc.}&\multicolumn{1}{c}{Patents}&\multicolumn{1}{c}{Abnorm. Ret.}&\multicolumn{1}{c}{R\&D}\\
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{Nonop. Inc.}&\multicolumn{1}{c}{Patents}&\multicolumn{1}{c}{Abnorm. Ret.}\\
 \hline
-L.Nonop. Inc.       &       0.288         &                     &                     &                     \\
-                    &     (0.197)         &                     &                     &                     \\
-Cent.               &       43.38         &       6.027         &      -1.646         &                     \\
-                    &     (55.46)         &     (12.97)         &     (1.154)         &                     \\
-L.Lang Unc. $\times$ Cent.&       229.9\sym{**} &       29.35\sym{+}  &      -1.521\sym{*}  &                     \\
-                    &     (81.87)         &     (17.00)         &     (0.598)         &                     \\
-L.Cent.             &                     &                     &                     &      -4.664         \\
-                    &                     &                     &                     &     (4.609)         \\
-L.Cum. Pats.        &      0.0771\sym{*}  &     -0.0918\sym{*}  &                     &                     \\
-                    &    (0.0390)         &    (0.0381)         &                     &                     \\
-L.invm              &      -67.95         &      -10.39         &       0.312         &      -0.649         \\
-                    &     (101.4)         &     (7.431)         &     (0.688)         &     (4.349)         \\
-L.New Pats.         &                     &       1.097\sym{***}&    0.000308         &                     \\
-                    &                     &     (0.179)         &   (0.00137)         &                     \\
-L.Abnorm. Ret.      &                     &                     &     -0.0784\sym{**} &                     \\
-                    &                     &                     &    (0.0245)         &                     \\
-Idiosync. Risk      &                     &                     &       0.390\sym{***}&                     \\
-                    &                     &                     &    (0.0555)         &                     \\
-L.Idiosync. Risk    &                     &                     &      0.0900\sym{***}&                     \\
-                    &                     &                     &    (0.0186)         &                     \\
-L2.Idiosync. Risk   &                     &                     &     -0.0537\sym{*}  &                     \\
-                    &                     &                     &    (0.0224)         &                     \\
-Diversity           &                     &                     &      -0.170         &                     \\
-                    &                     &                     &     (0.182)         &                     \\
-L.R\&D Ties         &                     &                     &                     &       0.564\sym{***}\\
-                    &                     &                     &                     &    (0.0861)         \\
-L2.Lang Unc. $\times$ L.Cent.&                     &                     &                     &      -12.76\sym{*}  \\
-                    &                     &                     &                     &     (5.044)         \\
+L.Nonop. Inc.       &       0.237         &                     &                     \\
+                    &     (0.168)         &                     &                     \\
+Cent.               &       39.92         &      -14.93         &      -1.611         \\
+                    &     (52.46)         &     (27.55)         &     (1.214)         \\
+L.Lang Unc. $\times$ Cent.&       241.7\sym{**} &      -16.82         &      -1.544\sym{*}  \\
+                    &     (80.67)         &     (28.88)         &     (0.607)         \\
+L.Emps.             &      0.0129\sym{+}  &                     &   0.0000366         \\
+                    &   (0.00670)         &                     & (0.0000273)         \\
+L.invm              &      -0.874         &      -3.525\sym{*}  &     0.00410         \\
+                    &     (4.467)         &     (1.511)         &    (0.0689)         \\
+L.New Pats.         &                     &       0.727\sym{***}&                     \\
+                    &                     &     (0.111)         &                     \\
+L.Cum. Pats.        &                     &    -0.00974         &                     \\
+                    &                     &    (0.0346)         &                     \\
+L.Abnorm. Ret.      &                     &                     &     -0.0841\sym{***}\\
+                    &                     &                     &    (0.0248)         \\
+Idiosync. Risk      &                     &                     &       0.373\sym{***}\\
+                    &                     &                     &    (0.0583)         \\
+L.Idiosync. Risk    &                     &                     &      0.0876\sym{***}\\
+                    &                     &                     &    (0.0185)         \\
+L2.Idiosync. Risk   &                     &                     &     -0.0514\sym{*}  \\
+                    &                     &                     &    (0.0235)         \\
+Diversity           &                     &                     &      -0.185         \\
+                    &                     &                     &     (0.175)         \\
 \hline
-Observations        &        1054         &        1608         &         798         &        2080         \\
-hansenp             &       0.288         &       0.588         &       0.169         &       0.388         \\
-ar2p                &       0.823         &       0.533         &       0.266         &       0.247         \\
+Observations        &        1041         &         624         &         797         \\
+hansenp             &       0.337         &       0.353         &       0.209         \\
+ar2p                &       0.910         &       0.300         &       0.205         \\
 \hline\hline
-\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{5}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }

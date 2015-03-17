@@ -97,7 +97,7 @@ drop _merge
 save panel_yr, replace
 
 //language
-import delim using language_mo3, clear
+import delim using language_mo, clear
 gen kld = klent1000
 gen lcon = 1-kld
 

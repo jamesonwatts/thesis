@@ -15,16 +15,18 @@
 \contentsline {table}{\numberline {4.6}{\ignorespaces Regression of Sales and Emps. on Nonop. Inc. via Centrality}}{103}
 \contentsline {table}{\numberline {4.7}{\ignorespaces Regression of Patents on Centrality }}{103}
 \contentsline {table}{\numberline {4.8}{\ignorespaces Regression of Abnormal Returns on Centrality}}{104}
-\contentsline {table}{\numberline {4.9}{\ignorespaces Regression of Patents and Ab. Ret. on Unc. x Centrality}}{105}
-\contentsline {table}{\numberline {4.10}{\ignorespaces Regression of R\&D on Centrality}}{106}
-\contentsline {table}{\numberline {4.11}{\ignorespaces Summary of Results}}{109}
+\contentsline {table}{\numberline {4.9}{\ignorespaces Regression of Patents and Ab. Ret. on Unc. x Centrality}}{106}
+\contentsline {table}{\numberline {4.10}{\ignorespaces Regression of R\&D on Centrality}}{107}
+\contentsline {table}{\numberline {4.11}{\ignorespaces Summary of Results}}{110}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces VECM Results w/ NYSE Volume}}{125}
-\contentsline {table}{\numberline {A.2}{\ignorespaces VECM Results Diff. Top X Features}}{127}
-\contentsline {table}{\numberline {A.3}{\ignorespaces VECM Results Top 2k Features Diff. K}}{128}
+\contentsline {table}{\numberline {A.1}{\ignorespaces VECM Results w/ NYSE Volume}}{126}
+\contentsline {table}{\numberline {A.2}{\ignorespaces VECM Results Diff. Top X Features}}{128}
+\contentsline {table}{\numberline {A.3}{\ignorespaces VECM Results Top 2k Features Diff. K}}{129}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Sample Selection on Public}}{131}
-\contentsline {table}{\numberline {B.2}{\ignorespaces Sample Selection on Alliance Use}}{132}
-\contentsline {table}{\numberline {B.3}{\ignorespaces Sample Selection on Exit}}{133}
-\contentsline {table}{\numberline {B.4}{\ignorespaces Regression of Patents (Alt) on Centrality}}{134}
+\contentsline {table}{\numberline {B.1}{\ignorespaces Sample Selection on Alliance Use}}{133}
+\contentsline {table}{\numberline {B.2}{\ignorespaces Sample Selection on Public}}{134}
+\contentsline {table}{\numberline {B.3}{\ignorespaces Sample Selection on Exit}}{135}
+\contentsline {table}{\numberline {B.4}{\ignorespaces Alternative Patents Measure}}{136}
+\contentsline {table}{\numberline {B.5}{\ignorespaces Structural Break in Patenting Activity}}{138}
+\contentsline {table}{\numberline {B.6}{\ignorespaces Accounting for systematic Risk}}{140}

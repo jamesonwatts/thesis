@@ -1,29 +1,45 @@
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{l*{3}{c}}
+\begin{tabular}{l*{4}{c}}
 \hline\hline
-                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
-                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{Lang Uncert x Cent.}\\
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{Lang Uncert x Cent.}&\multicolumn{1}{c}{3-way Chaff}\\
 \hline
-L.patents           &    0.000787         &     -0.0145         &     0.00426         \\
-                    &   (0.00880)         &    (0.0216)         &   (0.00810)         \\
-L.tpat1             &       0.203\sym{***}&       0.239\sym{*}  &       0.203\sym{**} \\
-                    &    (0.0148)         &     (0.112)         &    (0.0784)         \\
-Centrality          &       34.78\sym{+}  &       0.791         &      -52.15\sym{**} \\
-                    &     (20.75)         &     (35.89)         &     (18.87)         \\
-L.public            &       4.489\sym{*}  &       3.473         &       4.649\sym{*}  \\
-                    &     (1.965)         &     (3.121)         &     (2.232)         \\
-L.Sales             &     0.00979\sym{*}  &     -0.0253         &                     \\
-                    &   (0.00436)         &    (0.0303)         &                     \\
-L.Lang Unc. $\times$ Centrality&                     &                     &      -149.0\sym{***}\\
-                    &                     &                     &     (42.05)         \\
+L.patents           &       0.582\sym{***}&       0.525\sym{***}&       0.558\sym{***}&                     \\
+                    &    (0.0341)         &     (0.111)         &     (0.100)         &                     \\
+L.tpat1             &     -0.0159         &     -0.0536         &     -0.0380         &                     \\
+                    &    (0.0152)         &    (0.0590)         &    (0.0471)         &                     \\
+Cent.               &       11.23         &       4.309         &      -18.65         &      -60.61         \\
+                    &     (11.72)         &     (22.41)         &     (17.91)         &     (37.65)         \\
+L.public            &       1.163         &       3.023         &       1.476         &                     \\
+                    &     (0.829)         &     (2.356)         &     (1.191)         &                     \\
+L.Emps.             &     0.00867\sym{***}&      0.0195         &      0.0182\sym{**} &                     \\
+                    &   (0.00103)         &    (0.0126)         &   (0.00661)         &                     \\
+L.Exper.            &       1.020         &       1.072         &       3.112         &                     \\
+                    &     (1.105)         &     (5.383)         &     (2.424)         &                     \\
+L.Exper.\^2         &     -0.0243\sym{+}  &    -0.00126         &     -0.0274\sym{+}  &                     \\
+                    &    (0.0129)         &    (0.0141)         &    (0.0166)         &                     \\
+Diversity           &       0.600         &       13.74\sym{*}  &       3.212         &                     \\
+                    &     (1.747)         &     (6.254)         &     (2.904)         &                     \\
+L.Lang Unc. $\times$ Cent.&                     &                     &      -51.68\sym{+}  &      -194.4\sym{+}  \\
+                    &                     &                     &     (27.80)         &     (115.6)         \\
+L.New Pats.         &                     &                     &                     &       0.284         \\
+                    &                     &                     &                     &     (0.176)         \\
+L.Cum. Pats.        &                     &                     &                     &      0.0450         \\
+                    &                     &                     &                     &    (0.0519)         \\
+chaff=1             &                     &                     &                     &       0.197         \\
+                    &                     &                     &                     &     (0.838)         \\
+chaff=1 $\times$ Cent.&                     &                     &                     &       127.2\sym{+}  \\
+                    &                     &                     &                     &     (76.11)         \\
+chaff=1 $\times$ L.Lang Unc. $\times$ Cent.&                     &                     &                     &       189.4         \\
+                    &                     &                     &                     &     (122.9)         \\
 \hline
-Observations        &        1080         &         862         &        1495         \\
-r2\_w                &       0.280         &                     &                     \\
-hansenp             &                     &       0.478         &       0.108         \\
-ar2p                &                     &       0.161         &       0.138         \\
+Observations        &        1786         &        1420         &        1420         &         753         \\
+r2\_w                &       0.455         &                     &                     &                     \\
+hansenp             &                     &       0.328         &       0.106         &       0.203         \\
+ar2p                &                     &       0.354         &       0.327         &       0.211         \\
 \hline\hline
-\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }

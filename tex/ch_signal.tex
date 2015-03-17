@@ -258,29 +258,30 @@ However, recall from the prior discussion that the symbolic effect of centrality
 \begin{tabular}{l*{3}{c}}
 \hline\hline
                     &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
-                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{L Unc. x Cent.}\\
+                    &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{Lang Uncert x Cent.}\\
 \hline
-L.Nonop. Income     &       0.452\sym{***}&      0.0772         &       0.320         \\
-                    &    (0.0275)         &     (0.110)         &     (0.199)         \\
-Centrality          &       11.26         &      -66.94         &      -3.226         \\
-                    &     (23.19)         &     (54.44)         &     (47.19)         \\
-L.Cum. Patents      &      0.0387\sym{***}&      0.0585         &      0.0337\sym{+}  \\
-                    &   (0.00876)         &    (0.0373)         &    (0.0204)         \\
-L.Lang Unc. $\times$ Cent.&                     &                     &       201.5\sym{**} \\
-                    &                     &                     &     (74.47)         \\
+L.Nonop. Income     &       0.405\sym{***}&       0.408\sym{+}  &       0.242         \\
+                    &    (0.0287)         &     (0.240)         &     (0.168)         \\
+Centrality          &       20.42         &      -38.37         &       24.39         \\
+                    &     (22.99)         &     (30.39)         &     (46.41)         \\
+L.Employees         &     0.00954\sym{***}&      0.0102         &      0.0119\sym{*}  \\
+                    &   (0.00142)         &   (0.00888)         &   (0.00569)         \\
+L.Lang Unc. $\times$ Cent.&                     &                     &       229.5\sym{**} \\
+                    &                     &                     &     (73.74)         \\
 \hline
 Observations        &        1484         &        1242         &        1242         \\
-$R^2$ within                &       0.275         &                     &                     \\
-Hansen p-value             &                     &       0.125         &       0.262         \\
-AR(2) p-value                &                     &       0.331         &       0.761         \\
+$R^2$ within                &       0.290         &                     &                     \\
+Hansen p-value             &                     &       0.420         &       0.294         \\
+AR(2) p-value                &                     &       0.679         &       0.934         \\
 \hline\hline
 \multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
 \multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }
+
 \end{table}
 
-Table \ref{r3} shows the proximate effect of centrality (and its interaction with language uncertainty) on nonoperating income. Models 1 and 2 fail to reproduce the main effects of \citet{powell1999}. This explains the lack of results in the two-stage estimations above. However, Model 3 (with the interaction) shows a strong positive effect ($p < 0.001$). This supports my hypothesis that language uncertainty will positively moderate the symbolic effects of centrality. Controlling for cumulative patents (as was done originally) as an alternative signaling explanation does not affect the results. Moreover, the 2SLS results reappear when using the interacted variable to instrument for nonoperating income's effect on sales and employee growth. This can be seen in Table \ref{r4}. In other words, by interacting centrality with language uncertainty, I am able to reproduce the two-stage results (at $p < 0.05$) from the original model.
+Table \ref{r3} shows the proximate effect of centrality (and its interaction with language uncertainty) on nonoperating income. Models 1 and 2 fail to reproduce the main effects of \citet{powell1999}. This explains the lack of results in the two-stage estimations above. However, Model 3 (with the interaction) shows a strong positive effect ($p < 0.001$). This supports my hypothesis that language uncertainty will positively moderate the symbolic effects of centrality. Controlling for firm size as an alternative signaling explanation does not affect the results. Moreover, the 2SLS results reappear when using the interacted variable to instrument for nonoperating income's effect on sales and employee growth. This can be seen in Table \ref{r4}. In other words, by interacting centrality with language uncertainty, I am able to reproduce the two-stage results (at $p < 0.05$) from the original model.
 
 \begin{table}[htbp]\centering \caption[Regression of Sales and Emps. on Nonop. Inc. via Centrality]{2SLS Regression of Sales and Emps. on Nonop. Inc. via Centrality\label{r4}}
 {
@@ -292,7 +293,7 @@ Table \ref{r3} shows the proximate effect of centrality (and its interaction wit
 \hline
 L.Nonop. Inc.     &       4.456\sym{*}  &       2.896\sym{*}  \\
                     &     (1.789)         &     (1.172)         \\
-L.Empl.         &       0.496\sym{***}&                     \\
+L.Emps         &       0.496\sym{***}&                     \\
                     &    (0.0495)         &                     \\
 L.Sales             &                     &       1.315\sym{***}\\
                     &                     &    (0.0589)         \\
@@ -304,9 +305,10 @@ $R^2$ within                &       0.576         &       0.854         \\
 \multicolumn{3}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }
+
 \end{table}
 
-I turn now to the substantive role that network centrality plays in facilitating collaborative R\&D. Models 1 and 2 in Table's \ref{r5} and \ref{r6} show the proximate effects of centrality on patents and abnormal returns. Model 3 in these tables illustrates the effects of R\&D ties on the two performance measures through centrality. While the proximate effect of centrality on patents is not reproduced, its effect as an instrument of R\&D appears to hold (Table \ref{r5}, Model 3). There is also no direct effect of centrality on abnormal returns; however the 2-stage effect is directionally consistent with centrality's effect on patents ($z=1.42$). Network diversity and patenting activity were included in the abnormal returns model as additional controls since they remained statistically significant ($p < 0.10$) and contributed to model fit.
+I turn now to the substantive role that network centrality plays in facilitating collaborative R\&D. Models 1 and 2 in Table's \ref{r5} and \ref{r6} show the proximate effects of centrality on patents and abnormal returns. Model 3 in these tables illustrates the effects of R\&D ties on the two performance measures through centrality. While the proximate effect of centrality on patents is not reproduced, its effect as an instrument of R\&D appears to hold (Table \ref{r5}, Model 3). There is also no direct effect of centrality on abnormal returns; however the 2-stage effect is directionally consistent with centrality's effect on patents ($z=1.44$). Network diversity and number of employees were included in the abnormal returns model as additional controls since they remained statistically significant ($p < 0.10$) and contributed to model fit.
 
 \begin{table}[htbp]\centering \caption{Regression of Patents on Centrality \label{r5}}
 {
@@ -316,17 +318,17 @@ I turn now to the substantive role that network centrality plays in facilitating
                     &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
                     &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{R\&D $\rightarrow$ Cent.}\\
 \hline
-L.New Patents       &    -0.00125         &    -0.00472         &   -0.000557         \\
-                    &   (0.00301)         &   (0.00750)         &   (0.00316)         \\
-L.Cum. Patents      &       0.129\sym{***}&      0.0420         &       0.130\sym{***}\\
-                    &   (0.00388)         &    (0.0260)         &   (0.00407)         \\
-Centrality          &       8.193         &      -46.26         &       100.9\sym{***}\\
-                    &     (5.595)         &     (29.57)         &     (13.71)         \\
+L.New Patents       &       0.737\sym{***}&       0.760\sym{***}&       0.711\sym{***}\\
+                    &    (0.0458)         &     (0.129)         &    (0.0481)         \\
+L.Cum. Patents      &      0.0154         &      0.0133         &      0.0271\sym{+}  \\
+                    &    (0.0147)         &    (0.0360)         &    (0.0156)         \\
+Centrality          &      -1.209         &       3.385         &       82.95\sym{***}\\
+                    &     (10.89)         &     (20.71)         &     (25.20)         \\
 \hline
-Observations        &        3268         &        2689         &        3268         \\
-$R^2$ within                &       0.322         &                     &       0.252         \\
-Hansen p-value             &                     &       0.715         &                     \\
-AR(2) p-value                &                     &       0.394         &                     \\
+Observations        &         889         &         747         &         889         \\
+$R^2$ within                &       0.589         &                     &       0.556         \\
+Hansen p-value             &                     &       0.159         &                     \\
+AR(2) p-value                &                     &       0.218         &                     \\
 \hline\hline
 \multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
 \multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
@@ -342,33 +344,34 @@ AR(2) p-value                &                     &       0.394         &      
                     &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
                     &\multicolumn{1}{c}{Fixed Effects}&\multicolumn{1}{c}{Arellano-Bond}&\multicolumn{1}{c}{R\&D $\rightarrow$ Cent.}\\
 \hline
-L.Abnorm. Ret.      &      -0.150\sym{***}&     -0.0858\sym{**} &      -0.149\sym{***}\\
-                    &    (0.0165)         &    (0.0317)         &    (0.0168)         \\
-Centrality          &      -0.126         &       0.203         &       1.296         \\
-                    &     (0.324)         &     (1.365)         &     (0.915)         \\
-Idiosync. Risk      &       0.303\sym{***}&       0.398\sym{***}&       0.306\sym{***}\\
-                    &    (0.0126)         &    (0.0839)         &    (0.0129)         \\
-L.Idiosync. Risk    &      0.0385\sym{**} &      0.0812\sym{***}&      0.0393\sym{**} \\
-                    &    (0.0120)         &    (0.0214)         &    (0.0122)         \\
-L2.Idiosync. Risk   &     -0.0263\sym{**} &     -0.0536\sym{*}  &     -0.0270\sym{***}\\
-                    &   (0.00809)         &    (0.0233)         &   (0.00820)         \\
-Diversity           &      -0.107\sym{**} &      -0.300         &      -0.135\sym{**} \\
-                    &    (0.0391)         &     (0.293)         &    (0.0432)         \\
-L.New Patents       &     0.00102\sym{+}  &    0.000747         &     0.00115\sym{*}  \\
-                    &  (0.000551)         &   (0.00165)         &  (0.000563)         \\
+L.Abnorm. Ret.      &      -0.150\sym{***}&     -0.0951\sym{**} &      -0.148\sym{***}\\
+                    &    (0.0165)         &    (0.0290)         &    (0.0168)         \\
+Centrality          &      -0.168         &      -0.238         &       1.345         \\
+                    &     (0.323)         &     (1.343)         &     (0.932)         \\
+Idiosync. Risk      &       0.303\sym{***}&       0.371\sym{***}&       0.307\sym{***}\\
+                    &    (0.0126)         &    (0.0832)         &    (0.0129)         \\
+L.Idiosync. Risk    &      0.0384\sym{**} &      0.0771\sym{***}&      0.0393\sym{**} \\
+                    &    (0.0120)         &    (0.0218)         &    (0.0122)         \\
+L2.Idiosync. Risk   &     -0.0263\sym{**} &     -0.0570\sym{*}  &     -0.0270\sym{**} \\
+                    &   (0.00810)         &    (0.0232)         &   (0.00822)         \\
+Diversity           &      -0.106\sym{**} &      -0.400         &      -0.136\sym{**} \\
+                    &    (0.0391)         &     (0.283)         &    (0.0433)         \\
+L.Employees         &   0.0000242\sym{+}  &   0.0000543\sym{+}  &   0.0000231         \\
+                    & (0.0000139)         & (0.0000284)         & (0.0000141)         \\
 \hline
 Observations        &         989         &         802         &         989         \\
-$R^2$ within                &       0.644         &                     &       0.636         \\
-Hansen p-value             &                     &       0.152         &                     \\
-AR(2) p-value                &                     &       0.310         &                     \\
+$R^2$ within                &       0.644         &                     &       0.634         \\
+Hansen p-value             &                     &       0.245         &                     \\
+AR(2) p-value                &                     &       0.202         &                     \\
 \hline\hline
 \multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
 \multicolumn{4}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }
+
 \end{table}
 
-In Table \ref{r7}, I attempt to resolve the lack of proximate effect of centrality on both patenting and abnormal returns by including the interaction with language uncertainty. In the case of patents, I am still unable to reproduce the results, however I explore some explanations for this lack of finding in Appendix \ref{apndxB}. In the case of abnormal returns, the interaction of language uncertainty with centrality does have the hypothesized negative and statistically significant effect ($p<0.001$).
+In Table \ref{r7}, I attempt to resolve the lack of proximate effect of centrality on both patenting and abnormal returns by including the interaction with language uncertainty. In the case of patents, I am still unable to reproduce the results, however the result is directionally consistent with the proposed hypothesis ($z=-1.23$). I also explore some explanations for this lack of finding in Appendix \ref{apndxB}. In the case of abnormal returns, the interaction of language uncertainty with centrality does have the hypothesized negative and statistically significant effect ($p<0.001$).
 
 \begin{table}[htbp]\centering \caption[Regression of Patents and Ab. Ret. on Unc. x Centrality]{Patents and Ab. Ret. on Unc. x Centrality\label{r7}}
 {
@@ -378,37 +381,38 @@ In Table \ref{r7}, I attempt to resolve the lack of proximate effect of centrali
                     &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}\\
                     &\multicolumn{1}{c}{Patents}&\multicolumn{1}{c}{Abnorm. Ret.}\\
 \hline
-L.New Patents       &   0.0000220         &    0.000396         \\
-                    &   (0.00415)         &   (0.00151)         \\
-L.Cum. Patents      &      0.0526\sym{*}  &                     \\
-                    &    (0.0235)         &                     \\
-Centrality          &      -18.93         &      -1.609         \\
-                    &     (13.78)         &     (1.218)         \\
-L.Lang Unc. $\times$ Centrality&       3.251         &      -1.534\sym{**} \\
-                    &     (10.48)         &     (0.589)         \\
-L.Abnorm. Ret.      &                     &     -0.0766\sym{**} \\
-                    &                     &    (0.0246)         \\
-Idiosync. Risk      &                     &       0.395\sym{***}\\
-                    &                     &    (0.0573)         \\
-L.Idiosync. Risk    &                     &      0.0873\sym{***}\\
-                    &                     &    (0.0192)         \\
-L2.Idiosync. Risk   &                     &     -0.0519\sym{*}  \\
-                    &                     &    (0.0226)         \\
-Diversity           &                     &      -0.171         \\
-                    &                     &     (0.186)         \\
+L.New Patents       &       0.620\sym{***}&                     \\
+                    &     (0.125)         &                     \\
+L.Cum. Patents      &      0.0133         &                     \\
+                    &    (0.0370)         &                     \\
+Centrality          &      -48.57         &      -1.685         \\
+                    &     (34.84)         &     (1.069)         \\
+L.Lang Unc. $\times$ Centrality&      -45.60         &      -1.467\sym{*}  \\
+                    &     (37.00)         &     (0.601)         \\
+L.Abnorm. Ret.      &                     &     -0.0833\sym{***}\\
+                    &                     &    (0.0245)         \\
+Idiosync. Risk      &                     &       0.373\sym{***}\\
+                    &                     &    (0.0595)         \\
+L.Idiosync. Risk    &                     &      0.0881\sym{***}\\
+                    &                     &    (0.0188)         \\
+L2.Idiosync. Risk   &                     &     -0.0525\sym{*}  \\
+                    &                     &    (0.0232)         \\
+Diversity           &                     &      -0.202         \\
+                    &                     &     (0.174)         \\
+L.Employees         &                     &   0.0000350         \\
+                    &                     & (0.0000231)         \\
 \hline
-Observations        &        2689         &         802         \\
+Observations        &         747         &         802         \\
 $R^2$ within                &                     &                     \\
-Hansen p-value             &       0.596         &       0.134         \\
-AR(2) p-value                &       0.336         &       0.310         \\
+Hansen p-value             &       0.288         &       0.170         \\
+AR(2) p-value                &       0.269         &       0.217         \\
 \hline\hline
 \multicolumn{3}{l}{\footnotesize Standard errors in parentheses}\\
 \multicolumn{3}{l}{\footnotesize \sym{+} \(p<0.1\), \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 }
-\end{table}
 
-Table \ref{r8} shows the effect of centrality on a firm's R\&D ties. Model 1 reproduces the original effect; however, it is only marginally significant in the more conservative Model 2. Model 3 introduces the language uncertainty by centrality interaction, which is negative and statistically significant ($p<0.05$) resolving the marginal prior result. This finding also implies that the substantive advantage of centrality dominates in the selection of research collaborators.
+\end{table}
 
 \begin{table}[htbp]\centering \caption{Regression of R\&D on Centrality\label{r8}}
 {
@@ -436,9 +440,9 @@ AR(2) p-value                &                     &       0.363         &      
 }
 \end{table}
 
+Table \ref{r8} shows the effect of centrality on a firm's R\&D ties. Model 1 reproduces the original effect; however, it is only marginally significant in the more conservative Model 2. Model 3 introduces the language uncertainty by centrality interaction, which is negative and statistically significant ($p<0.05$) resolving the marginal prior result. This finding also implies that the substantive advantage of centrality dominates in the selection of research collaborators.
+
 \section{Discussion}
-
-
 
 Network centrality can bring both symbolic and substantive advantage to a firm. Symbolic advantage is attained when the quality signaled by a firm's affiliation with high-status alters attracts new resources. Substantive advantage occurs when the information and resources flowing across extant network ties are useful in production. 
 
