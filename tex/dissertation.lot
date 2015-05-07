@@ -1,32 +1,31 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces English Stopwords}}{49}
+\contentsline {table}{\numberline {2.2}{\ignorespaces Top Words (1991-1997)}}{50}
+\contentsline {table}{\numberline {2.3}{\ignorespaces Top Words (1998-2003)}}{51}
+\contentsline {table}{\numberline {2.4}{\ignorespaces Language Frequencies by Year}}{58}
+\contentsline {table}{\numberline {2.5}{\ignorespaces VECM Results}}{70}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces English Stopwords}}{46}
-\contentsline {table}{\numberline {3.2}{\ignorespaces Top Words (1991-1997)}}{47}
-\contentsline {table}{\numberline {3.3}{\ignorespaces Top Words (1998-2003)}}{48}
-\contentsline {table}{\numberline {3.4}{\ignorespaces Language Frequencies by Year}}{55}
-\contentsline {table}{\numberline {3.5}{\ignorespaces VECM Results}}{67}
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Summary Statistics }}{92}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Variable Correlations}}{93}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Regression of Employees on Nonoperating Income}}{100}
-\contentsline {table}{\numberline {4.4}{\ignorespaces Regression of Sales on Nonoperating Income}}{101}
-\contentsline {table}{\numberline {4.5}{\ignorespaces Regression of Nonoperating Income on Centrality}}{102}
-\contentsline {table}{\numberline {4.6}{\ignorespaces Regression of Sales and Emps. on Nonop. Inc. via Centrality}}{103}
-\contentsline {table}{\numberline {4.7}{\ignorespaces Regression of Patents on Centrality }}{103}
-\contentsline {table}{\numberline {4.8}{\ignorespaces Regression of Abnormal Returns on Centrality}}{104}
-\contentsline {table}{\numberline {4.9}{\ignorespaces Regression of Patents and Ab. Ret. on Unc. x Centrality}}{106}
-\contentsline {table}{\numberline {4.10}{\ignorespaces Regression of R\&D on Centrality}}{107}
-\contentsline {table}{\numberline {4.11}{\ignorespaces Summary of Results}}{110}
+\contentsline {table}{\numberline {3.1}{\ignorespaces Summary Statistics }}{95}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Variable Correlations}}{96}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Regression of Employees on Nonoperating Income}}{103}
+\contentsline {table}{\numberline {3.4}{\ignorespaces Regression of Sales on Nonoperating Income}}{104}
+\contentsline {table}{\numberline {3.5}{\ignorespaces Regression of Nonoperating Income on Centrality}}{105}
+\contentsline {table}{\numberline {3.6}{\ignorespaces Regression of Sales and Emps. on Nonop. Inc. via Centrality}}{106}
+\contentsline {table}{\numberline {3.7}{\ignorespaces Regression of Patents on Centrality }}{106}
+\contentsline {table}{\numberline {3.8}{\ignorespaces Regression of Abnormal Returns on Centrality}}{107}
+\contentsline {table}{\numberline {3.9}{\ignorespaces Regression of Patents and Ab. Ret. on Unc. x Centrality}}{109}
+\contentsline {table}{\numberline {3.10}{\ignorespaces Regression of R\&D on Centrality}}{110}
+\contentsline {table}{\numberline {3.11}{\ignorespaces Summary of Results}}{113}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces VECM Results w/ NYSE Volume}}{126}
-\contentsline {table}{\numberline {A.2}{\ignorespaces VECM Results Diff. Top X Features}}{128}
-\contentsline {table}{\numberline {A.3}{\ignorespaces VECM Results Top 2k Features Diff. K}}{129}
+\contentsline {table}{\numberline {A.1}{\ignorespaces VECM Results w/ NYSE Volume}}{128}
+\contentsline {table}{\numberline {A.2}{\ignorespaces VECM Results Diff. Top X Features}}{130}
+\contentsline {table}{\numberline {A.3}{\ignorespaces VECM Results Top 2k Features Diff. K}}{131}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Sample Selection on Alliance Use}}{133}
-\contentsline {table}{\numberline {B.2}{\ignorespaces Sample Selection on Public}}{134}
-\contentsline {table}{\numberline {B.3}{\ignorespaces Sample Selection on Exit}}{135}
-\contentsline {table}{\numberline {B.4}{\ignorespaces Alternative Patents Measure}}{136}
-\contentsline {table}{\numberline {B.5}{\ignorespaces Structural Break in Patenting Activity}}{138}
-\contentsline {table}{\numberline {B.6}{\ignorespaces Accounting for systematic Risk}}{140}
+\contentsline {table}{\numberline {B.1}{\ignorespaces Sample Selection on Alliance Use}}{135}
+\contentsline {table}{\numberline {B.2}{\ignorespaces Sample Selection on Public}}{136}
+\contentsline {table}{\numberline {B.3}{\ignorespaces Sample Selection on Exit}}{137}
+\contentsline {table}{\numberline {B.4}{\ignorespaces Alternative Patents Measure}}{138}
+\contentsline {table}{\numberline {B.5}{\ignorespaces Structural Break in Patenting Activity}}{140}
+\contentsline {table}{\numberline {B.6}{\ignorespaces Accounting for systematic Risk}}{142}
